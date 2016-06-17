@@ -10,22 +10,26 @@ import {Router} from '@angular/router';
 
 export class UserComponent implements OnInit {
   public user: User;
+  public errorMessage: any;
 
   constructor(private _userService: UserService,
         private _router: Router){
   }
 
     ngOnInit(){
-        this.user = this._userService.getUser();
-        if (this.user === null){
+        if (!this._userService.haveUser()){
             console.log('no user, navigating to login');
             this._router.navigate(['/login']);
         }
+        this._userService.getUser().subscribe(
+            user => this.user = user,
+            error => this.errorMessage = error
+        );
     }
 
     logout(){
         this._userService.logout();
-        this.user = this._userService.getUser();
+        this.user = null;
         this._router.navigate(['/login']);
     }
 }

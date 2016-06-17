@@ -29,11 +29,11 @@ export class QuestionService {
 
     private _questionUrl = '/api/questions/';
 
-    getQuestions(category: number, user: User){
+    getQuestions(category: number, token: string){
         let headers = new Headers({'Accept': 'application/json'});
-        if(user){
+        if(token){
             headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + user.token });
+                                       'Authorization': 'Token ' + token });
         }
         let options = new RequestOptions({headers: headers});
 
@@ -44,12 +44,12 @@ export class QuestionService {
 
     private _answerUrl = '/api/answer/';
 
-    setValue(answer: Answer, user: User){
-        if(user){
+    setValue(answer: Answer, token: string){
+        if(token){
             let body = JSON.stringify(answer);
             let headers = new Headers({'Content-Type': 'application/json',
                                        'Accept': 'application/json',
-                                       'Authorization': 'Token ' + user.token });
+                                       'Authorization': 'Token ' + token });
             let options = new RequestOptions({headers: headers});
 
             return this._http.post(this._answerUrl, body, options)

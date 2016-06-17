@@ -33,7 +33,12 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         } else {
             this.answer = {'question': this.question.id};
         }
-        this.user = this._userService.getUser();
+        if(this._userService.haveUser()){
+          this._userService.getUser().subscribe(
+              user => this.user = user,
+              error => console.error(error)
+          );
+        }
     }
 
     ngAfterViewChecked(){
@@ -61,7 +66,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     setValue(){
         if(this.user){
             this.answer.question = this.question.id;
-            this._questionService.setValue(this.answer, this.user)
+            this._questionService.setValue(this.answer, this.user.token)
                         .subscribe(res => console.log(res),
                                    error => console.error(error));
             if(this.question.q_type === "bool"){

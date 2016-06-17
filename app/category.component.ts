@@ -21,7 +21,7 @@ export class CategoryComponent implements OnChanges {
     constructor(private _questionService: QuestionService, private _userService: UserService){ }
 
     ngOnChanges() {
-        this._questionService.getQuestions(this.category.id, this._userService.getUser())
+        this._questionService.getQuestions(this.category.id, this._userService.token)
             .subscribe(questions => this.questions = questions,
                        error => this.errorMessage = <any>error);
     }

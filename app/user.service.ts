@@ -6,17 +6,38 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
-    public user: User = null;
     public token: string = null;
+    public user: User = null;
+    public userObserver: Observable<User>;
     private _answers: { [q_id: number]: string } = { };
 
-    constructor(private _http: Http) { }
+    constructor(private _http: Http) {
+        if(localStorage.getItem('user') !== null){
+            console.log('pulling user from local storage');
+            this.token = localStorage.getItem('user');
+        }
+    }
+
+    haveUser(){
+        return this.token !== null;
+    }
 
     getUser(){
-        return this.user;
+        //return this.requestUser(this.token);
+        if(this.user){
+            return Observable.of(new Object()).map(user => this.user);
+        } else if(this.token){
+            return this.requestUser(this.token);
+        } else {
+            return Observable.throw(new Error("No User"));
+        }
     }
 
     logout(){
+        // wow such javascript
+        //localStorage['user'] = null;
+        localStorage.removeItem('user');
+        this.token = null;
         this.user = null;
         this._answers = { };
     }
@@ -39,13 +60,14 @@ export class UserService {
 
     private handleError(error: Response){
         console.error(error);
-        return Observable.throw(error.json().error || 'Server Error');
+        return Observable.throw(error || 'Server Error');
     }
 
     private _userUrl: string = '/api/user/';
 
     requestUser(token: string){
         this.token = token;
+        localStorage['user'] = token;
         let headers = new Headers({'Accept': 'application/json',
                                    'Authorization': 'Token ' + token });
         let options = new RequestOptions({headers: headers});
