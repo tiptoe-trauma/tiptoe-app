@@ -1,4 +1,4 @@
-import {Component, OnChanges} from 'angular2/core';
+import {Component, OnChanges} from '@angular/core';
 import {Question, Category} from './question';
 import {QuestionComponent} from './question.component';
 import {QuestionService} from './question.service';

@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from 'angular2/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {DefinitionService} from './definition.service';
 import {Definition} from './question';
 
@@ -11,12 +11,12 @@ export class DefinitionPipe implements PipeTransform {
     public definitions: Definition[];
     public errored: boolean = false;
     private _regex: RegExp = /<([^>]+)\|([^>]+)>/g;
-    
+
     constructor(private _definitionService: DefinitionService){
         _definitionService.getDefinitions()
                 .subscribe(defs => this.definitions = <Definition[]> defs,
                            error => this.errored = true);
-    
+
     }
 
     getDefinition(word: string){

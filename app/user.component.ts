@@ -1,7 +1,7 @@
 import {User} from './user';
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from './user.service';
-import {Router} from 'angular2/router';
+import {Router} from '@angular/router';
 
 @Component ({
   selector: 'my-user',
@@ -19,13 +19,13 @@ export class UserComponent implements OnInit {
         this.user = this._userService.getUser();
         if (this.user === null){
             console.log('no user, navigating to login');
-            this._router.navigate(['Login']);
+            this._router.navigate(['/login']);
         }
     }
 
     logout(){
         this._userService.logout();
         this.user = this._userService.getUser();
-        this._router.navigate(['Login']);
+        this._router.navigate(['/login']);
     }
 }

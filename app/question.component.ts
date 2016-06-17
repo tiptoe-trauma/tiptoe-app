@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewChecked, EventEmitter} from 'angular2/core';
+import {Component, OnInit, AfterViewChecked, EventEmitter} from '@angular/core';
 import {Question, Answer} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';

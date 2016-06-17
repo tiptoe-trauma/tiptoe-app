@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryComponent} from './category.component';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
@@ -18,7 +18,7 @@ export class QuestionnaireComponent implements OnInit {
     public errorMessage: any;
 
     constructor(private _questionService: QuestionService){ }
-    
+
     ngOnInit(){
         this._questionService.getCategories()
             .subscribe(categories => this.setCategories(categories),

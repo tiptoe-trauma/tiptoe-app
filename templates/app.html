@@ -1,8 +1,8 @@
 <nav class="navbar navbar-light bg-faded">
     <h2 class="navbar-brand">CAFE Web Application</h2>
-    <button type="button" class="nav-item btn btn-secondary" [routerLink]="['About']">About</button>
-    <button type="button" class="nav-item btn btn-secondary" [routerLink]="['User']">User</button>
-    <button type="button" class="nav-item btn btn-secondary" [routerLink]="['Questionnaire']">Questionnaire</button>
+    <a [routerLink]="['/about']"> <button type="button" class="nav-item btn btn-secondary">About</button></a>
+    <a [routerLink]="['/user']"> <button type="button" class="nav-item btn btn-secondary">User</button></a>
+    <a [routerLink]="['/questionnaire']"> <button type="button" class="nav-item btn btn-secondary">Questionnaire</button></a>
 </nav>
 <div class="container main">
     <router-outlet></router-outlet>

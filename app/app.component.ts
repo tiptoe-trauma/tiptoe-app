@@ -1,11 +1,13 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {Component} from '@angular/core';
+import {Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router';
+import {HTTP_PROVIDERS} from '@angular/http';
 import {QuestionnaireComponent} from './questionnaire.component';
 import {AboutComponent} from './about.component';
 import {UserComponent} from './user.component';
 import {LoginComponent} from './login.component';
 import {UserService} from './user.service';
+// Until useAsDefault: true has returned
+import {NotFoundComponent} from './notfound.component';
 
 
 @Component({
@@ -17,11 +19,13 @@ import {UserService} from './user.service';
 
 })
 
-@RouteConfig([
-    {path: '/about', name: 'About', component: AboutComponent, useAsDefault: true},
-    {path: '/user', name: 'User', component: UserComponent},
-    {path: '/login', name: 'Login', component: LoginComponent},
-    {path: '/questionnaire', name: 'Questionnaire', component: QuestionnaireComponent}
+@Routes([
+    {path: '/about', component: AboutComponent},
+    {path: '/user', component: UserComponent},
+    {path: '/login', component: LoginComponent},
+    {path: '/questionnaire', component: QuestionnaireComponent},
+    // Until useAsDefault: true has returned
+    {path: '/', component: NotFoundComponent}
 ])
 
 export class AppComponent { }
