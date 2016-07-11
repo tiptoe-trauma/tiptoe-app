@@ -32,6 +32,16 @@ export class QuestionnaireComponent implements OnInit {
         }
     }
 
+    nextCategory(){
+        let index = this.categories.indexOf(this.selectedCategory);
+        if(index + 1 === this.categories.length){
+            this.selectedCategory = this.categories[0];
+        } else {
+            this.selectedCategory = this.categories[index + 1]
+        }
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+    }
+
     onSelect(category: Category) {
         this.selectedCategory = category;
     }
