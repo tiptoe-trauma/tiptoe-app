@@ -57,15 +57,21 @@
         <template ngSwitchWhen=bool>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
-              (click)="answer.yesno=true; setValue()"
+              (click)="answer.yesno=true;answer.integer=null; setValue()"
               [disabled]="question.disabled"
               [checked]="answer.yesno">Yes
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
-              (click)="answer.yesno=false; setValue()"
+              (click)="answer.yesno=false;answer.integer=null; setValue()"
               [disabled]="question.disabled"
               [checked]="answer.yesno === false">No
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
+              (click)="answer.integer=-1;answer.yesno=null; setValue()"
+              [disabled]="question.disabled"
+              [checked]="answer.integer === -1">N/A
             </label>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
