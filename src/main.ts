@@ -1,5 +1,6 @@
 import { bootstrap } from '@angular/platform-browser-dynamic'
 import { ROUTER_PROVIDERS } from '@angular/router';
+import 'rxjs/Rx';
 import { enableProdMode } from '@angular/core';
 import { AppComponent, environment } from './app/';
 
