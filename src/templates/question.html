@@ -5,7 +5,7 @@
     </div>
     <p class="card-text" [innerHTML]="question.text | define"></p>
     <form [ngSwitch]="question.q_type">
-        <template [ngSwitchCase]="'text'">
+        <template [ngSwitchCase]="text">
           <fieldset class="form-group">
             <input type="text" class="form-control"
                    placeholder="Text..."
@@ -16,7 +16,7 @@
           </fieldset>
           <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
-        <template [ngSwitchCase]="'int'">
+        <template [ngSwitchCase]="int">
           <fieldset class="form-group">
             <input type="number" class="form-control"
                    placeholder="Number"
@@ -27,7 +27,7 @@
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
-        <template [ngSwitchCase]="'combo'">
+        <template [ngSwitchCase]="combo">
           <fieldset class="form-group">
               <select class="form-control"
                   (blur)="setValue()"
@@ -42,7 +42,7 @@
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
-        <template [ngSwitchCase]="'check'">
+        <template [ngSwitchCase]="check">
           <fieldset class="form-group">
               <div class="checkbox" *ngFor="let option of question.options">
                   <label>
@@ -58,7 +58,7 @@
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
-        <template [ngSwitchCase]="'bool'">
+        <template [ngSwitchCase]="bool">
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
               (click)="answer.yesno=true;answer.integer=null; setValue()"
