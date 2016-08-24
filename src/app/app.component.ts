@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {QuestionnaireComponent} from './questionnaire.component';
 import {AboutComponent} from './about.component';
@@ -14,18 +13,9 @@ import {NotFoundComponent} from './notfound.component';
     selector: 'cafe-app',
     templateUrl: 'templates/app.html',
     styleUrls: ['css/app.css'],
-    directives: [ROUTER_DIRECTIVES],
-    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, UserService]
+    providers: [HTTP_PROVIDERS, UserService]
 
 })
 
-@Routes([
-    {path: '/about', component: AboutComponent},
-    {path: '/user', component: UserComponent},
-    {path: '/login', component: LoginComponent},
-    {path: '/questionnaire', component: QuestionnaireComponent},
-    // Until useAsDefault: true has returned
-    {path: '/', component: NotFoundComponent}
-])
 
 export class AppComponent { }

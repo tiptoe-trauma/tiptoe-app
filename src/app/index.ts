@@ -1,5 +1,7 @@
 export * from './about.component';
 export * from './app.component';
+export * from './app.module';
+export * from './app.routing';
 export * from './category.component';
 export * from './definition.pipe';
 export * from './definition.service';

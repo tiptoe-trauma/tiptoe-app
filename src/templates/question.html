@@ -11,7 +11,8 @@
                    placeholder="Text..."
                    (blur)="setValue()"
                    [disabled]="question.disabled"
-                   [(ngModel)]="answer.text">
+                   [(ngModel)]="answer.text"
+                   name="text">
           </fieldset>
           <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
@@ -21,7 +22,8 @@
                    placeholder="Number"
                    (blur)="setValue()"
                    [disabled]="question.disabled"
-                   [(ngModel)]="answer.integer">
+                   [(ngModel)]="answer.integer"
+                   name="number">
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
           </fieldset>
         </template>
@@ -30,7 +32,8 @@
               <select class="form-control"
                   (blur)="setValue()"
                    [disabled]="question.disabled"
-                  [(ngModel)]="answer.text">
+                  [(ngModel)]="answer.text"
+                  name="combo">
                 <option></option>
                 <option *ngFor="#option of question.options" [value]="option.text">
                     {{option.text}}
@@ -47,7 +50,8 @@
                     (click)="setCheck(option.id)"
                     [checked]="isChecked(option.id)"
                     [value]="option.id"
-                    [disabled]="question.disabled">
+                    [disabled]="question.disabled"
+                    name="check">
                     {{option.text}}
                 </label>
               </div>
@@ -59,19 +63,22 @@
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
               (click)="answer.yesno=true;answer.integer=null; setValue()"
               [disabled]="question.disabled"
-              [checked]="answer.yesno">Yes
+              [checked]="answer.yesno"
+              name="radioyes">Yes
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
               (click)="answer.yesno=false;answer.integer=null; setValue()"
               [disabled]="question.disabled"
-              [checked]="answer.yesno === false">No
+              [checked]="answer.yesno === false"
+              name="radiono">No
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
               (click)="answer.integer=-1;answer.yesno=null; setValue()"
               [disabled]="question.disabled"
-              [checked]="answer.integer === -1">N/A
+              [checked]="answer.integer === -1"
+              name="radiona">N/A
             </label>
             <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
         </template>
