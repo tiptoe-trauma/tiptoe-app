@@ -9,7 +9,9 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-    'jquery': 'vendor/jquery'
+    'jquery': 'vendor/jquery',
+    'bootstrap': 'vendor/bootstrap',
+    'tether': 'vendor/tether',
 };
 
 /** User packages configuration. */

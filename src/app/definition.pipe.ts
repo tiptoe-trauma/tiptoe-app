@@ -32,7 +32,9 @@ export class DefinitionPipe implements PipeTransform {
         if(!this.errored && this.definitions){
             let matches = this._regex.exec(value);
             while(matches){
-                value = value.replace(matches[0], this.wrapWord(matches[1], this.getDefinition(matches[2])));
+                value = value.replace(matches[0],
+                                      this.wrapWord(matches[1],
+                                      this.getDefinition(matches[2])));
                 matches = this._regex.exec(value);
             }
             return value;
