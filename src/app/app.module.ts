@@ -10,6 +10,8 @@ import {UserComponent} from './user.component';
 import {LoginComponent} from './login.component';
 // Until useAsDefault: true has returned
 import {NotFoundComponent} from './notfound.component';
+import { CategoryComponent } from './category.component';
+import { QuestionComponent } from './question.component';
 
 @NgModule({
   imports: [
@@ -18,12 +20,14 @@ import {NotFoundComponent} from './notfound.component';
     routing,
   ],
   declarations: [
-    AppComponent,
+    QuestionComponent,
+    CategoryComponent,
+    QuestionnaireComponent,
     AboutComponent,
     UserComponent,
     LoginComponent,
-    QuestionnaireComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AppComponent,
   ],
   providers: [
     appRoutingProviders

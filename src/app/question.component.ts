@@ -1,4 +1,5 @@
-import {Component, OnInit, AfterViewChecked, EventEmitter} from '@angular/core';
+import {Input, Component, OnInit,
+    AfterViewChecked, EventEmitter} from '@angular/core';
 import {Question, Answer} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';
@@ -12,13 +13,12 @@ declare var jQuery:any;
     selector: 'my-question',
     templateUrl: 'templates/question.html',
     styleUrls: ['css/question.css',],
-    inputs: ['question'],
     outputs: ['changed'],
     pipes: [DefinitionPipe]
 })
 
 export class QuestionComponent implements OnInit, AfterViewChecked {
-    public question: Question;
+    @Input() question: Question;
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
     public user: User;

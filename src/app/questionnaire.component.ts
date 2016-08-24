@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryComponent} from './category.component';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
 import {Category} from './question';
@@ -8,7 +7,6 @@ import {Category} from './question';
     selector: 'my-questionnaire',
     templateUrl: 'templates/questionnaire.html',
     styleUrls: ['css/questionnaire.css'],
-    directives: [CategoryComponent],
     providers: [QuestionService, DefinitionService]
 })
 

@@ -1,6 +1,5 @@
-import {Component, OnChanges} from '@angular/core';
+import {Component, OnChanges, Input} from '@angular/core';
 import {Question, Category} from './question';
-import {QuestionComponent} from './question.component';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
 
@@ -8,13 +7,10 @@ import {UserService} from './user.service';
     selector: 'my-category',
     templateUrl: 'templates/category.html',
     styleUrls: ['css/category.css'],
-    directives: [QuestionComponent],
-    inputs: ['category']
-
 })
 
 export class CategoryComponent implements OnChanges {
-    public category: Category;
+    @Input() category: Category;
     public questions: Question[];
     public errorMessage: any;
 

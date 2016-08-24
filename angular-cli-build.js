@@ -17,8 +17,8 @@ module.exports = function(defaults) {
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
       'jquery/dist/jquery.min.+(js|map)',
-      'bootstrap/dist/**/**.min.+(js|css)',
-      'tether/dist/**/**.min.+(js|css)',
+      'bootstrap/dist/**/*.min.+(js|css)',
+      'tether/dist/**/*.min.+(js|css)',
     ]
   });
 };
