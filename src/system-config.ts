@@ -9,6 +9,7 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+    'jquery': 'vendor/jquery'
 };
 
 /** User packages configuration. */
