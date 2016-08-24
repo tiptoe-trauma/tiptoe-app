@@ -7,7 +7,7 @@ import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
 import {DefinitionPipe} from './definition.pipe';
 
-declare var jQuery:any;
+//declare var jquery:any;
 
 @Component({
     selector: 'my-question',
@@ -42,7 +42,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     }
 
     ngAfterViewChecked(){
-        jQuery('[data-toggle="popover"]').popover();
+        //jquery('[data-toggle="popover"]').popover();
     }
 
     setCheck(id: number){
