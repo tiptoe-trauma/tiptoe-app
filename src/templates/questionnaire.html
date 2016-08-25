@@ -1,10 +1,13 @@
-<div class="categories container">
-    <label class="btn btn-secondary col-sm-3"
-        *ngFor="let category of categories"
-        [class.active]="category.name === selectedCategory.name"
-        (click)="onSelect(category)">
-        {{category.name}}
-    </label>
+<div class="categories container-fluid">
+    <div class="list-group col-xs-4" *ngFor="let group of groups">
+        <h2 class="text-capitalize">{{group}}</h2>
+        <label class="list-group-item"
+            *ngFor="let category of category_group(group)"
+            [class.list-group-item-info]="category.name === selectedCategory.name"
+            (click)="onSelect(category)">
+            {{category.name}}
+        </label>
+    </div>
 </div>
 <my-category *ngIf="selectedCategory" [category]="selectedCategory"></my-category>
 <label class="btn btn-primary col-sm-2"

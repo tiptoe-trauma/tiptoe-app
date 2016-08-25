@@ -6,7 +6,7 @@ import {UserService} from './user.service';
 @Component({
     selector: 'my-category',
     templateUrl: 'templates/category.html',
-    styleUrls: ['css/category.css'],
+    styleUrls: ['../css/category.css'],
 })
 
 export class CategoryComponent implements OnChanges {

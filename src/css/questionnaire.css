@@ -1,3 +1,13 @@
 li.selected {
     color: #5BC0DE;
 }
+
+.categories {
+    margin-bottom: 2em;
+}
+
+.list-group-item {
+    height: 30px;
+    padding: 2px 15px;
+    font-size: .9em;
+}

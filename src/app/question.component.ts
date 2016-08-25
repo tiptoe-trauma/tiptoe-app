@@ -12,7 +12,7 @@ import {DefinitionPipe} from './definition.pipe';
 @Component({
     selector: 'my-question',
     templateUrl: 'templates/question.html',
-    styleUrls: ['css/question.css',],
+    styleUrls: ['../css/question.css',],
     outputs: ['changed'],
     pipes: [DefinitionPipe]
 })
