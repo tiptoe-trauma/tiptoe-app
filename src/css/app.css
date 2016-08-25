@@ -1,9 +1,33 @@
 nav button.router-link-active {
-    background-color: #5BC0DE;
+    background-color: #A65900;
     color: #FFF;
     border-color: #5BC0DE;
 }
 
+.nav-buttons {
+    padding-top: 7px;
+}
+
 div.main {
     margin-top: 1em;
+}
+
+.navbar-brand {
+    height: 50px;
+}
+
+h2.navbar-brand {
+    padding-top: 12px;
+    color: white;
+    font-size: 1.5em;
+}
+
+nav.bg-faded {
+    background-color: #FFA640;
+}
+
+button.btn-secondary {
+    background-color: #FF8900;
+    border-color: #A65900;
+    color: white;
 }
