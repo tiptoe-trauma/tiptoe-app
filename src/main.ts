@@ -1,11 +1,13 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
+import './polyfills.ts';
 import 'rxjs/Rx';
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { AppModule, environment } from './app/';
+import { environment } from './environments/environment';
+import { AppModule } from './app/';
 
 if (environment.production) {
   enableProdMode();
 }
 
-//bootstrap(AppComponent, [appRoutingProviders]);
 platformBrowserDynamic().bootstrapModule(AppModule);

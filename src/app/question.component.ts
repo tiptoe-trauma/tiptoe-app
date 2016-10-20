@@ -5,7 +5,6 @@ import {User} from './user';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
-import {DefinitionPipe} from './definition.pipe';
 
 //declare var jquery:any;
 
@@ -14,7 +13,6 @@ import {DefinitionPipe} from './definition.pipe';
     templateUrl: 'templates/question.html',
     styleUrls: ['../css/question.css',],
     outputs: ['changed'],
-    pipes: [DefinitionPipe]
 })
 
 export class QuestionComponent implements OnInit, AfterViewChecked {

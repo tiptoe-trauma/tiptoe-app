@@ -2,6 +2,7 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { AppComponent }       from './app.component';
+import { HttpModule }    from '@angular/http';
 import { routing,
          appRoutingProviders } from './app.routing';
 import {QuestionnaireComponent} from './questionnaire.component';
@@ -12,11 +13,13 @@ import {LoginComponent} from './login.component';
 import {NotFoundComponent} from './notfound.component';
 import { CategoryComponent } from './category.component';
 import { QuestionComponent } from './question.component';
+import { DefinitionPipe } from './definition.pipe';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     routing,
   ],
   declarations: [
@@ -28,9 +31,10 @@ import { QuestionComponent } from './question.component';
     LoginComponent,
     NotFoundComponent,
     AppComponent,
+    DefinitionPipe,
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://dev.cafe-trauma.com",
+    "secure": false
+  },
+  "/rdf": {
+    "target": "https://dev.cafe-trauma.com",
+    "secure": false
+  }
+}
