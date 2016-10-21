@@ -1,9 +1,9 @@
 <div class="card" *ngIf="question" [ngClass]="{disabled: question.disabled}">
     <div *ngIf="user && user.is_staff">
         <span>#{{question.id}}</span>
-        <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="/gicon.png"></a>
+        <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="https://cafe-trauma.com/gicon.png"></a>
     </div>
-    <p class="card-text" [innerHTML]="question.text | define"></p>
+    <p class="card-text">{{question.text}}</p>
     <form>
         <template [ngIf]="question.q_type === 'text'">
           <fieldset class="form-group">

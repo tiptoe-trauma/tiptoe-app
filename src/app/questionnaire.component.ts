@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from './question.service';
-import {DefinitionService} from './definition.service';
 import {Category} from './question';
 
 @Component({
     selector: 'my-questionnaire',
     templateUrl: 'templates/questionnaire.html',
     styleUrls: ['../css/questionnaire.css'],
-    providers: [QuestionService, DefinitionService]
 })
 
 export class QuestionnaireComponent implements OnInit {
@@ -34,8 +32,9 @@ export class QuestionnaireComponent implements OnInit {
         return cats
     }
 
-    setCategories(categories){
+    setCategories(categories: Category[]){
         this.categories = categories;
+        console.log(categories);
         if(this.categories && this.categories.length > 0){
             this.selectedCategory = this.categories[0];
         }

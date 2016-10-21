@@ -14,6 +14,9 @@ import {NotFoundComponent} from './notfound.component';
 import { CategoryComponent } from './category.component';
 import { QuestionComponent } from './question.component';
 import { DefinitionPipe } from './definition.pipe';
+import { UserService } from './user.service';
+import { QuestionService } from './question.service';
+import { DefinitionService } from './definition.service';
 
 @NgModule({
   imports: [
@@ -35,6 +38,9 @@ import { DefinitionPipe } from './definition.pipe';
   ],
   providers: [
     appRoutingProviders,
+    UserService,
+    QuestionService,
+    DefinitionService,
   ],
   bootstrap: [ AppComponent ]
 })
