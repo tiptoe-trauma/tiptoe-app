@@ -1,10 +1,12 @@
 {
   "/api": {
     "target": "https://dev.cafe-trauma.com",
-    "secure": false
+    "secure": false,
+    "changeOrigin": true
   },
   "/rdf": {
     "target": "https://dev.cafe-trauma.com",
-    "secure": false
+    "secure": false,
+    "changeOrigin": true
   }
 }
