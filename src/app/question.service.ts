@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Question, Category, Answer, Definition} from './question';
+import {Stat, Question, Category, Answer, Definition} from './question';
 import {User} from './user';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
@@ -39,6 +39,21 @@ export class QuestionService {
 
         return this._http.get(this._questionUrl + category + '/', options)
                             .map(res => <Question[]> res.json())
+                            .catch(this.handleError);
+    }
+
+    private _statUrl = '/api/stats/';
+
+    getStats(question: number, token: string){
+        let headers = new Headers({'Accept': 'application/json'});
+        if(token){
+            headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + token });
+        }
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._statUrl + question + '/', options)
+                            .map(res => <Stat> res.json())
                             .catch(this.handleError);
     }
 

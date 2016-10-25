@@ -36,3 +36,7 @@ export interface Definition {
     word: string;
     definition: string;
 }
+
+export interface Stat {
+    same: number;
+}

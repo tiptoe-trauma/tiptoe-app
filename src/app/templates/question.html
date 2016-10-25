@@ -1,4 +1,4 @@
-<div class="card" *ngIf="question" [ngClass]="{disabled: question.disabled}">
+<div class="card col-xs-10" *ngIf="question" [ngClass]="{disabled: question.disabled}">
     <div *ngIf="user && user.is_staff">
         <span>#{{question.id}}</span>
         <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="https://cafe-trauma.com/gicon.png"></a>
@@ -84,3 +84,13 @@
         </template>
     </form>
 </div>
+<span *ngIf="stat"
+      class="col-xs-2">
+      <div class="box gauge--1">
+        <div class="mask">
+        	<div class="semi-circle"></div>
+        	<div class="semi-circle--mask"
+                 [style]="getStyle()"></div>
+        </div>
+      </div>
+</span>

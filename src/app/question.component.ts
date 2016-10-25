@@ -1,17 +1,19 @@
 import {Input, Component, OnInit,
     AfterViewChecked, EventEmitter} from '@angular/core';
-import {Question, Answer} from './question';
+import {Question, Answer, Stat} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 //declare var jquery:any;
 
 @Component({
     selector: 'my-question',
     templateUrl: 'templates/question.html',
-    styleUrls: ['../css/question.css',],
+    styleUrls: ['../css/question.css',
+                '../css/guage.css'],
     outputs: ['changed'],
 })
 
@@ -20,9 +22,11 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
     public user: User;
+    public stat: Stat;
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
+                private _sanitizer: DomSanitizer,
                 private _userService: UserService) { }
 
     ngOnInit(){
@@ -33,9 +37,16 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         }
         if(this._userService.haveUser()){
           this._userService.getUser().subscribe(
-              user => this.user = user,
+              user => this.setUser(user),
               error => console.error(error)
           );
+        }
+    }
+
+    setUser(user: User){
+        this.user = user;
+        if(this.question.answer){
+            this.getStats();
         }
     }
 
@@ -61,11 +72,26 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
       }
     }
 
+    getStats(){
+        this._questionService.getStats(this.question.id, this.user.token)
+                            .subscribe(stat => {
+                                                this.stat = stat;
+                                                console.log(stat)
+                                               },
+                                       error => console.error(error));
+    }
+
+    getStyle(){
+        let n = 180 * this.stat.same;
+        let style = "transform: rotate(" + n + "deg) translate3d(0, 0, 0);"
+        return this._sanitizer.bypassSecurityTrustStyle(style);
+    }
+
     setValue(){
         if(this.user){
             this.answer.question = this.question.id;
             this._questionService.setValue(this.answer, this.user.token)
-                        .subscribe(res => console.log(res),
+                        .subscribe(res => this.getStats(),
                                    error => console.error(error));
             if(this.question.q_type === "bool"){
                 this.changed.emit(this.answer);
