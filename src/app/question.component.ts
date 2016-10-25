@@ -74,10 +74,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
 
     getStats(){
         this._questionService.getStats(this.question.id, this.user.token)
-                            .subscribe(stat => {
-                                                this.stat = stat;
-                                                console.log(stat)
-                                               },
+                            .subscribe(stat => this.stat = stat,
                                        error => console.error(error));
     }
 

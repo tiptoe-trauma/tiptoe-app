@@ -34,7 +34,6 @@ export class QuestionnaireComponent implements OnInit {
 
     setCategories(categories: Category[]){
         this.categories = categories;
-        console.log(categories);
         if(this.categories && this.categories.length > 0){
             this.selectedCategory = this.categories[0];
         }
@@ -45,7 +44,6 @@ export class QuestionnaireComponent implements OnInit {
                 this.groups.push(categories[i].group);
             }
         }
-        console.log(this.groups);
     }
 
     nextCategory(){
