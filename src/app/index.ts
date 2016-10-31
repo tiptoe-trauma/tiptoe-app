@@ -15,3 +15,4 @@ export * from './questionnaire.component';
 export * from './user.component';
 export * from './user.service';
 export * from './user';
+export * from './stat.component';

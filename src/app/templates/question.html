@@ -84,13 +84,4 @@
         </template>
     </form>
 </div>
-<span *ngIf="stat"
-      class="col-xs-2">
-      <div class="box gauge--1">
-        <div class="mask">
-        	<div class="semi-circle"></div>
-        	<div class="semi-circle--mask"
-                 [style]="getStyle()"></div>
-        </div>
-      </div>
-</span>
+<my-stat *ngIf="stat" [user]="user" [question]="question"></my-stat>

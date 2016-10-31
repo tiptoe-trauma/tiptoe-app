@@ -13,6 +13,7 @@ import {LoginComponent} from './login.component';
 import {NotFoundComponent} from './notfound.component';
 import { CategoryComponent } from './category.component';
 import { QuestionComponent } from './question.component';
+import { StatComponent } from './stat.component';
 import { DefinitionPipe } from './definition.pipe';
 import { UserService } from './user.service';
 import { QuestionService } from './question.service';
@@ -34,6 +35,7 @@ import { DefinitionService } from './definition.service';
     LoginComponent,
     NotFoundComponent,
     AppComponent,
+    StatComponent,
     DefinitionPipe,
   ],
   providers: [

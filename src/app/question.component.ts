@@ -22,7 +22,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
     public user: User;
-    public stat: Stat;
+    public stat: boolean = false;
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
@@ -73,15 +73,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     }
 
     getStats(){
-        this._questionService.getStats(this.question.id, this.user.token)
-                            .subscribe(stat => this.stat = stat,
-                                       error => console.error(error));
-    }
-
-    getStyle(){
-        let n = 180 * this.stat.same;
-        let style = "transform: rotate(" + n + "deg) translate3d(0, 0, 0);"
-        return this._sanitizer.bypassSecurityTrustStyle(style);
+        this.stat = true;
     }
 
     setValue(){
