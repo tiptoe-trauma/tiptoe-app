@@ -1,20 +1,24 @@
 /* Many thanks to http://codepen.io/Sambego/pen/zKLar */
 
+.box {
+  height: 180px;
+  width: 180px;
+}
+
 .mask {
   position: relative;
   overflow: hidden;
   display: block;
-  width: 12.5rem;
-  height: 6.25rem;
-  margin: 1.25rem;
+  width: 100%;
+  height: 50%;
 }
 
 .semi-circle {
   position: relative;
   display: block;
-  width: 12.5rem;
-  height: 6.25rem;
-  background: linear-gradient(to right, #c0392b 0%, #f1c40f 50%, #1abc9c 100%);
+  width: 98%;
+  height: 100%;
+  background: #1abc9c;
   border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
 }
 .semi-circle::before {
@@ -24,9 +28,9 @@
   left: 50%;
   z-index: 2;
   display: block;
-  width: 8.75rem;
-  height: 4.375rem;
-  margin-left: -4.375rem;
+  width: 70%;
+  height: 70%;
+  margin-left: -35%;
   background: #fff;
   border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
 }
@@ -35,13 +39,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 12.5rem;
-  height: 12.5rem;
+  width: 100%;
+  height: 101%;
   background: transparent;
   transform: rotate(0deg) translate3d(0, 0, 0);
-  transform-origin: center center;
+  transform-origin: center bottom;
   backface-visibility: hidden;
-  transition: all .3s ease-in-out;
 }
 .semi-circle--mask::before {
   content: "";
@@ -50,13 +53,18 @@
   left: 0%;
   z-index: 2;
   display: block;
-  width: 12.625rem;
-  height: 6.375rem;
+  width: 100%;
+  height: 100%;
   margin: -1px 0 0 -1px;
   background: #f2f2f2;
   border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
 }
 
-.gauge--1 .semi-circle {
-  background: #1abc9c;
+.bignum{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 25%;
+    font-size: 3em;
+    z-index: 5;
 }

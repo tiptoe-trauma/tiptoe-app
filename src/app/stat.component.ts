@@ -16,14 +16,20 @@ export class StatComponent implements OnInit {
     @Input() question: Question;
     @Input() user: User;
     public stat: Stat;
+    public percent: number = 0;
 
     constructor(private _questionService: QuestionService,
                 private _sanitizer: DomSanitizer) { }
 
     ngOnInit(){
         this._questionService.getStats(this.question.id, this.user.token)
-                            .subscribe(stat => this.stat = stat,
+                            .subscribe(stat => this.setStat(stat),
                                        error => console.error(error));
+    }
+
+    setStat(stat: Stat){
+        this.stat = stat;
+        this.percent = Math.floor(stat.same * 100);
     }
 
     getStyle(){
