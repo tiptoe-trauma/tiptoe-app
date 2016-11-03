@@ -3,7 +3,7 @@
         <span>#{{question.id}}</span>
         <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="https://cafe-trauma.com/gicon.png"></a>
     </div>
-    <p class="card-text">{{question.text}}</p>
+    <p class="card-text" [innerHTML]="question.text | define"></p>
     <form>
         <template [ngIf]="question.q_type === 'text'">
           <fieldset class="form-group">

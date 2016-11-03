@@ -7,7 +7,7 @@ import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
-//declare var jquery:any;
+declare var $:any;
 
 @Component({
     selector: 'my-question',
@@ -51,7 +51,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     }
 
     ngAfterViewChecked(){
-        //jquery('[data-toggle="popover"]').popover();
+        (<any>$('[data-toggle="popover"]')).popover();
     }
 
     setCheck(id: number){
