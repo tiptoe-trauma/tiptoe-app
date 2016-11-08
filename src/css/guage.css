@@ -16,7 +16,7 @@
 .semi-circle {
   position: relative;
   display: block;
-  width: 98%;
+  width: 100%;
   height: 100%;
   background: #1abc9c;
   border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
@@ -40,7 +40,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 101%;
+  height: 100%;
   background: transparent;
   transform: rotate(0deg) translate3d(0, 0, 0);
   transform-origin: center bottom;

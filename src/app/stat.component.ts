@@ -33,8 +33,11 @@ export class StatComponent implements OnInit {
     }
 
     getStyle(){
-        let n = 180 * this.stat.same;
-        let style = "transform: rotate(" + n + "deg) translate3d(0, 0, 0);"
-        return this._sanitizer.bypassSecurityTrustStyle(style);
+        if(this.stat){
+            let n = 180 * this.stat.same;
+            let style = "transform: rotate(" + n + "deg) translate3d(0, 0, 0);"
+            return this._sanitizer.bypassSecurityTrustStyle(style);
+        }
+        return this._sanitizer.bypassSecurityTrustStyle("");
     }
 }
