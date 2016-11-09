@@ -2,6 +2,7 @@
     <div *ngIf="user && user.is_staff">
         <span>#{{question.id}}</span>
         <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="https://cafe-trauma.com/gicon.png"></a>
+        <a href="/admin/questionnaire/question/{{question.id}}/change/" target="_blank"><img src="https://cafe-trauma.com/admin_icon.png"></a>
     </div>
     <p class="card-text" [innerHTML]="question.text | define"></p>
     <form>
