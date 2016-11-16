@@ -5,3 +5,8 @@ div.card {
 .disabled {
     color: lightgrey;
 }
+
+.help-text {
+    color: red;
+    font-weight: bold;
+}

@@ -15,7 +15,7 @@
                    [(ngModel)]="answer.text"
                    name="text">
           </fieldset>
-          <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+          <small *ngIf="question.help_text" class="help-text">{{question.help_text}}</small>
         </template>
         <template [ngIf]="question.q_type === 'int'">
           <fieldset class="form-group">
@@ -25,7 +25,7 @@
                    [disabled]="question.disabled"
                    [(ngModel)]="answer.integer"
                    name="number">
-            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+            <small *ngIf="question.help_text" class="help-text">{{question.help_text}}</small>
           </fieldset>
         </template>
         <template [ngIf]="question.q_type === 'combo'">
@@ -40,7 +40,7 @@
                     {{option.text}}
                 </option>
             </select>
-            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+            <small *ngIf="question.help_text" class="help-text">{{question.help_text}}</small>
           </fieldset>
         </template>
         <template [ngIf]="question.q_type === 'check'">
@@ -56,7 +56,7 @@
                     {{option.text}}
                 </label>
               </div>
-            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+            <small *ngIf="question.help_text" class="help-text">{{question.help_text}}</small>
           </fieldset>
         </template>
         <template [ngIf]="question.q_type === 'bool'">
@@ -81,7 +81,7 @@
               [checked]="answer.integer === -1"
               name="radiona">N/A
             </label>
-            <small *ngIf="question.help_text" class="text-muted">{{question.help_text}}</small>
+            <small *ngIf="question.help_text" class="help-text">{{question.help_text}}</small>
         </template>
     </form>
 </div>
