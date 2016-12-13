@@ -43,6 +43,27 @@
             <small *ngIf="question.help_text" class="help-text">{{question.help_text}}</small>
           </fieldset>
         </template>
+        <template [ngIf]="question.q_type === 'unit'">
+          <fieldset class="form-inline">
+            <input type="number" class="form-control"
+                   placeholder="Number"
+                   (blur)="setValue()"
+                   [disabled]="question.disabled"
+                   [(ngModel)]="answer.integer"
+                   name="number">
+              <select class="form-control"
+                  (blur)="setValue()"
+                   [disabled]="question.disabled"
+                  [(ngModel)]="answer.text"
+                  name="combo">
+                <option></option>
+                <option *ngFor="let option of question.options" [value]="option.text">
+                    {{option.text}}
+                </option>
+            </select>
+            <small *ngIf="question.help_text" class="help-text">{{question.help_text}}</small>
+          </fieldset>
+        </template>
         <template [ngIf]="question.q_type === 'check'">
           <fieldset class="form-group">
               <div class="checkbox" *ngFor="let option of question.options">
