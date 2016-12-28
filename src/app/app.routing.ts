@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     {path: 'about', component: AboutComponent},
     {path: 'user', component: UserComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'questionnaire', component: QuestionnaireComponent},
+    {path: 'questionnaire/:type', component: QuestionnaireComponent},
     {path: 'organogram', component: OrganogramComponent},
     // Until useAsDefault: true has returned
     {path: '**', component: NotFoundComponent}

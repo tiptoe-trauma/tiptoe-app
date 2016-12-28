@@ -18,12 +18,14 @@ export class QuestionService {
 
     private _categoryUrl = '/api/categories/';
 
-    getCategories(){
+    getCategories(type: string){
         let headers = new Headers({'Accept': 'application/json'});
         let options = new RequestOptions({headers: headers});
 
         return this._http.get(this._categoryUrl, options)
-                            .map(res => <Category[]> res.json().results)
+                            .map(res => <Category[]> res.json().results.filter(
+                                    category => category.questionnaire === type)
+                                )
                             .catch(this.handleError);
     }
 

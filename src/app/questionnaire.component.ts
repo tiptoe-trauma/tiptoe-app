@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from './question.service';
 import {Category} from './question';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'my-questionnaire',
@@ -14,10 +16,14 @@ export class QuestionnaireComponent implements OnInit {
     public errorMessage: any;
     public groups: string[];
 
-    constructor(private _questionService: QuestionService){ }
+    constructor(private _questionService: QuestionService,
+                private _route: ActivatedRoute,
+                private _router: Router){ }
 
     ngOnInit(){
-        this._questionService.getCategories()
+        this._route.params
+            .switchMap((params: Params) =>
+                       this._questionService.getCategories(params['type']))
             .subscribe(categories => this.setCategories(categories),
                        error => this.errorMessage = <any>error);
     }
