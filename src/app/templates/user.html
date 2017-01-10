@@ -3,5 +3,13 @@
   <p>{{user.username}}</p>
   <p>{{user.email}}</p>
   <p *ngIf="user.is_staff">Welcome to the staff page</p>
+  <h4>Complete Questionnaire for</h4>
+  <a routerLink="/questionnaire/center">
+      <button type="button" class="btn btn-primary">Trauma Center</button></a>
+  <a routerLink="/questionnaire/system">
+      <button type="button" class="btn btn-primary">Trauma System</button></a>
+  <br/>
+  <br/>
+  <br/>
   <button type="button" class="btn" (click)="logout()">Logout</button>
 </div>
