@@ -10,6 +10,7 @@ export interface Question {
     enabled: boolean;
     graph: boolean;
     depends_on: number[];
+    old?: boolean;
 }
 
 export interface Category {

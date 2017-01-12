@@ -1,5 +1,6 @@
 import {Input, Component, OnInit,
-    AfterViewChecked, EventEmitter} from '@angular/core';
+    AfterViewChecked, EventEmitter,
+    state, trigger, style, animate, transition, keyframes} from '@angular/core';
 import {Question, Answer, Stat} from './question';
 import {User} from './user';
 import {QuestionService} from './question.service';
@@ -12,6 +13,21 @@ declare var $:any;
 @Component({
     selector: 'my-question',
     templateUrl: 'templates/question.html',
+    animations: [
+        trigger('visibilityChanged', [
+            state('true', style({ opacity: 1, display: 'inline'})),
+            state('false', style({ opacity: 0, display: 'none'})),
+            transition('void <=> true', animate('.5s', keyframes([
+                style({opacity: 0, display: 'inline', offset: 0}),
+                style({opacity: 1, display: 'inline', offset: 1}),
+            ]))),
+            transition('void <=> false', animate('.5s', keyframes([
+                style({opacity: 1, display: 'inline', offset: 0}),
+                style({opacity: 0, display: 'inline', offset: 1}),
+            ]))),
+            transition('new => *', animate('0s')),
+        ])
+    ],
     styleUrls: ['../css/question.css',
                 '../css/guage.css'],
     outputs: ['changed'],
@@ -23,6 +39,7 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
     public changed: EventEmitter<any> = new EventEmitter();
     public user: User;
     public stat: boolean = false;
+    public visibility: string;
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
@@ -30,6 +47,11 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
                 private _userService: UserService) { }
 
     ngOnInit(){
+        if(this.question.old){
+            this.visibility = String(this.question.enabled);
+        } else {
+            this.visibility = 'new';
+        }
         if(this.question.answer){
             this.answer = this.question.answer;
         } else {

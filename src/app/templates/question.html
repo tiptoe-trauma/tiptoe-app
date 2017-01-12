@@ -1,4 +1,4 @@
-<div class="card col-xs-10" *ngIf="question" [hidden]="!question.enabled">
+<div class="card col-xs-10" *ngIf="question" [@visibilityChanged]="visibility">
     <div *ngIf="user && user.is_staff">
         <span>#{{question.id}}</span>
         <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="https://cafe-trauma.com/gicon.png"></a>

@@ -27,7 +27,8 @@ export class CategoryComponent implements OnChanges {
             for(let j = 0; j < this.questions[i].depends_on.length; j++){
                 if(this.questions[i].depends_on[j] == answer.question){
                     this._questionService.getQuestion(this.questions[i].id, this._userService.token)
-                        .subscribe(question => this.questions[i] = question,
+                        .subscribe(question => {question.old = true,
+                                                this.questions[i] = question},
                                    error => this.errorMessage = <any>error);
                 }
             }
