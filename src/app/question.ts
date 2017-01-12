@@ -7,7 +7,7 @@ export interface Question {
     answer: Answer;
     tags?: string;
     help_text?: string;
-    disabled: boolean;
+    enabled: boolean;
     graph: boolean;
     depends_on: number[];
 }

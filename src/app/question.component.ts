@@ -80,11 +80,9 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         if(this.user){
             this.answer.question = this.question.id;
             this._questionService.setValue(this.answer, this.user.token)
-                        .subscribe(res => this.getStats(),
+                        .subscribe(res => {this.getStats();
+                                           this.changed.emit(this.answer)},
                                    error => console.error(error));
-            if(this.question.q_type === "bool"){
-                this.changed.emit(this.answer);
-            }
          } else {
              console.log("Must be logged in to submit");
          }

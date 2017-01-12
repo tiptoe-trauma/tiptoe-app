@@ -29,7 +29,7 @@ export class QuestionService {
                             .catch(this.handleError);
     }
 
-    private _questionUrl = '/api/questions/';
+    private _questionsUrl = '/api/questions/';
 
     getQuestions(category: number, token: string){
         let headers = new Headers({'Accept': 'application/json'});
@@ -39,8 +39,23 @@ export class QuestionService {
         }
         let options = new RequestOptions({headers: headers});
 
-        return this._http.get(this._questionUrl + category + '/', options)
+        return this._http.get(this._questionsUrl + category + '/', options)
                             .map(res => <Question[]> res.json())
+                            .catch(this.handleError);
+    }
+
+    private _questionUrl = '/api/question/';
+
+    getQuestion(question: number, token: string){
+        let headers = new Headers({'Accept': 'application/json'});
+        if(token){
+            headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + token });
+        }
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._questionUrl + question + '/', options)
+                            .map(res => <Question> res.json())
                             .catch(this.handleError);
     }
 

@@ -1,4 +1,4 @@
-<div class="card col-xs-10" *ngIf="question" [ngClass]="{disabled: question.disabled}">
+<div class="card col-xs-10" *ngIf="question" [hidden]="!question.enabled">
     <div *ngIf="user && user.is_staff">
         <span>#{{question.id}}</span>
         <a *ngIf="question.graph" href="/graphs/{{question.id}}.png" target="_blank"><img src="https://cafe-trauma.com/gicon.png"></a>
@@ -11,7 +11,6 @@
             <input type="text" class="form-control"
                    placeholder="Text..."
                    (blur)="setValue()"
-                   [disabled]="question.disabled"
                    [(ngModel)]="answer.text"
                    name="text">
           </fieldset>
@@ -21,7 +20,6 @@
             <input type="number" class="form-control"
                    placeholder="Number"
                    (blur)="setValue()"
-                   [disabled]="question.disabled"
                    [(ngModel)]="answer.integer"
                    name="number">
           </fieldset>
@@ -30,7 +28,6 @@
           <fieldset class="form-group">
               <select class="form-control"
                   (blur)="setValue()"
-                   [disabled]="question.disabled"
                   [(ngModel)]="answer.text"
                   name="combo">
                 <option></option>
@@ -45,12 +42,10 @@
             <input type="number" class="form-control"
                    placeholder="Number"
                    (blur)="setValue()"
-                   [disabled]="question.disabled"
                    [(ngModel)]="answer.integer"
                    name="number">
               <select class="form-control"
                   (blur)="setValue()"
-                   [disabled]="question.disabled"
                   [(ngModel)]="answer.text"
                   name="combo">
                 <option></option>
@@ -68,7 +63,6 @@
                     (click)="setCheck(option.id)"
                     [checked]="isChecked(option.id)"
                     [value]="option.id"
-                    [disabled]="question.disabled"
                     name="check">
                     {{option.text}}
                 </label>
@@ -79,21 +73,18 @@
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
               (click)="answer.yesno=true;answer.integer=null; setValue()"
-              [disabled]="question.disabled"
               [checked]="answer.yesno"
               name="radioyes">Yes
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
               (click)="answer.yesno=false;answer.integer=null; setValue()"
-              [disabled]="question.disabled"
               [checked]="answer.yesno === false"
               name="radiono">No
             </label>
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
               (click)="answer.integer=-1;answer.yesno=null; setValue()"
-              [disabled]="question.disabled"
               [checked]="answer.integer === -1"
               name="radiona">N/A
             </label>

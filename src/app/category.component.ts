@@ -25,8 +25,10 @@ export class CategoryComponent implements OnChanges {
     checkDeps(answer) {
         for(let i = 0; i < this.questions.length; i++){
             for(let j = 0; j < this.questions[i].depends_on.length; j++){
-                if(this.questions[i].depends_on[j] === answer.question){
-                    this.questions[i].disabled = !answer.yesno;
+                if(this.questions[i].depends_on[j] == answer.question){
+                    this._questionService.getQuestion(this.questions[i].id, this._userService.token)
+                        .subscribe(question => this.questions[i] = question,
+                                   error => this.errorMessage = <any>error);
                 }
             }
         }
