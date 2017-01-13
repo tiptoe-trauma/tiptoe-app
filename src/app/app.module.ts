@@ -19,6 +19,7 @@ import { DefinitionPipe } from './definition.pipe';
 import { UserService } from './user.service';
 import { QuestionService } from './question.service';
 import { DefinitionService } from './definition.service';
+import { ErrorService, ErrorComponent } from './errors';
 
 @NgModule({
   imports: [
@@ -39,12 +40,14 @@ import { DefinitionService } from './definition.service';
     StatComponent,
     OrganogramComponent,
     DefinitionPipe,
+    ErrorComponent,
   ],
   providers: [
     appRoutingProviders,
     UserService,
     QuestionService,
     DefinitionService,
+    ErrorService,
   ],
   bootstrap: [ AppComponent ]
 })
