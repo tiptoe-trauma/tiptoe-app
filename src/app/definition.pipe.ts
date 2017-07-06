@@ -11,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class DefinitionPipe implements PipeTransform {
     public definitions: Definition[];
     public errored: boolean = false;
-    private _regex: RegExp = /\{([^>]+)\|([^>]+)\}/g;
+    private _regex: RegExp = /\{([^}]+)\|([^}]+)\}/g;
 
     constructor(private _definitionService: DefinitionService,
                 private _sanitizer: DomSanitizer){
