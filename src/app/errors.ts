@@ -52,7 +52,9 @@ export class ErrorComponent {
   }
 
   getSeverityClass(severity: number){
-      if(severity < 2){
+      if(severity < 1){
+          return "alert-success";
+      } else if(severity === 1){
           return "alert-info";
       } else if(severity === 2){
           return "alert-warning";

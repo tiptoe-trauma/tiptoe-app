@@ -22,7 +22,7 @@ export class LoginComponent {
                         .subscribe(
                                 res => setTimeout(() => this._router.navigate(['/user']), 250),
                                 error => this._errorService.announceError(
-                                    'Login Failed', error, 1));
+                                    'Login Failed', error, 2));
     // setTimeout here to prevent bug https://github.com/angular/angular/issues/6154
     // setTimeout(() => this._router.navigate(['/user']));
   }
