@@ -58,14 +58,13 @@
         <ng-template [ngIf]="question.q_type === 'check'">
           <fieldset class="form-group">
               <div class="checkbox" *ngFor="let option of question.options">
-                  <label>
                     <input type="checkbox"
+                    [id]="option.id"
                     (click)="setCheck(option.id)"
                     [checked]="isChecked(option.id)"
                     [value]="option.id"
                     name="check">
-                    {{option.text}}
-                </label>
+                  <label for="{{option.id}}" [innerHTML]="option.text | define"></label>
               </div>
           </fieldset>
         </ng-template>
