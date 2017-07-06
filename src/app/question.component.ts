@@ -1,5 +1,4 @@
-import {Input, Component, OnInit,
-    AfterViewChecked, EventEmitter,
+import {Input, Component, OnInit, EventEmitter,
     state, trigger, style, animate, transition, keyframes} from '@angular/core';
 import {Question, Answer, Stat} from './question';
 import {User} from './user';
@@ -33,7 +32,7 @@ declare var $:any;
     outputs: ['changed'],
 })
 
-export class QuestionComponent implements OnInit, AfterViewChecked {
+export class QuestionComponent implements OnInit {
     @Input() question: Question;
     public answer: Answer;
     public changed: EventEmitter<any> = new EventEmitter();
@@ -70,10 +69,6 @@ export class QuestionComponent implements OnInit, AfterViewChecked {
         if(this.question.answer){
             this.getStats();
         }
-    }
-
-    ngAfterViewChecked(){
-        (<any>$('[data-toggle="popover"]')).popover();
     }
 
     setCheck(id: number){

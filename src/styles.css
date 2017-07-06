@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+.definition {
+    position: relative;
+    display: inline-block;
+}
+
+.definition .definitiontext {
+    visibility: hidden;
+    width: 300px;
+    /*background-color: black;
+    color: #fff;*/
+    background-color: white;
+    border: 1px solid black;
+    font-weight: normal;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -150px;
+}
+
+.definitiontext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.definition:hover .definitiontext {
+    visibility: visible;
+}

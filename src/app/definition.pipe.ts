@@ -46,11 +46,8 @@ export class DefinitionPipe implements PipeTransform {
 
     // Wrap DIV around the word
     wrapWord(word: string, definition: string){
-        return `<span style="font-weight:bold"
-                      data-container="body"
-                      data-toggle="popover"
-                      data-trigger="hover"
-                      data-placement="top"
-                      data-content="${definition}">${word}</span>`;
+        return `<div class="definition" style="font-weight:bold">${word}
+                  <span class="definitiontext">${definition}</span>
+                </div>`;
     }
 }
