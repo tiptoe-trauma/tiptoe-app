@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
 
 export class UserComponent implements OnInit {
   public user: User;
-  public errorMessage: any;
 
   constructor(private _userService: UserService,
         private _router: Router){
@@ -22,8 +21,7 @@ export class UserComponent implements OnInit {
             this._router.navigate(['/login']);
         }
         this._userService.getUser().subscribe(
-            user => this.user = user,
-            error => this.errorMessage = error
+            user => this.user = user
         );
     }
 

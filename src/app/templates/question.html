@@ -6,7 +6,7 @@
     </div>
     <p class="card-text" [innerHTML]="question.text | define"></p>
     <form>
-        <template [ngIf]="question.q_type === 'text'">
+        <ng-template [ngIf]="question.q_type === 'text'">
           <fieldset class="form-group">
             <input type="text" class="form-control"
                    placeholder="Text..."
@@ -14,8 +14,8 @@
                    [(ngModel)]="answer.text"
                    name="text">
           </fieldset>
-        </template>
-        <template [ngIf]="question.q_type === 'int'">
+        </ng-template>
+        <ng-template [ngIf]="question.q_type === 'int'">
           <fieldset class="form-group">
             <input type="number" class="form-control"
                    placeholder="Number"
@@ -23,8 +23,8 @@
                    [(ngModel)]="answer.integer"
                    name="number">
           </fieldset>
-        </template>
-        <template [ngIf]="question.q_type === 'combo'">
+        </ng-template>
+        <ng-template [ngIf]="question.q_type === 'combo'">
           <fieldset class="form-group">
               <select class="form-control"
                   (blur)="setValue()"
@@ -36,8 +36,8 @@
                 </option>
             </select>
           </fieldset>
-        </template>
-        <template [ngIf]="question.q_type === 'unit'">
+        </ng-template>
+        <ng-template [ngIf]="question.q_type === 'unit'">
           <fieldset class="form-inline">
             <input type="number" class="form-control"
                    placeholder="Number"
@@ -54,8 +54,8 @@
                 </option>
             </select>
           </fieldset>
-        </template>
-        <template [ngIf]="question.q_type === 'check'">
+        </ng-template>
+        <ng-template [ngIf]="question.q_type === 'check'">
           <fieldset class="form-group">
               <div class="checkbox" *ngFor="let option of question.options">
                   <label>
@@ -68,8 +68,8 @@
                 </label>
               </div>
           </fieldset>
-        </template>
-        <template [ngIf]="question.q_type === 'bool'">
+        </ng-template>
+        <ng-template [ngIf]="question.q_type === 'bool'">
             <label class="radio-inline">
               <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
               (click)="answer.yesno=true;answer.integer=null; setValue()"
@@ -88,7 +88,7 @@
               [checked]="answer.integer === -1"
               name="radiona">N/A
             </label>
-        </template>
+        </ng-template>
         <small *ngIf="question.help_text && user && user.is_staff" class="help-text">{{question.help_text}}</small>
     </form>
 </div>
