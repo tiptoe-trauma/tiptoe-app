@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User} from './user';
+import {User, Organization} from './user';
 import {Question} from './question';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
@@ -89,5 +89,67 @@ export class UserService {
 
     setValue(question: Question, value: string){
         this._answers[question.id] = value;
+    }
+
+    setActiveOrganization(org: Organization){
+        if(this.haveUser()){
+            let body = '{"id": ' + org.id + '}';
+            let headers = new Headers({'Content-Type': 'application/json',
+                                       'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.post(this._userUrl, body, options)
+                          .map(res => this.setUser(<User> res.json(), this.token))
+                          .catch(this.handleError);
+        } else {
+            return Observable.throw("Must be logged in to set active organization");
+        }
+    }
+
+    private _organizationUrl: string = '/api/organization/';
+
+    createOrganization(org: Organization){
+        if(this.haveUser()){
+            let body = JSON.stringify(org);
+            let headers = new Headers({'Content-Type': 'application/json',
+                                       'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.post(this._organizationUrl, body, options)
+                          .map(res => <Organization> res.json())
+                          .catch(this.handleError);
+        } else {
+            return Observable.throw("Must be logged in to create organizations");
+        }
+    }
+
+    deleteOrganization(org: Organization){
+        if(this.haveUser()){
+            let headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.delete(this._organizationUrl + org.id + '/', options)
+                              .catch(this.handleError);
+        } else {
+            return Observable.throw("Must be logged in to delete organizations");
+        }
+    }
+
+
+    requestOrganizationList(){
+        if(this.haveUser()){
+            let headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + this.token });
+            let options = new RequestOptions({headers: headers});
+
+            return this._http.get(this._organizationUrl, options)
+                              .map(res => <Organization[]> res.json())
+                              .catch(this.handleError);
+        } else {
+            return Observable.throw("Must be logged in to request organizations");
+        }
     }
 }

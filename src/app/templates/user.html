@@ -9,7 +9,30 @@
   <a routerLink="/questionnaire/system">
       <button type="button" class="btn btn-primary">Trauma System</button></a>
   <br/>
+  <ul>
+      <li *ngFor="let organization of organizations">
+          {{organization.name}} - {{organization.org_type}}
+          <button *ngIf="user.active_organization == null || user.active_organization.id !== organization.id" type="button" class="btn" (click)="setActiveOrganization(organization)">Set Active</button>
+          <button type="button" class="btn btn-danger" (click)="deleteOrganization(organization)">Delete</button>
+      </li>
+  </ul>
   <br/>
+
+    <h4>Create Questionnaire for new Organization</h4>
+    <input type="text" name="newOrgName" [(ngModel)]="new_org_name" placeholder="New Organization Name">
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="center_radio"
+      (click)="new_org_type='center'"
+      [checked]="new_org_type === 'center'"
+      name="radioc">Trauma Center
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="system_radio"
+      (click)="new_org_type='system'"
+      [checked]="new_org_type === 'system'"
+      name="radios">Trauma System
+    </label>
+    <button type="button" class="btn btn-primary" (click)="createOrganization()">Create Organization</button>
   <br/>
   <button type="button" class="btn" (click)="logout()">Logout</button>
 </div>
