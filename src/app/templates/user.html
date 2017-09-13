@@ -1,21 +1,19 @@
 <div *ngIf="user">
-  <h3>User Profile</h3>
-  <p>{{user.username}}</p>
-  <p>{{user.email}}</p>
-  <p *ngIf="user.is_staff">Welcome to the staff page</p>
-  <h4>Complete Questionnaire for</h4>
-  <a routerLink="/questionnaire/center">
-      <button type="button" class="btn btn-primary">Trauma Center</button></a>
-  <a routerLink="/questionnaire/system">
-      <button type="button" class="btn btn-primary">Trauma System</button></a>
-  <br/>
-  <ul>
-      <li *ngFor="let organization of organizations">
-          {{organization.name}} - {{organization.org_type}}
-          <button *ngIf="user.active_organization == null || user.active_organization.id !== organization.id" type="button" class="btn" (click)="setActiveOrganization(organization)">Set Active</button>
-          <button type="button" class="btn btn-danger" (click)="deleteOrganization(organization)">Delete</button>
-      </li>
-  </ul>
+  <h3>Select or Create Organization</h3>
+  <table>
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Type</th>
+          </tr>
+      </thead>
+      <tr *ngFor="let organization of organizations">
+          <td>{{organization.name}}</td>
+          <td>{{organization.org_type}}</td>
+          <td><button *ngIf="user.active_organization == null || user.active_organization.id !== organization.id" type="button" class="btn" (click)="setActiveOrganization(organization)">Set Active</button></td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteOrganization(organization)">Delete</button></td>
+      </tr>
+  </table>
   <br/>
 
     <h4>Create Questionnaire for new Organization</h4>
@@ -32,7 +30,7 @@
       [checked]="new_org_type === 'system'"
       name="radios">Trauma System
     </label>
-    <button type="button" class="btn btn-primary" (click)="createOrganization()">Create Organization</button>
-  <br/>
-  <button type="button" class="btn" (click)="logout()">Logout</button>
+    <button type="button" class="btn btn-success" (click)="createOrganization()">Create Organization</button>
+    <br>
+    <button type="button" class="btn" (click)="logout()">Logout</button>
 </div>
