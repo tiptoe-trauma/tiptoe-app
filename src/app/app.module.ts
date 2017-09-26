@@ -20,7 +20,9 @@ import { DefinitionPipe } from './definition.pipe';
 import { UserService } from './user.service';
 import { QuestionService } from './question.service';
 import { DefinitionService } from './definition.service';
+import { OrganogramService } from './organogram.service';
 import { ErrorService, ErrorComponent } from './errors';
+import { OrgSpecialityComponent } from './org-speciality/org-speciality.component';
 
 @NgModule({
   imports: [
@@ -43,6 +45,7 @@ import { ErrorService, ErrorComponent } from './errors';
     OrganogramComponent,
     DefinitionPipe,
     ErrorComponent,
+    OrgSpecialityComponent,
   ],
   providers: [
     appRoutingProviders,
@@ -50,6 +53,7 @@ import { ErrorService, ErrorComponent } from './errors';
     QuestionService,
     DefinitionService,
     ErrorService,
+    OrganogramService,
   ],
   bootstrap: [ AppComponent ]
 })
