@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {QuestionService} from './question.service';
 import {Category} from './question';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Angulartics2 } from 'angulartics2';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -18,6 +19,7 @@ export class QuestionnaireComponent implements OnInit {
 
     constructor(private _questionService: QuestionService,
                 private _route: ActivatedRoute,
+                private _angulartics2: Angulartics2,
                 private _router: Router){ }
 
     ngOnInit(){
@@ -63,6 +65,14 @@ export class QuestionnaireComponent implements OnInit {
     }
 
     onSelect(category: Category) {
+        this._angulartics2.eventTrack.next({
+            action: 'click',
+            properties: {
+                category: 'categoryChange',
+                value: category.id,
+                label: category.name
+            }
+        });
         this.selectedCategory = category;
     }
 }

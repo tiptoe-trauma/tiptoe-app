@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from './user.service';
 import {User} from './user';
+import { Angulartics2GoogleAnalytics } from 'angulartics2';
+
 
 
 @Component({
@@ -13,7 +15,8 @@ import {User} from './user';
 export class AppComponent implements OnInit {
     public user: User;
 
-     constructor(private _userService: UserService){ }
+     constructor(private _userService: UserService,
+                 private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics){ }
 
      ngOnInit(){
         this._userService.getUser().subscribe(

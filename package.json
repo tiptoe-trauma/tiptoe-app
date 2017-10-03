@@ -15,7 +15,7 @@
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
-    "@angular/compiler-cli": "^4.0.0",
+    "@angular/compiler-cli": "^4.4.4",
     "@angular/core": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
@@ -29,11 +29,10 @@
     "jquery": "^3.1.1",
     "rxjs": "^5.1.0",
     "ts-helpers": "^1.1.1",
-    "typescript": "^2.4.1",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "^1.2.0",
+    "@angular/cli": "^1.4.4",
     "@types/jasmine": "^2.2.30",
     "@types/jquery": "^2.0.33",
     "@types/node": "^6.0.42",
@@ -48,6 +47,6 @@
     "protractor": "4.0.9",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
-    "typescript": "2.0.2"
+    "typescript": "2.3.4"
   }
 }
