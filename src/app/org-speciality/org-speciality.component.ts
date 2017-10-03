@@ -8,7 +8,7 @@ import { OrganogramService, Speciality } from '../organogram.service';
 })
 export class OrgSpecialityComponent implements OnInit {
   @Input() speciality_type: string;
-  private speciality: Speciality;
+  public speciality: Speciality;
 
   constructor(private _organogramService: OrganogramService) { }
 

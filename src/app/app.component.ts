@@ -11,7 +11,7 @@ import {User} from './user';
 
 
 export class AppComponent implements OnInit {
-    private user: User;
+    public user: User;
 
      constructor(private _userService: UserService){ }
 
