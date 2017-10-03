@@ -23,6 +23,7 @@ import { DefinitionService } from './definition.service';
 import { OrganogramService } from './organogram.service';
 import { ErrorService, ErrorComponent } from './errors';
 import { OrgSpecialityComponent } from './org-speciality/org-speciality.component';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { OrgSpecialityComponent } from './org-speciality/org-speciality.componen
     FormsModule,
     HttpModule,
     routing,
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
   ],
   declarations: [
     QuestionComponent,

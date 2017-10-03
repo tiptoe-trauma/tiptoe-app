@@ -2,6 +2,7 @@ import {Component, OnChanges, Input} from '@angular/core';
 import {Question, Category} from './question';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
+import { Angulartics2 } from 'angulartics2';
 
 @Component({
     selector: 'my-category',
@@ -14,9 +15,17 @@ export class CategoryComponent implements OnChanges {
     public questions: Question[];
     public errorMessage: any;
 
-    constructor(private _questionService: QuestionService, private _userService: UserService){ }
+    constructor(private _questionService: QuestionService,
+                private _angulartics2: Angulartics2,
+                private _userService: UserService){ }
 
     ngOnChanges() {
+        this._angulartics2.eventTrack.next({
+            action: 'categoryChange',
+            properties: {
+                category: this.category.name
+            }
+        })
         this._questionService.getQuestions(this.category.id, this._userService.token)
             .subscribe(questions => this.questions = questions,
                        error => this.errorMessage = <any>error);
