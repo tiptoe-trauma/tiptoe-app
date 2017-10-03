@@ -9,18 +9,16 @@
   <table class="table">
       <thead>
           <tr>
-              <th>Organization Name</th>
-              <th>Questionnaire</th>
+              <th>Go to questionnaire</th>
               <th>Delete</th>
           </tr>
       </thead>
       <tr *ngFor="let organization of organizations">
-          <td>{{organization.name}}</td>
           <td><button type="button"
               class="btn"
               [class.btn-info]="organization.org_type == 'center'"
               [class.btn-warning]="organization.org_type == 'system'"
-              (click)="setActiveOrganization(organization)">Go To {{organization.org_type}} Questionnaire</button></td>
+              (click)="setActiveOrganization(organization)">{{organization.name}}</button></td>
           <td><button type="button" class="btn btn-danger"(click)="deleteOrganization(organization)">Delete</button></td>
       </tr>
   </table>
