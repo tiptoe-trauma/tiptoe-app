@@ -4,11 +4,46 @@
   <meta charset="utf-8">
   <title>CAFE App</title>
   <base href="/">
+  <style>
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
 
+    .app {
+        flex: 1;
+    }
+
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+
+    .blog-footer{
+        padding: 1.5rem 0;
+        color: #999;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-top: .05rem solid #e5e5e5;
+    }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <cafe-app>Loading...</cafe-app>
+  <div class="wrapper">
+      <cafe-app class="app">
+          <div class="loading">
+              <span>Loading the CAFE Trauma Questionnaire...</span>
+          </div>
+      </cafe-app>
+      <footer class="blog-footer">
+        <p>For any problems please contact <a href="mailto:cafetraumahelp@gmail.com">cafetraumahelp@gmail.com</a></p>
+        <small>This research is supported by the National Institute of General Medical Sciences of the National Institutes of Health under award number 1R01GM111324</small>
+      </footer>
+  </div>
 </body>
 </html>
