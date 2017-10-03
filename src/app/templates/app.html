@@ -1,13 +1,10 @@
 <nav class="navbar navbar-light bg-faded">
     <img class="navbar-brand" src="https://cafe-trauma.com/images/cafe_logo_white.png">
-    <h2 class="navbar-brand">CAFE Web Application</h2>
+    <h2 class="navbar-brand">CAFE</h2>
+    <h2 *ngIf="user && user.active_organization" class="navbar-brand">{{user.active_organization.name}}</h2>
     <div class="nav-buttons float-xs-right">
-    <a routerLink="/about"> <button type="button" class="nav-item btn btn-secondary">About</button></a>
-    <a href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
-    <a routerLink="/organogram"> <button type="button" class="nav-item btn btn-secondary">Organogram</button></a>
-    <a routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">User</button></a>
-    <a routerLink="/questionnaire/center"> <button type="button" class="nav-item btn btn-secondary">Center Questionnaire</button></a>
-    <a routerLink="/questionnaire/system"> <button type="button" class="nav-item btn btn-secondary">System Questionnaire</button></a>
+    <a *ngIf="user && user.is_staff" href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
+    <a routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Home</button></a>
     </div>
 </nav>
 <div class="container main">

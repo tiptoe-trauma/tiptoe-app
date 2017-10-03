@@ -9,7 +9,7 @@ import {OrganogramComponent} from './organogram.component';
 import {NotFoundComponent} from './notfound.component';
 
 const appRoutes: Routes = [
-    {path: 'about', component: AboutComponent},
+    //{path: 'about', component: AboutComponent},
     {path: 'user', component: UserComponent},
     {path: 'login', component: LoginComponent},
     {path: 'questionnaire/:type', component: QuestionnaireComponent},

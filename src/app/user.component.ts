@@ -2,6 +2,7 @@ import {User, Organization} from './user';
 import {Component, OnInit} from '@angular/core';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
+import {ErrorService} from './errors';
 
 @Component ({
   selector: 'my-user',
@@ -15,7 +16,8 @@ export class UserComponent implements OnInit {
   public new_org_type: string;
 
   constructor(private _userService: UserService,
-        private _router: Router){
+              private _errorService: ErrorService,
+              private _router: Router){
   }
 
     ngOnInit(){
@@ -30,9 +32,20 @@ export class UserComponent implements OnInit {
         this._userService.requestOrganizationList().subscribe(
             orgs => this.organizations = orgs
         );
+        this._userService.userChanged.subscribe(
+            user => this.user = user
+        )
     }
 
     createOrganization(){
+        if(!this.new_org_name || this.new_org_type === undefined){
+            this._errorService.announceError('Organization Creation Error', 'Must enter organization name', 2);
+            return;
+        }
+        if(this.new_org_type === undefined){
+            this._errorService.announceError('Organization Creation Error', 'Must enter organization type', 2);
+            return;
+        }
         let new_org: Organization = {'name': this.new_org_name,
                                      'org_type': this.new_org_type,
                                      'users': [this.user.id]};
@@ -50,19 +63,28 @@ export class UserComponent implements OnInit {
             this._userService.deleteOrganization(org).subscribe(
                 res => {
                     this.organizations = this.organizations.filter(o => o != org);
-                    if(org.id === this.user.active_organization.id){
-                        this._userService.getUser().subscribe(
-                            user => this.user = user
-                        );
-                    }
                 }
             );
         }
     }
 
+    navigateToActiveQuestionnaire(){
+        if(this.user.active_organization.org_type == 'center'){
+            this._router.navigate(['/questionnaire/center']);
+        } else if(this.user.active_organization.org_type == 'system'){
+            this._router.navigate(['/questionnaire/system']);
+        } else {
+            console.log("incorrect questionnaire type");
+        }
+    }
+
     setActiveOrganization(org: Organization){
         this._userService.setActiveOrganization(org).subscribe(
-            user => this.user = user
+            user => {
+                this.user = user;
+                this.navigateToActiveQuestionnaire();
+            },
+            error => console.log("organization setting error")
         );
     }
 

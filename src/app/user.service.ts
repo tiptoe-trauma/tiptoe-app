@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {User, Organization} from './user';
 import {Question} from './question';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
@@ -10,12 +10,14 @@ export class UserService {
     public user: User = null;
     public userObserver: Observable<User>;
     private _answers: { [q_id: number]: string } = { };
+    public userChanged: EventEmitter<User>;
 
     constructor(private _http: Http) {
         if(localStorage.getItem('user') !== null){
             console.log('pulling user from local storage');
             this.token = localStorage.getItem('user');
         }
+        this.userChanged = new EventEmitter();
     }
 
     haveUser(){
@@ -39,6 +41,7 @@ export class UserService {
         localStorage.removeItem('user');
         this.token = null;
         this.user = null;
+        this.userChanged.emit(this.user);
         this._answers = { };
     }
 
@@ -80,6 +83,7 @@ export class UserService {
     setUser(user: User, token: string){
         user.token = token;
         this.user = user;
+        this.userChanged.emit(this.user);
         return this.user
     }
 
@@ -132,6 +136,10 @@ export class UserService {
             let options = new RequestOptions({headers: headers});
 
             return this._http.delete(this._organizationUrl + org.id + '/', options)
+                              .map(res => {
+                                  this.user.active_organization = null;
+                                  this.setUser(this.user, this.token);
+                              })
                               .catch(this.handleError);
         } else {
             return Observable.throw("Must be logged in to delete organizations");

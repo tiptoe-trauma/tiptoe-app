@@ -8,6 +8,6 @@ import {Router} from '@angular/router';
 // Until useAsDefault has returned
 export class NotFoundComponent {
     constructor(private _router:Router){
-        this._router.navigate(['/about']);
+        this._router.navigate(['/user']);
     }
 }
