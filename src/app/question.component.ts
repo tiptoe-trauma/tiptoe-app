@@ -6,6 +6,7 @@ import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Angulartics2 } from 'angulartics2';
 
 declare var $:any;
 
@@ -39,9 +40,11 @@ export class QuestionComponent implements OnInit {
     public user: User;
     public stat: boolean = false;
     public visibility: string;
+    private old_answer: Answer;
 
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
+                private _angulartics2: Angulartics2,
                 private _sanitizer: DomSanitizer,
                 private _userService: UserService) { }
 
@@ -53,6 +56,7 @@ export class QuestionComponent implements OnInit {
         }
         if(this.question.answer){
             this.answer = this.question.answer;
+            this.old_answer = Object.assign({}, this.answer);
         } else {
             this.answer = {'question': this.question.id};
         }
@@ -95,6 +99,26 @@ export class QuestionComponent implements OnInit {
 
     setValue(){
         if(this.user){
+            let action = 'changedAnswer';
+            if(this.old_answer === undefined){
+                action = 'newAnswer';
+            } else if(this.old_answer == this.answer &&
+                      this.old_answer.yesno == this.answer.yesno &&
+                      this.old_answer.integer == this.answer.integer &&
+                      this.old_answer.options == this.answer.options &&
+                      this.old_answer.yesno == this.answer.yesno &&
+                      this.old_answer.text == this.answer.text){
+                action = 'sameAnswer';
+            }
+            this.old_answer = Object.assign({}, this.answer);
+            this._angulartics2.eventTrack.next({
+                action: action,
+                properties: {
+                    category: 'answer',
+                    value: this.question.id,
+                    label: this.question.id,
+                }
+            });
             this.answer.question = this.question.id;
             this._questionService.setValue(this.answer, this.user.token)
                         .subscribe(res => {this.getStats();
