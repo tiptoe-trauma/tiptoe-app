@@ -18,13 +18,22 @@ export class AppComponent implements OnInit {
      constructor(private _userService: UserService,
                  private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics){ }
 
+    setUser(user: User){
+        if(user === undefined){
+            this.angulartics2GoogleAnalytics.setUsername(undefined);
+        } else {
+            this.angulartics2GoogleAnalytics.setUsername(user.username);
+        }
+        this.user = user;
+    }
+
      ngOnInit(){
         this._userService.getUser().subscribe(
-            user => this.user = user,
+            user => this.setUser(user),
             error => console.log(error)
         );
         this._userService.userChanged.subscribe(
-            user => this.user = user
+            user => this.setUser(user)
         )
      }
 }
