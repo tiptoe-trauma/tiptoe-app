@@ -17,6 +17,8 @@ declare var $:any;
         trigger('visibilityChanged', [
             state('true', style({ opacity: 1, display: 'inline'})),
             state('false', style({ opacity: 0, display: 'none'})),
+            state('newtrue', style({ opacity: 1, display: 'inline'})),
+            state('newfalse', style({ opacity: 0, display: 'none'})),
             transition('void <=> true', animate('.5s', keyframes([
                 style({opacity: 0, display: 'inline', offset: 0}),
                 style({opacity: 1, display: 'inline', offset: 1}),
@@ -25,7 +27,8 @@ declare var $:any;
                 style({opacity: 1, display: 'inline', offset: 0}),
                 style({opacity: 0, display: 'inline', offset: 1}),
             ]))),
-            transition('new => *', animate('0s')),
+            transition('* => newtrue', animate('0s')),
+            transition('* => newfalse', animate('0s')),
         ])
     ],
     styleUrls: ['../css/question.css',
@@ -52,7 +55,7 @@ export class QuestionComponent implements OnInit {
         if(this.question.old){
             this.visibility = String(this.question.enabled);
         } else {
-            this.visibility = 'new';
+            this.visibility = 'new' + String(this.question.enabled);
         }
         if(this.question.answer){
             this.answer = this.question.answer;
