@@ -3,6 +3,7 @@ import {UserService} from './user.service';
 import {User} from './user';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
 
+declare function ga(a, b, c): void;
 
 
 @Component({
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
             this.angulartics2GoogleAnalytics.setUsername(undefined);
         } else {
             this.angulartics2GoogleAnalytics.setUsername(user.username);
+            ga('set', 'userId', user.username);
         }
         this.user = user;
     }
