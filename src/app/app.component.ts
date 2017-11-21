@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
                  private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics){ }
 
     setUser(user: User){
-        if(user === undefined){
+        if(user == undefined){
             this.angulartics2GoogleAnalytics.setUsername(undefined);
         } else {
             this.angulartics2GoogleAnalytics.setUsername(user.username);
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
      ngOnInit(){
         this._userService.getUser().subscribe(
             user => this.setUser(user),
-            error => console.log(error)
+            error => console.log("no user")
         );
         this._userService.userChanged.subscribe(
             user => this.setUser(user)

@@ -24,17 +24,18 @@ export class UserComponent implements OnInit {
         if (!this._userService.haveUser()){
             console.log('no user, navigating to login');
             this._router.navigate(['/login']);
+        } else {
+            this._userService.getUser().subscribe(
+                user => this.user = user
+            );
+            this.organizations = [];
+            this._userService.requestOrganizationList().subscribe(
+                orgs => this.organizations = orgs
+            );
+            this._userService.userChanged.subscribe(
+                user => this.user = user
+            )
         }
-        this._userService.getUser().subscribe(
-            user => this.user = user
-        );
-        this.organizations = [];
-        this._userService.requestOrganizationList().subscribe(
-            orgs => this.organizations = orgs
-        );
-        this._userService.userChanged.subscribe(
-            user => this.user = user
-        )
     }
 
     createOrganization(){
