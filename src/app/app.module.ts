@@ -24,6 +24,7 @@ import { OrganogramService } from './organogram.service';
 import { ErrorService, ErrorComponent } from './errors';
 import { OrgSpecialityComponent } from './org-speciality/org-speciality.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import { CompactBarComponent } from './compact-bar/compact-bar.component';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
     DefinitionPipe,
     ErrorComponent,
     OrgSpecialityComponent,
+    CompactBarComponent,
   ],
   providers: [
     appRoutingProviders,

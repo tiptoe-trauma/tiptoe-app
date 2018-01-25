@@ -1,0 +1,18 @@
+.organogram{
+  //transform: scale(.6);
+}
+
+.spec-holder {
+  display: flex;
+  justify-content: justify;
+  //flex-wrap: wrap;
+}
+
+.speciality {
+  margin: 1em;
+  height: 100%;
+}
+
+.them {
+  opacity: .5;
+}
