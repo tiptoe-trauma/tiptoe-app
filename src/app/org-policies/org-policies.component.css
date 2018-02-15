@@ -1,0 +1,81 @@
+button.current {
+  background-color: lightblue;
+}
+
+.policy_holder {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.policy_comparison {
+  width: 80%;
+}
+
+.policy_button_box {
+  display: flex;
+  flex-direction: column;
+}
+
+.groups {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.group_name {
+  margin: .5em;
+}
+
+.spec_box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.us {
+  border-top: 1px black solid;
+  border-right: 1px black solid;
+  border-left: 1px black solid;
+  background-color: lightgreen;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.both {
+  border-right: 1px black solid;
+  border-left: 1px black solid;
+  background-color: lightyellow;
+}
+
+.them {
+  border-right: 1px black solid;
+  border-left: 1px black solid;
+  border-bottom: 1px black solid;
+  background-color: lightblue;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.spec {
+  border: 1px black solid;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.Ortho {
+  background-color: cyan;
+}
+.Neuro {
+  background-color: purple;
+  color: white;
+}
+.Trauma {
+  background-color: red;
+  color: white;
+}
+.Anesth {
+  background-color: darkgrey;
+  color: white;
+}

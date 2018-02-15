@@ -25,6 +25,8 @@ import { ErrorService, ErrorComponent } from './errors';
 import { OrgSpecialityComponent } from './org-speciality/org-speciality.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { CompactBarComponent } from './compact-bar/compact-bar.component';
+import { OrgJoyplotComponent } from './org-joyplot/org-joyplot.component';
+import { OrgPoliciesComponent } from './org-policies/org-policies.component';
 
 @NgModule({
   imports: [
@@ -50,6 +52,8 @@ import { CompactBarComponent } from './compact-bar/compact-bar.component';
     ErrorComponent,
     OrgSpecialityComponent,
     CompactBarComponent,
+    OrgJoyplotComponent,
+    OrgPoliciesComponent,
   ],
   providers: [
     appRoutingProviders,
