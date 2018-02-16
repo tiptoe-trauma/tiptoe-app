@@ -28,7 +28,11 @@ export class CompactBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.axises = [10, 8, 6, 4, 2];
+    this.axises = [this.data.axis_value,
+                   Math.ceil(this.data.axis_value * .8),
+                   Math.ceil(this.data.axis_value * .6),
+                   Math.ceil(this.data.axis_value * .3),
+                   Math.ceil(this.data.axis_value * .2)];
     for(let i = 0; i < this.data.bars.length; i++){
       let b = this.data.bars[i];
       b.height = 100 * (b.num / this.data.axis_value);

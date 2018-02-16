@@ -16,3 +16,8 @@
 .them {
   opacity: .5;
 }
+
+.section-holder {
+  display: flex;
+  flex-direction: column;
+}

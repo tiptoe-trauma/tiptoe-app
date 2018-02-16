@@ -4,6 +4,7 @@
     <h2 *ngIf="user && user.active_organization" class="navbar-brand">{{user.active_organization.name}}</h2>
     <div class="nav-buttons float-xs-right">
     <a *ngIf="user && user.is_staff" href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
+    <a routerLink="/organogram"> <button type="button" class="nav-item btn btn-secondary">Compare</button></a>
     <a routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Home</button></a>
     </div>
 </nav>

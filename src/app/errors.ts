@@ -14,9 +14,7 @@ export class ErrorService {
 
   errorAnnounced$ = this.errorAnnounceSource.asObservable();
 
-  constructor() {
-      console.log('es init');
-  }
+  constructor() { }
 
   public announceError(title: string, description: string, severity: number){
       let error = {

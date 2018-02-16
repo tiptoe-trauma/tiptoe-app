@@ -14,7 +14,6 @@ export class UserService {
 
     constructor(private _http: Http) {
         if(localStorage.getItem('user') !== null){
-            console.log('pulling user from local storage');
             this.token = localStorage.getItem('user');
         }
         this.userChanged = new EventEmitter();

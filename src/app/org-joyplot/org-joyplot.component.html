@@ -1,4 +1,4 @@
 <h1>Personnel</h1>
-<p>
-  {{joynums}}
-</p>
+<div class="barbox">
+  <app-compact-bar *ngFor="let bc of bars" [data]="bc"></app-compact-bar>
+</div>

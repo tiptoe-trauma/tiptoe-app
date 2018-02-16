@@ -10,7 +10,5 @@ export class OrganogramComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit(){
-        console.log('woo');
-    }
+    ngOnInit(){ }
 }
