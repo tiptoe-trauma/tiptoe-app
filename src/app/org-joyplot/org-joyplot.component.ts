@@ -118,6 +118,8 @@ export class OrgJoyplotComponent implements OnInit {
       return key;
     } else if('anesth_residency' == key){
       return key;
+    } else if('id' == key){
+      return "";
     }
     return key;
   }

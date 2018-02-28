@@ -35,21 +35,21 @@ button.current {
   border-top: 1px black solid;
   border-right: 1px black solid;
   border-left: 1px black solid;
-  background-color: lightgreen;
+  background-color: #57F472;
   border-radius: 15px 15px 0px 0px;
 }
 
 .both {
   border-right: 1px black solid;
   border-left: 1px black solid;
-  background-color: lightyellow;
+  background-color: #FFFFD5;
 }
 
 .them {
   border-right: 1px black solid;
   border-left: 1px black solid;
   border-bottom: 1px black solid;
-  background-color: lightblue;
+  background-color: #90D1E2;
   border-radius: 0px 0px 15px 15px;
 }
 
@@ -65,17 +65,18 @@ button.current {
 }
 
 .Ortho {
-  background-color: cyan;
+  background-color: #4283CC;
+  color: white;
 }
 .Neuro {
-  background-color: purple;
+  background-color: #8453B2;
   color: white;
 }
 .Trauma {
-  background-color: red;
+  background-color: #B24339;
   color: white;
 }
 .Anesth {
-  background-color: darkgrey;
+  background-color: #FF5688;
   color: white;
 }
