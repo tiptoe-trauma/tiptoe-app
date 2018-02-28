@@ -18,10 +18,12 @@ export class OrgJoyplotComponent implements OnInit {
   public bars: BarChart[];
   public max_value: number;
   public paths: Path[];
+  public show_bars: boolean;
 
   constructor(private _organogramService: OrganogramService) { }
 
   ngOnInit() {
+    this.show_bars = false;
     this.bars = [];
     this.paths = [];
     this.max_value = 50;
@@ -32,6 +34,10 @@ export class OrgJoyplotComponent implements OnInit {
   private pushValue(bars: Bar[], value: string, jn: JoyPlotNumbers): number{
     bars.push({'label': value, 'num': jn[value]});
     return jn[value];
+  }
+
+  toggleBars(){
+    this.show_bars = !this.show_bars;
   }
 
   createPaths(joynums: JoyPlotNumbers[]){
