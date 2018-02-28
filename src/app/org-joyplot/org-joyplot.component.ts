@@ -45,8 +45,85 @@ export class OrgJoyplotComponent implements OnInit {
     this.show_bars = !this.show_bars;
   }
 
+  translateKey(key: string){
+    if('trauma_backup' == key) {
+      return key;
+    } else if('trauma_backup_approved' == key) {
+      return key;
+    } else if('ortho_number' == key) {
+      return key;
+    } else if('ortho_liason' == key) {
+      return key;
+    } else if('ortho_number_meetings' == key) {
+      return key;
+    } else if('ortho_residency' == key) {
+      return key;
+    } else if('ortho_fellowship' == key) {
+      return key;
+    } else if('neuro_number' == key) {
+      return key;
+    } else if('neuro_liason' == key) {
+      return key;
+    } else if('neuro_number_meetings' == key) {
+      return key;
+    } else if('neuro_residency' == key) {
+      return key;
+    } else if('anesth_number' == key) {
+      return key;
+    } else if('anesth_liason' == key) {
+      return key;
+    } else if('general_atls_once' == key) {
+      return "Trauma surgeons ATLS certified once";
+    } else if('general_atls_current' == key) {
+      return "Trauma surgeons current in ATLS";
+    } else if('trauma_priv' == key) {
+      return key;
+    } else if('trauma_panel' == key) {
+      return key;
+    } else if('trauma_cme' == key) {
+      return key;
+    } else if('trauma_board_eligible' == key) {
+      return key;
+    } else if('trauma_board_certified' == key) {
+      return key;
+    } else if('trauma_exclusive' == key) {
+      return key;
+    } else if('trauma_critical_certifications' == key) {
+      return key;
+    } else if('trauma_fellowship' == key) {
+      return key;
+    } else if('ortho_panel' == key) {
+      return key;
+    } else if('ortho_cme' == key) {
+      return key;
+    } else if('ortho_board_eligible' == key) {
+      return key;
+    } else if('ortho_board_certified' == key) {
+      return key;
+    } else if('ortho_exclusive' == key) {
+      return key;
+    } else if('neuro_panel' == key) {
+      return key;
+    } else if('neuro_cme' == key) {
+      return key;
+    } else if('neuro_board_eligible' == key) {
+      return key;
+    } else if('neuro_board_certified' == key) {
+      return key;
+    } else if('neuro_exclusive' == key) {
+      return key;
+    } else if('anesth_panel' == key) {
+      return key;
+    } else if('anesth_board_certified' == key) {
+      return key;
+    } else if('anesth_residency' == key){
+      return key;
+    }
+    return key;
+  }
+
   displayName(name: string){
-    this.hovered = name;
+    this.hovered = this.translateKey(name);
   }
 
   clearName(){
