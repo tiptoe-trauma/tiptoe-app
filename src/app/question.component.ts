@@ -2,6 +2,7 @@ import {Input, Component, OnInit, EventEmitter,
     state, trigger, style, animate, transition, keyframes} from '@angular/core';
 import {Question, Answer, Stat} from './question';
 import {User} from './user';
+import {ErrorService} from './errors';
 import {QuestionService} from './question.service';
 import {DefinitionService} from './definition.service';
 import {UserService} from './user.service';
@@ -45,9 +46,13 @@ export class QuestionComponent implements OnInit {
     public visibility: string;
     private old_answer: Answer;
 
+    public server_state: string;
+
+
     constructor(private _questionService: QuestionService,
                 private _definitionService: DefinitionService,
                 private _angulartics2: Angulartics2,
+                private _errorService: ErrorService,
                 private _sanitizer: DomSanitizer,
                 private _userService: UserService) { }
 
@@ -60,6 +65,7 @@ export class QuestionComponent implements OnInit {
         if(this.question.answer){
             this.answer = this.question.answer;
             this.old_answer = Object.assign({}, this.answer);
+            this.server_state = 'success';
         } else {
             this.answer = {'question': this.question.id};
         }
@@ -96,6 +102,12 @@ export class QuestionComponent implements OnInit {
       }
     }
 
+    server_failed(){
+      this.server_state = 'failure';
+      this._errorService.announceError('Answer Error', 'That answer was not recorded properly by the server, please try answering again.  If this problem persists use the contact info at the bottom of the page.', 3);
+      this.answer = Object.assign({}, this.old_answer);
+    }
+
     getStats(){
         this.stat = true;
     }
@@ -113,7 +125,6 @@ export class QuestionComponent implements OnInit {
                       this.old_answer.text == this.answer.text){
                 action = 'sameAnswer';
             }
-            this.old_answer = Object.assign({}, this.answer);
             this._angulartics2.eventTrack.next({
                 action: action,
                 properties: {
@@ -123,12 +134,19 @@ export class QuestionComponent implements OnInit {
                 }
             });
             this.answer.question = this.question.id;
+            this.server_state = 'loading';
             this._questionService.setValue(this.answer, this.user.token)
                         .subscribe(res => {this.getStats();
+                                           this.server_state = 'success';
+                                           this.old_answer = Object.assign({}, this.answer);
                                            this.changed.emit(this.answer)},
-                                   error => console.error(error));
+                                   error => {
+                                      console.log(error);
+                                      this.server_failed();
+                                    });
          } else {
              console.log("Must be logged in to submit");
+             this.server_state = 'failure';
          }
     }
 }

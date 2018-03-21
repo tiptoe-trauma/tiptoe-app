@@ -2,6 +2,7 @@ import {Component, OnChanges, Input} from '@angular/core';
 import {Question, Category} from './question';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
+import {ErrorService} from './errors';
 
 @Component({
     selector: 'my-category',
@@ -12,15 +13,18 @@ import {UserService} from './user.service';
 export class CategoryComponent implements OnChanges {
     @Input() category: Category;
     public questions: Question[];
-    public errorMessage: any;
 
     constructor(private _questionService: QuestionService,
+                private _errorService: ErrorService,
                 private _userService: UserService){ }
 
     ngOnChanges() {
         this._questionService.getQuestions(this.category.id, this._userService.token)
             .subscribe(questions => this.questions = questions,
-                       error => this.errorMessage = <any>error);
+                       error => {
+                         this.questions = [];
+                         this._errorService.announceError('Server Error', 'Unable to load questions. Please try reloading the page, if this problem persists use the contact information at the bottom', 2);
+                       });
     }
 
     checkDeps(answer) {
@@ -30,7 +34,7 @@ export class CategoryComponent implements OnChanges {
                     this._questionService.getQuestion(this.questions[i].id, this._userService.token)
                         .subscribe(question => {question.old = true,
                                                 this.questions[i] = question},
-                                   error => this.errorMessage = <any>error);
+                                   error => this._errorService.announceError('Server Error', 'There was an error with question dependency. Please try reloading the page, if this problem persists use the contact information at the bottom', 2));
                 }
             }
         }

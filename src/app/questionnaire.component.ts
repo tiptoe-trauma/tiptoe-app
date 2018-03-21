@@ -3,6 +3,7 @@ import {QuestionService} from './question.service';
 import {Category} from './question';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
+import {ErrorService} from './errors';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -14,12 +15,12 @@ import 'rxjs/add/operator/switchMap';
 export class QuestionnaireComponent implements OnInit {
     public categories: Category[];
     public selectedCategory: Category;
-    public errorMessage: any;
     public groups: string[];
 
     constructor(private _questionService: QuestionService,
                 private _route: ActivatedRoute,
                 private _angulartics2: Angulartics2,
+                private _errorService: ErrorService,
                 private _router: Router){ }
 
     ngOnInit(){
@@ -27,7 +28,10 @@ export class QuestionnaireComponent implements OnInit {
             .switchMap((params: Params) =>
                        this._questionService.getCategories(params['type']))
             .subscribe(categories => this.setCategories(categories),
-                       error => this.errorMessage = <any>error);
+                       error => {
+                         console.log(error);
+                         this._errorService.announceError('Server Error', 'Unable to load questions. Please try reloading the page, if this problem persists use the contact information at the bottom', 2);
+                       });
     }
 
     category_group(group: string){

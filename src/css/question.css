@@ -10,3 +10,15 @@ div.card {
     color: red;
     font-weight: bold;
 }
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 20px;
+}
+
+.server_state {
+}
