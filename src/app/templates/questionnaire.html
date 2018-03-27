@@ -5,11 +5,11 @@
             *ngFor="let category of category_group(group)"
             [class.list-group-item-info]="category.name === selectedCategory.name"
             (click)="onSelect(category)">
-            {{category.name}}
+            {{category.name}} - {{percent(category)}}
         </label>
     </div>
 </div>
-<my-category *ngIf="selectedCategory" [category]="selectedCategory"></my-category>
+<my-category *ngIf="selectedCategory" (changed)="updatePercent()" [category]="selectedCategory"></my-category>
 <label class="btn btn-primary col-sm-2"
     (click)="nextCategory()">
     Next

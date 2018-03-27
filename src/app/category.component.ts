@@ -1,4 +1,4 @@
-import {Component, OnChanges, Input} from '@angular/core';
+import {Component, OnChanges, Input, EventEmitter} from '@angular/core';
 import {Question, Category} from './question';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
@@ -8,11 +8,13 @@ import {ErrorService} from './errors';
     selector: 'my-category',
     templateUrl: 'templates/category.html',
     styleUrls: ['../css/category.css'],
+    outputs: ['changed']
 })
 
 export class CategoryComponent implements OnChanges {
     @Input() category: Category;
     public questions: Question[];
+    public changed: EventEmitter<any> = new EventEmitter();
 
     constructor(private _questionService: QuestionService,
                 private _errorService: ErrorService,
@@ -28,6 +30,7 @@ export class CategoryComponent implements OnChanges {
     }
 
     checkDeps(answer) {
+        this.changed.emit(answer);
         for(let i = 0; i < this.questions.length; i++){
             for(let j = 0; j < this.questions[i].depends_on.length; j++){
                 if(this.questions[i].depends_on[j] == answer.question){

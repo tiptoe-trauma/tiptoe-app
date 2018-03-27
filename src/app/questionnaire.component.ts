@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from './question.service';
-import {Category} from './question';
+import { UserService } from './user.service';
+import {Category, Completion} from './question';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import {ErrorService} from './errors';
@@ -16,8 +17,10 @@ export class QuestionnaireComponent implements OnInit {
     public categories: Category[];
     public selectedCategory: Category;
     public groups: string[];
+    public completion: Completion[];
 
     constructor(private _questionService: QuestionService,
+                private _userService: UserService,
                 private _route: ActivatedRoute,
                 private _angulartics2: Angulartics2,
                 private _errorService: ErrorService,
@@ -30,8 +33,13 @@ export class QuestionnaireComponent implements OnInit {
             .subscribe(categories => this.setCategories(categories),
                        error => {
                          console.log(error);
-                         this._errorService.announceError('Server Error', 'Unable to load questions. Please try reloading the page, if this problem persists use the contact information at the bottom', 2);
+                         this._errorService.announceError('Server Error',
+                                `Unable to load questions.
+                                 Please try reloading the page,
+                                 if this problem persists use the
+                                 contact information at the bottom`, 2);
                        });
+        this.updatePercent();
     }
 
     category_group(group: string){
@@ -42,6 +50,25 @@ export class QuestionnaireComponent implements OnInit {
             }
         }
         return cats
+    }
+
+    updatePercent(){
+        this._questionService.getCompletion(this._userService.token).subscribe(
+          completion => this.completion = completion,
+          errors => console.log(errors)
+        );
+    }
+
+    percent(category: Category){
+      if(this.completion){
+        for(let i = 0; i < this.completion.length; i++){
+          if(this.completion[i].category == category.id){
+            let percent = this.completion[i].completed_questions / this.completion[i].total_questions;
+            return percent;
+          }
+        }
+      }
+      return 0
     }
 
     setCategories(categories: Category[]){

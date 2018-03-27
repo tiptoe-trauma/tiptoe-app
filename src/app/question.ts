@@ -41,3 +41,9 @@ export interface Definition {
 export interface Stat {
     same: number;
 }
+
+export interface Completion {
+  category: number;
+  total_questions: number;
+  completed_questions: number;
+}

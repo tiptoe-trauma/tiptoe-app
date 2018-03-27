@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Stat, Question, Category, Answer, Definition} from './question';
+import {Stat, Question, Category, Answer, Definition, Completion} from './question';
 import {User} from './user';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
@@ -41,6 +41,21 @@ export class QuestionService {
 
         return this._http.get(this._questionsUrl + category + '/', options)
                             .map(res => <Question[]> res.json())
+                            .catch(this.handleError);
+    }
+
+    private _completionUrl = '/api/completion/';
+
+    getCompletion(token: string){
+        let headers = new Headers({'Accept': 'application/json'});
+        if(token){
+            headers = new Headers({'Accept': 'application/json',
+                                       'Authorization': 'Token ' + token });
+        }
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.get(this._completionUrl, options)
+                            .map(res => <Completion[]> res.json())
                             .catch(this.handleError);
     }
 
