@@ -64,7 +64,7 @@ export class QuestionnaireComponent implements OnInit {
         for(let i = 0; i < this.completion.length; i++){
           if(this.completion[i].category == category.id){
             let percent = this.completion[i].completed_questions / this.completion[i].total_questions;
-            return percent;
+            return (percent * 100) + "%";
           }
         }
       }

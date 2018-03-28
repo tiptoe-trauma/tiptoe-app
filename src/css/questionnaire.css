@@ -12,7 +12,6 @@ li.selected {
 }
 
 .list-group-item {
-    padding: 3px 15px;
     font-size: .9em;
 }
 
@@ -25,4 +24,21 @@ label.list-group-item-info {
 label.btn-primary {
     background-color: #235D79;
     border-color: #034769;
+}
+
+.category-name {
+  padding: 3px 15px;
+  position: absolute;
+  text-align: left;
+  top: 0;
+  left: 0;
+}
+
+.progress-bar {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #a2cca2;
 }
