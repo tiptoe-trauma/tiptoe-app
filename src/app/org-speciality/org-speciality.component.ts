@@ -10,7 +10,7 @@ import { BarChart, Bar } from '../compact-bar/compact-bar.component';
 export class OrgSpecialityComponent implements OnInit {
   @Input() speciality_type: string;
   public speciality: Speciality;
-  private bar_chart: BarChart;
+  public bar_chart: BarChart;
 
   constructor(private _organogramService: OrganogramService) { }
 
