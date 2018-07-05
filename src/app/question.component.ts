@@ -86,7 +86,11 @@ export class QuestionComponent implements OnInit {
 
     setCheck(id: number){
       if(this.answer.options){
-        this.answer.options.push(id);
+        if(this.answer.options.indexOf(id, 0) >= 0){
+          this.answer.options.splice(this.answer.options.indexOf(id, 0), 1);
+        } else {
+          this.answer.options.push(id);
+        }
       } else {
         this.answer.options = [id];
       }
