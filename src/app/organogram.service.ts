@@ -52,6 +52,18 @@ export interface JoyPlotNumbers {
   anesth_residency: number
 }
 
+export interface TMDStats {
+  organization: string;
+  medical_speciality: string;
+  reporting: string[];
+  trauma_call: boolean;
+  lead_qi: boolean;
+  tpm_perf_eval: boolean;
+  qualifications_trauma_panel: boolean;
+  appoint_trauma_panel: boolean;
+  fire_trauma_panel: boolean;
+}
+
 @Injectable()
 export class OrganogramService {
 
@@ -62,6 +74,14 @@ export class OrganogramService {
     let options = new RequestOptions({headers: headers});
     return this._http.get('/api/joyplot', options)
                         .map(res => <JoyPlotNumbers[]> res.json())
+  }
+
+  public getTMDStats(token: string) {
+    let headers = new Headers({'Accept': 'application/json',
+                               'Authorization': 'Token ' + token });
+    let options = new RequestOptions({headers: headers});
+    return this._http.get('/api/tmd_stats', options)
+                        .map(res => <TMDStats> res.json())
   }
 
   public getSpeciality(stype: string): Speciality{

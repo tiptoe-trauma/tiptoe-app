@@ -1,0 +1,23 @@
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
+import { TMDStats, OrganogramService } from '../organogram.service';
+
+@Component({
+  selector: 'app-org-personnel',
+  templateUrl: './org-personnel.component.html',
+  styleUrls: ['./org-personnel.component.css']
+})
+export class OrgPersonnelComponent implements OnInit {
+
+  public tmd_stats: TMDStats;
+
+  constructor(private _userService: UserService,
+              private _organogramService: OrganogramService) { }
+
+  ngOnInit() {
+    let token = this._userService.token;
+    this._organogramService.getTMDStats(token).subscribe(
+      res => this.tmd_stats = res
+    );
+  }
+}

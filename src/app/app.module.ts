@@ -27,6 +27,8 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { CompactBarComponent } from './compact-bar/compact-bar.component';
 import { OrgJoyplotComponent } from './org-joyplot/org-joyplot.component';
 import { OrgPoliciesComponent } from './org-policies/org-policies.component';
+import { OrgPersonnelComponent } from './org-personnel/org-personnel.component';
+import { OrgTmdSvgComponent } from './org-tmd-svg/org-tmd-svg.component';
 
 @NgModule({
   imports: [
@@ -54,6 +56,8 @@ import { OrgPoliciesComponent } from './org-policies/org-policies.component';
     CompactBarComponent,
     OrgJoyplotComponent,
     OrgPoliciesComponent,
+    OrgPersonnelComponent,
+    OrgTmdSvgComponent,
   ],
   providers: [
     appRoutingProviders,
