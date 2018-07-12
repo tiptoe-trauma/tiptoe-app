@@ -69,8 +69,9 @@ export class OrganogramService {
 
   constructor(private _http: Http) { }
 
-  public getJoyplot() {
-    let headers = new Headers({'Accept': 'application/json'});
+  public getJoyplot(token: string) {
+    let headers = new Headers({'Accept': 'application/json',
+                               'Authorization': 'Token ' + token });
     let options = new RequestOptions({headers: headers});
     return this._http.get('/api/joyplot', options)
                         .map(res => <JoyPlotNumbers[]> res.json())
@@ -81,7 +82,7 @@ export class OrganogramService {
                                'Authorization': 'Token ' + token });
     let options = new RequestOptions({headers: headers});
     return this._http.get('/api/tmd_stats', options)
-                        .map(res => <TMDStats> res.json())
+                        .map(res => <TMDStats[]> res.json())
   }
 
   public getSpeciality(stype: string): Speciality{

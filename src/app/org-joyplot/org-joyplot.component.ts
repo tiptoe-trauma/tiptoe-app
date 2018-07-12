@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganogramService, JoyPlotNumbers } from '../organogram.service';
+import { UserService } from '../user.service';
 import { Bar, BarChart } from '../compact-bar/compact-bar.component';
 
 export interface Path {
@@ -24,7 +25,8 @@ export class OrgJoyplotComponent implements OnInit {
   public show_bars: boolean;
   public hovered: string;
 
-  constructor(private _organogramService: OrganogramService) { }
+  constructor(private _organogramService: OrganogramService,
+              private _userService: UserService) { }
 
   ngOnInit() {
     this.hovered = "";
@@ -32,7 +34,8 @@ export class OrgJoyplotComponent implements OnInit {
     this.bars = [];
     this.paths = [];
     this.max_value = 50;
-    this._organogramService.getJoyplot()
+    let token = this._userService.token;
+    this._organogramService.getJoyplot(token)
       .subscribe(joynums => this.populateBarCharts(joynums));
   }
 

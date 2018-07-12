@@ -9,7 +9,7 @@ import { TMDStats, OrganogramService } from '../organogram.service';
 })
 export class OrgPersonnelComponent implements OnInit {
 
-  public tmd_stats: TMDStats;
+  public our_tmd_stats: TMDStats;
 
   constructor(private _userService: UserService,
               private _organogramService: OrganogramService) { }
@@ -17,7 +17,7 @@ export class OrgPersonnelComponent implements OnInit {
   ngOnInit() {
     let token = this._userService.token;
     this._organogramService.getTMDStats(token).subscribe(
-      res => this.tmd_stats = res
+      res => this.our_tmd_stats = res[0]
     );
   }
 }

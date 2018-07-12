@@ -25,20 +25,12 @@ export class OrgPoliciesComponent implements OnInit {
     this.us_groups = [];
     this.both_groups = [];
     this.them_groups = [];
-    this._organogramService.getJoyplot()
+    let token = this._userService.token;
+    this._organogramService.getJoyplot(token)
       .subscribe(joynums => {
-          this.joynums = joynums;
-          this._userService.getUser()
-            .subscribe(user => {
-                this.active_org = user.active_organization.id;
-                for(let jpn of this.joynums){
-                  if(jpn['id'] == this.active_org){
-                    this.ournums = jpn;
-                  }
-                }
-                this.joynums = this.joynums.filter((x) => x['id'] != this.active_org);
-                this.setPolicy(this.policies[0]);
-              });
+          this.ournums = joynums[0];
+          this.joynums = joynums.slice(1);
+          this.setPolicy(this.policies[0]);
         });
     }
 
