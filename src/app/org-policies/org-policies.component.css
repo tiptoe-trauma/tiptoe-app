@@ -9,6 +9,7 @@ button.current {
 
 .policy_comparison {
   width: 80%;
+  display: flex;
 }
 
 .policy_button_box {
@@ -17,6 +18,7 @@ button.current {
 }
 
 .groups {
+  flex-basis: 33%;
   display: flex;
   justify-content: flex-end;
 }
@@ -32,25 +34,21 @@ button.current {
 }
 
 .us {
-  border-top: 1px black solid;
-  border-right: 1px black solid;
-  border-left: 1px black solid;
+  border: 1px black solid;
   background-color: #81cc8e;
-  border-radius: 15px 15px 0px 0px;
+  border-radius: 15px 0px 0px 15px;
 }
 
 .both {
-  border-right: 1px black solid;
-  border-left: 1px black solid;
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
   background-color: #FFFFD5;
 }
 
 .them {
-  border-right: 1px black solid;
-  border-left: 1px black solid;
-  border-bottom: 1px black solid;
+  border: 1px black solid;
   background-color: #90D1E2;
-  border-radius: 0px 0px 15px 15px;
+  border-radius: 0px 15px 15px 0px;
 }
 
 .spec {
@@ -58,10 +56,10 @@ button.current {
   border-radius: 5px;
   padding: 5px;
   text-align: center;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .Ortho {
