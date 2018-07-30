@@ -29,6 +29,7 @@ import { OrgJoyplotComponent } from './org-joyplot/org-joyplot.component';
 import { OrgPoliciesComponent } from './org-policies/org-policies.component';
 import { OrgPersonnelComponent } from './org-personnel/org-personnel.component';
 import { OrgTmdSvgComponent } from './org-tmd-svg/org-tmd-svg.component';
+import { OrgTpmSvgComponent } from './org-tpm-svg/org-tpm-svg.component';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { OrgTmdSvgComponent } from './org-tmd-svg/org-tmd-svg.component';
     OrgPoliciesComponent,
     OrgPersonnelComponent,
     OrgTmdSvgComponent,
+    OrgTpmSvgComponent,
   ],
   providers: [
     appRoutingProviders,

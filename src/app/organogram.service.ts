@@ -64,6 +64,16 @@ export interface TMDStats {
   fire_trauma_panel: boolean;
 }
 
+export interface TPMStats {
+  continuing_education: boolean;
+  organization: string;
+  coordinating_quality_improvement: boolean;
+  education_level: string;
+  evaluating_nursing: boolean;
+  certifications: string[];
+  reporting: string[];
+}
+
 @Injectable()
 export class OrganogramService {
 
@@ -83,6 +93,14 @@ export class OrganogramService {
     let options = new RequestOptions({headers: headers});
     return this._http.get('/api/tmd_stats', options)
                         .map(res => <TMDStats[]> res.json())
+  }
+
+  public getTPMStats(token: string) {
+    let headers = new Headers({'Accept': 'application/json',
+                               'Authorization': 'Token ' + token });
+    let options = new RequestOptions({headers: headers});
+    return this._http.get('/api/tpm_stats', options)
+                        .map(res => <TPMStats[]> res.json())
   }
 
   public getSpeciality(stype: string): Speciality{

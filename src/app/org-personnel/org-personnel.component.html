@@ -1,9 +1,11 @@
 <h1>Personnel</h1>
-<div *ngIf="our_tmd_stats" class="tmd_comparison">
+<div *ngIf="our_tmd_stats && our_tpm_stats" class="tmd_comparison">
   <div class="us">
     <app-org-tmd-svg [tmd_stats]="our_tmd_stats"></app-org-tmd-svg>
+    <app-org-tpm-svg [tpm_stats]="our_tpm_stats"></app-org-tpm-svg>
   </div>
   <div class="them">
     <app-org-tmd-svg [tmd_stats]="average_tmd_stats"></app-org-tmd-svg>
+    <app-org-tpm-svg [tpm_stats]="average_tpm_stats"></app-org-tpm-svg>
   </div>
 </div>

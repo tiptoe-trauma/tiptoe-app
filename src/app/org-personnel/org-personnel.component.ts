@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { TMDStats, OrganogramService } from '../organogram.service';
+import { TMDStats, TPMStats , OrganogramService } from '../organogram.service';
 
 @Component({
   selector: 'app-org-personnel',
@@ -12,6 +12,9 @@ export class OrgPersonnelComponent implements OnInit {
   public our_tmd_stats: TMDStats;
   public average_tmd_stats: TMDStats;
 
+  public our_tpm_stats: TPMStats;
+  public average_tpm_stats: TPMStats;
+
   constructor(private _userService: UserService,
               private _organogramService: OrganogramService) { }
 
@@ -21,6 +24,11 @@ export class OrgPersonnelComponent implements OnInit {
       res => {
           this.our_tmd_stats = res[0];
           this.average_tmd_stats = res[1];
+     });
+    this._organogramService.getTPMStats(token).subscribe(
+      res => {
+          this.our_tpm_stats = res[0];
+          this.average_tpm_stats = res[1];
      });
   }
 }
