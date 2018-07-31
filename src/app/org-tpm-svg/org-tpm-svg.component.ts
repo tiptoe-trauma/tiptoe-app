@@ -14,4 +14,13 @@ export class OrgTpmSvgComponent implements OnInit {
   ngOnInit() {
   }
 
+  public certification(name){
+    return (this.tpm_stats.certifications && this.tpm_stats.certifications.indexOf(name) > -1);
+  }
+
+  public reports(name){
+    return (this.tpm_stats.reporting && this.tpm_stats.reporting.indexOf(name) > -1);
+  }
+
+
 }

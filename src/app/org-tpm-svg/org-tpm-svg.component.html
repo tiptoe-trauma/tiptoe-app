@@ -44,8 +44,8 @@
                 <svg:text x="71" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Trauma Program Manager</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="210" y="30" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(211.5,41.5)">
+        <svg:rect *ngIf="reports('Trauma Medical Director')" x="210" y="30" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="reports('Trauma Medical Director')" transform="translate(211.5,41.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="96" height="27" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 96px; white-space: normal; overflow-wrap: normal; text-align: center;">
@@ -55,8 +55,8 @@
                 <svg:text x="48" y="20" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Trauma Medical Director</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="310" y="30" width="110" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(321.5,48.5)">
+        <svg:rect *ngIf="reports('Nurse Executive')" x="310" y="30" width="110" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="reports('Nurse Executive')" transform="translate(321.5,48.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="87" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 88px; white-space: nowrap; overflow-wrap: normal; text-align: center;">
@@ -66,8 +66,8 @@
                 <svg:text x="44" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Nurse Executive</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="10" y="165" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(11.5,176.5)">
+        <svg:rect *ngIf="tpm_stats.evaluating_nursing" x="10" y="165" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="tpm_stats.evaluating_nursing" transform="translate(11.5,176.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="96" height="27" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 96px; white-space: normal; overflow-wrap: normal; text-align: center;">
@@ -77,8 +77,8 @@
                 <svg:text x="48" y="20" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Evaluating Nursing Care</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="10" y="220" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(11.5,224.5)">
+        <svg:rect *ngIf="tpm_stats.coordinating_quality_improvement" x="10" y="220" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="tpm_stats.coordinating_quality_improvement" transform="translate(11.5,224.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="96" height="41" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 96px; white-space: normal; overflow-wrap: normal; text-align: center;">
@@ -88,8 +88,8 @@
                 <svg:text x="48" y="27" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Coordinating Trauma Quality Improvement</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="420" y="150" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(453.5,168.5)">
+        <svg:rect *ngIf="certification('ATNC')" x="420" y="150" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="certification('ATNC')" transform="translate(453.5,168.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="32" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 33px; white-space: nowrap; overflow-wrap: normal; text-align: center;">
@@ -99,8 +99,8 @@
                 <svg:text x="16" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">ATNC</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="420" y="200" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(453.5,218.5)">
+        <svg:rect *ngIf="certification('TNCC')" x="420" y="200" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="certification('TNCC')" transform="translate(453.5,218.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="33" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 34px; white-space: nowrap; overflow-wrap: normal; text-align: center;">
@@ -112,8 +112,8 @@
                 <svg:text x="17" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="110" y="30" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(111.5,34.5)">
+        <svg:rect *ngIf="reports('Head of Emergency Medicine')" x="110" y="30" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="reports('Head of Emergency Medicine')" transform="translate(111.5,34.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="96" height="41" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 96px; white-space: normal; overflow-wrap: normal; text-align: center;">
@@ -123,8 +123,8 @@
                 <svg:text x="48" y="27" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Head of Emergency Medicine</svg:text>
             </svg:switch>
         </svg:g>
-        <svg:rect x="420" y="250" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
-        <svg:g transform="translate(421.5,254.5)">
+        <svg:rect *ngIf="tpm_stats.continuing_education" x="420" y="250" width="100" height="50" fill="#ffffff" stroke="#000000" pointer-events="none" />
+        <svg:g *ngIf="tpm_stats.continuing_education" transform="translate(421.5,254.5)">
             <svg:switch>
                 <svg:foreignObject style="overflow:visible;" pointer-events="all" width="96" height="41" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                     <xhtml:div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 96px; white-space: normal; overflow-wrap: normal; text-align: center;">
