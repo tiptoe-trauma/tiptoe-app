@@ -4,10 +4,30 @@
   flex-wrap: wrap;
 }
 
+.pathbox{
+  display: flex;
+}
 .content {
   margin-top: 2em;
 }
 
+.joyplot {
+  border-left: 1px black solid;
+  flex-grow: 100;
+}
+
 svg > rect:hover {
   fill-opacity: 1;
+}
+
+.axis_box {
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.axis {
+  flex-grow: 1;
+  border-top: 1px solid black;
+  text-align: center;
 }

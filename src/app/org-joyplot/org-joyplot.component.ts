@@ -24,6 +24,7 @@ export class OrgJoyplotComponent implements OnInit {
   public paths: Path[];
   public show_bars: boolean;
   public hovered: string;
+  public axises: number[];
 
   constructor(private _organogramService: OrganogramService,
               private _userService: UserService) { }
@@ -149,7 +150,11 @@ export class OrgJoyplotComponent implements OnInit {
         if(typeof jn[key] == 'number'){
           let value = jn[key];
           if(value < this.max_value){
-            path.boxes.push({'name': key, 'x': x});
+            let color = offset % 2 == 1 ? '#90D1E2' : '#81CC8E';
+            if((x / (path.box_size * 2)) % 2 == 0){
+              color = offset % 2 == 1 ? '#90C1E2' : '#81BC8E';
+            }
+            path.boxes.push({'name': key, 'x': x, 'color': color});
             path.path += (" Q " + x + ' ' + lastvalue);
             x += path.box_size;
             let halfway = ((value - lastvalue)/2) + lastvalue;
@@ -160,10 +165,9 @@ export class OrgJoyplotComponent implements OnInit {
         }
       }
       path.path += " L" + x + " 0 L0 0";
-      path.offset = "matrix(1 0 0 -1 0 " + (50 - offset)+ ")";
       path.id = "path" + offset;
       offset += path.box_size;
-      path.color = offset % 2 == 0 ? '#0064FF' : '#2B82FF';
+      path.color = offset % 2 == 0 ? '#0064FF' : '#81CC8E';
       this.paths.push(path);
     }
     this.paths.reverse();
@@ -189,6 +193,11 @@ export class OrgJoyplotComponent implements OnInit {
       this.bars.push(barchart);
     }
     this.createPaths(joynums);
+    this.axises = [this.max_value,
+                   Math.ceil(this.max_value * .8),
+                   Math.ceil(this.max_value * .6),
+                   Math.ceil(this.max_value * .3),
+                   Math.ceil(this.max_value * .2)];
   }
 
 }

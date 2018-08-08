@@ -4,38 +4,46 @@
   <app-compact-bar *ngFor="let bc of bars" [data]="bc"></app-compact-bar>
 </div>
 
-<div *ngIf="show_bars == false" class="pathbox content">
-  <svg viewBox="0 0 235 50">
-    <svg *ngFor="let path of paths"
-         viewBox="0 0 235 50"
-         [attr.transform]="path.offset">
-      <svg:defs>
-        <svg:clipPath [attr.id]="path.id">
-          <svg:path [attr.d]="path.path"/>
-        </svg:clipPath>
-      </svg:defs>
+<div *ngIf="show_bars == false" class="content">
+  <div class="pathbox">
+    <div class="axis_box">
+      <div *ngFor="let label of axises" class="axis">
+          {{label}}
+      </div>
+    </div>
+    <svg class="joyplot" viewBox="0 0 235 50" transform="matrix(1 0 0 -1 0 0)">
+      <svg *ngFor="let path of paths"
+           viewBox="0 0 235 50">
+           <!--[attr.transform]="path.offset">-->
+        <svg:defs>
+          <svg:clipPath [attr.id]="path.id">
+            <svg:path [attr.d]="path.path"/>
+          </svg:clipPath>
+        </svg:defs>
 
-      <svg:rect
-          *ngFor="let box of path.boxes"
-          [attr.x]="box.x - 5"
-          y="0"
-          [attr.width]="10"
-          className="box"
-          height="50"
-          [attr.stroke]="path.color"
-          stroke-opacity=".7"
-          (mouseenter)="displayName(box.name)"
-          (mouseleave)="clearName()"
-          stroke-width=".1"
-          fill-opacity=".95"
-          [attr.clip-path]="'url(#' + path.id +')'"
-          [attr.fill]="path.color"/>
+        <svg:rect
+            *ngFor="let box of path.boxes"
+            [attr.x]="box.x - 5"
+            y="0"
+            [attr.width]="10"
+            className="box"
+            height="50"
+            [attr.stroke]="box.color"
+            stroke-opacity=".7"
+            (mouseenter)="displayName(box.name)"
+            (mouseleave)="clearName()"
+            stroke-width=".1"
+            fill-opacity=".95"
+            [attr.clip-path]="'url(#' + path.id +')'"
+            [attr.fill]="box.color"/>
 
-      <svg:path [attr.d]="path.path"
-          stroke="#FFFFFF"
-          stroke-width=".2"
-          fill="none"/>
+        <svg:path [attr.d]="path.path"
+            stroke="#FFFFFF"
+            stroke-width=".2"
+            fill="none"/>
+      </svg>
     </svg>
-  </svg>
-  <h3>{{hovered}}</h3>
+  </div>
+  <h3 *ngIf="hovered">{{hovered}}</h3>
+  <h3 *ngIf="!hovered">Hover over bars for details</h3>
 </div>
