@@ -1,4 +1,4 @@
-<div class="card col-xs-10" *ngIf="question" [@visibilityChanged]="visibility">
+<div class="card question" *ngIf="question" [@visibilityChanged]="visibility">
     <div class="topline">
       <div *ngIf="user && user.is_staff">
           <span>#{{question.id}}</span>

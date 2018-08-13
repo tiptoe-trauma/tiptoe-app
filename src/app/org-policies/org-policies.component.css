@@ -4,7 +4,7 @@ button.current {
 
 .policy_holder {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
 }
 
 .policy_comparison {
@@ -14,7 +14,7 @@ button.current {
 
 .policy_button_box {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .groups {

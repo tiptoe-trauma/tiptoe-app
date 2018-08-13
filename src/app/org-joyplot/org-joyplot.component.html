@@ -1,10 +1,5 @@
 <h1>Specialists</h1>
-<button (click)="toggleBars()">Toggle</button>
-<div *ngIf="show_bars" class="barbox content">
-  <app-compact-bar *ngFor="let bc of bars" [data]="bc"></app-compact-bar>
-</div>
-
-<div *ngIf="show_bars == false" class="content">
+<div class="content">
   <div class="pathbox">
     <div class="axis_box">
       <div *ngFor="let label of axises" class="axis">

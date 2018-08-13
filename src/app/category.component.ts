@@ -1,8 +1,11 @@
-import {Component, OnChanges, Input, EventEmitter} from '@angular/core';
+import {Component, OnChanges, Input, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import {Question, Category} from './question';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
 import {ErrorService} from './errors';
+import { TMDStats, TPMStats , OrganogramService } from './organogram.service';
+import { OrgPoliciesComponent } from './org-policies/org-policies.component';
+import { OrgJoyplotComponent } from './org-joyplot/org-joyplot.component';
 
 @Component({
     selector: 'my-category',
@@ -11,26 +14,74 @@ import {ErrorService} from './errors';
     outputs: ['changed']
 })
 
-export class CategoryComponent implements OnChanges {
+export class CategoryComponent implements OnChanges, OnInit {
     @Input() category: Category;
+    @ViewChild('policies') policy_component: OrgPoliciesComponent;
+    @ViewChild('joyplot') joyplot_component: OrgJoyplotComponent;
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
+    public our_tmd_stats: TMDStats;
+    public average_tmd_stats: TMDStats;
+
+    public our_tpm_stats: TPMStats;
+    public average_tpm_stats: TPMStats;
+
+    public policies: boolean = false;
 
     constructor(private _questionService: QuestionService,
                 private _errorService: ErrorService,
+                private _organogramService: OrganogramService,
                 private _userService: UserService){ }
 
+    ngOnInit() {
+      this.updateComparisons();
+    }
+
     ngOnChanges() {
-        this._questionService.getQuestions(this.category.id, this._userService.token)
-            .subscribe(questions => this.questions = questions,
-                       error => {
-                         this.questions = [];
-                         this._errorService.announceError('Server Error', 'Unable to load questions. Please try reloading the page, if this problem persists use the contact information at the bottom', 2);
-                       });
+      this.our_tmd_stats = null;
+      this.average_tmd_stats = null;
+      this.our_tpm_stats = null;
+      this.average_tpm_stats = null;
+      this.policies = false;
+      this.updateComparisons();
+      this._questionService.getQuestions(this.category.id, this._userService.token)
+          .subscribe(questions => this.questions = questions,
+                     error => {
+                       this.questions = [];
+                       this._errorService.announceError('Server Error', 'Unable to load questions. Please try reloading the page, if this problem persists use the contact information at the bottom', 2);
+                     });
+    }
+
+    updateComparisons(){
+      let token = this._userService.token;
+      if(this.category.name == "Trauma Medical Director"){
+        this._organogramService.getTMDStats(token).subscribe(
+          res => {
+              this.our_tmd_stats = res[0];
+              this.average_tmd_stats = res[1];
+         });
+      }
+      if(this.category.name == "Trauma Program Manager"){
+        this._organogramService.getTPMStats(token).subscribe(
+          res => {
+              this.our_tpm_stats = res[0];
+              this.average_tpm_stats = res[1];
+         });
+       }
+       if(this.category.group == "specialities"){
+         this.policies = true;
+         if(this.policy_component){
+           this.policy_component.getNumbers();
+         }
+         if(this.joyplot_component){
+           this.joyplot_component.updateNumbers();
+         }
+       }
     }
 
     checkDeps(answer) {
         this.changed.emit(answer);
+        this.updateComparisons();
         for(let i = 0; i < this.questions.length; i++){
             for(let j = 0; j < this.questions[i].depends_on.length; j++){
                 if(this.questions[i].depends_on[j] == answer.question){

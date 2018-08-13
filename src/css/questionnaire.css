@@ -1,3 +1,9 @@
+.questionnaire {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 li.selected {
     color: #5BC0DE;
 }
@@ -9,6 +15,7 @@ li.selected {
     border-radius: 5px 50px;
     background-color: #cadce8;
     border-color: #63ADD0;
+    width: 1100px;
 }
 
 .list-group-item {

@@ -16,17 +16,17 @@ declare var $:any;
     templateUrl: 'templates/question.html',
     animations: [
         trigger('visibilityChanged', [
-            state('true', style({ opacity: 1, display: 'inline'})),
+            state('true', style({ opacity: 1, display: 'flex'})),
             state('false', style({ opacity: 0, display: 'none'})),
-            state('newtrue', style({ opacity: 1, display: 'inline'})),
+            state('newtrue', style({ opacity: 1, display: 'flex'})),
             state('newfalse', style({ opacity: 0, display: 'none'})),
             transition('void <=> true', animate('.5s', keyframes([
-                style({opacity: 0, display: 'inline', offset: 0}),
-                style({opacity: 1, display: 'inline', offset: 1}),
+                style({opacity: 0, display: 'flex', offset: 0}),
+                style({opacity: 1, display: 'flex', offset: 1}),
             ]))),
             transition('void <=> false', animate('.5s', keyframes([
-                style({opacity: 1, display: 'inline', offset: 0}),
-                style({opacity: 0, display: 'inline', offset: 1}),
+                style({opacity: 1, display: 'flex', offset: 0}),
+                style({opacity: 0, display: 'flex', offset: 1}),
             ]))),
             transition('* => newtrue', animate('0s')),
             transition('* => newfalse', animate('0s')),

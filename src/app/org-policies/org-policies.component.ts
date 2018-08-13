@@ -25,6 +25,10 @@ export class OrgPoliciesComponent implements OnInit {
     this.us_groups = [];
     this.both_groups = [];
     this.them_groups = [];
+    this.getNumbers();
+    }
+
+  public getNumbers(){
     let token = this._userService.token;
     this._organogramService.getJoyplot(token)
       .subscribe(joynums => {
@@ -32,7 +36,7 @@ export class OrgPoliciesComponent implements OnInit {
           this.joynums = joynums.slice(1);
           this.setPolicy(this.policies[0]);
         });
-    }
+  }
 
 
   setPolicy(policy: string){

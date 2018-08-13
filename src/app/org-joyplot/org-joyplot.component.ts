@@ -31,10 +31,13 @@ export class OrgJoyplotComponent implements OnInit {
 
   ngOnInit() {
     this.hovered = "";
-    this.show_bars = false;
     this.bars = [];
     this.paths = [];
     this.max_value = 50;
+    this.updateNumbers();
+  }
+
+  public updateNumbers(){
     let token = this._userService.token;
     this._organogramService.getJoyplot(token)
       .subscribe(joynums => this.populateBarCharts(joynums));
@@ -43,10 +46,6 @@ export class OrgJoyplotComponent implements OnInit {
   private pushValue(bars: Bar[], value: string, jn: JoyPlotNumbers): number{
     bars.push({'label': value, 'num': jn[value]});
     return jn[value];
-  }
-
-  toggleBars(){
-    this.show_bars = !this.show_bars;
   }
 
   translateKey(key: string){

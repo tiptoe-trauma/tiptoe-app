@@ -1,0 +1,33 @@
+.tmd_comparison {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.us {
+  border: 1px black solid;
+  background-color: #81cc8e;
+  border-radius: 15px 15px 0px 0px;
+  padding: 1em;
+}
+
+.them {
+  border: 1px black solid;
+  background-color: #90D1E2;
+  border-radius: 0px 0px 15px 15px;
+  padding: 1em;
+}
+
+.category {
+  display: flex;
+  max-width: 1200px;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+}
+
+.org_box {
+  margin-left: 1em;
+}

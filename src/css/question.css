@@ -22,3 +22,7 @@ div.card {
 
 .server_state {
 }
+
+.question {
+  flex-direction: column;
+}

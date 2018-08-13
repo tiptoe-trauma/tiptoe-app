@@ -1,6 +1,35 @@
-<div *ngIf="category" class="questions">
-    <h3>{{category.name}}</h3>
-    <div class="container" *ngFor="let question of questions">
-        <my-question (changed)="checkDeps($event)" [question]="question"></my-question>
+<div class="category">
+  <div *ngIf="category" class="questions">
+      <h3>{{category.name}}</h3>
+      <div class="question" *ngFor="let question of questions">
+          <my-question (changed)="checkDeps($event)" [question]="question"></my-question>
+      </div>
+  </div>
+
+  <div *ngIf="our_tmd_stats" class="tmd_comparison org_box">
+    <div class="us">
+      <span>Ours</span>
+      <app-org-tmd-svg [tmd_stats]="our_tmd_stats"></app-org-tmd-svg>
     </div>
+    <div class="them">
+      <span>Theirs</span>
+      <app-org-tmd-svg [tmd_stats]="average_tmd_stats"></app-org-tmd-svg>
+    </div>
+  </div>
+
+  <div *ngIf="our_tpm_stats" class="tmd_comparison org_box">
+    <div class="us">
+      <span>Ours</span>
+      <app-org-tpm-svg [tpm_stats]="our_tpm_stats"></app-org-tpm-svg>
+    </div>
+    <div class="them">
+      <span>Theirs</span>
+      <app-org-tpm-svg [tpm_stats]="average_tpm_stats"></app-org-tpm-svg>
+    </div>
+  </div>
+
+  <div *ngIf="policies" class="org_box">
+    <app-org-policies #policies class="org-section"></app-org-policies>
+    <app-org-joyplot #joyplot class="org-section"></app-org-joyplot>
+  </div>
 </div>
