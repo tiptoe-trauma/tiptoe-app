@@ -1,4 +1,4 @@
-import {Component, OnChanges, Input, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import {Component, OnChanges, Input, EventEmitter, OnInit, ViewChild} from '@angular/core';
 import {Question, Category} from './question';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
@@ -21,10 +21,8 @@ export class CategoryComponent implements OnChanges, OnInit {
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
     public our_tmd_stats: TMDStats;
-    public average_tmd_stats: TMDStats;
 
     public our_tpm_stats: TPMStats;
-    public average_tpm_stats: TPMStats;
 
     public policies: boolean = false;
 
@@ -39,9 +37,7 @@ export class CategoryComponent implements OnChanges, OnInit {
 
     ngOnChanges() {
       this.our_tmd_stats = null;
-      this.average_tmd_stats = null;
       this.our_tpm_stats = null;
-      this.average_tpm_stats = null;
       this.policies = false;
       this.updateComparisons();
       this._questionService.getQuestions(this.category.id, this._userService.token)
@@ -52,29 +48,41 @@ export class CategoryComponent implements OnChanges, OnInit {
                      });
     }
 
+    translate_speciality(long_form: string){
+      if(long_form === 'Trauma Surgery'){
+        return 'trauma';
+      } else if(long_form === 'Orthopedic Surgery'){
+        return 'ortho';
+      } else if(long_form === 'Neurosurgery'){
+        return 'neuro';
+      } else if(long_form === 'Anesthesiology'){
+        return 'anesth';
+      }
+      return long_form;
+    }
+
     updateComparisons(){
       let token = this._userService.token;
       if(this.category.name == "Trauma Medical Director"){
         this._organogramService.getTMDStats(token).subscribe(
-          res => {
-              this.our_tmd_stats = res[0];
-              this.average_tmd_stats = res[1];
-         });
+          res => this.our_tmd_stats = res
+        );
       }
       if(this.category.name == "Trauma Program Manager"){
         this._organogramService.getTPMStats(token).subscribe(
-          res => {
-              this.our_tpm_stats = res[0];
-              this.average_tpm_stats = res[1];
-         });
+          res => this.our_tpm_stats = res
+         );
        }
-       if(this.category.group == "specialities"){
+       if(['Trauma Surgery',
+           'Orthopedic Surgery',
+           'Neurosurgery',
+           'Anesthesiology'].includes(this.category.name)){
          this.policies = true;
          if(this.policy_component){
-           this.policy_component.getNumbers();
+           this.policy_component.getNumbers(this.translate_speciality(this.category.name));
          }
          if(this.joyplot_component){
-           this.joyplot_component.updateNumbers();
+           this.joyplot_component.updateNumbers(this.translate_speciality(this.category.name));
          }
        }
     }

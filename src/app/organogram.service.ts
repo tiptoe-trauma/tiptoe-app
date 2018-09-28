@@ -87,12 +87,28 @@ export class OrganogramService {
                         .map(res => <JoyPlotNumbers[]> res.json())
   }
 
+  public getSpecialityStats(token: string, speciality: string){
+    let headers = new Headers({'Accept': 'application/json',
+                               'Authorization': 'Token ' + token });
+    let options = new RequestOptions({headers: headers});
+    return this._http.get('/api/stats/' + speciality, options)
+                        .map(res => res.json())
+  }
+
+  public getSpecialityPolicies(token: string, speciality: string){
+    let headers = new Headers({'Accept': 'application/json',
+                               'Authorization': 'Token ' + token });
+    let options = new RequestOptions({headers: headers});
+    return this._http.get('/api/policies/' + speciality, options)
+                        .map(res => res.json())
+  }
+
   public getTMDStats(token: string) {
     let headers = new Headers({'Accept': 'application/json',
                                'Authorization': 'Token ' + token });
     let options = new RequestOptions({headers: headers});
     return this._http.get('/api/tmd_stats', options)
-                        .map(res => <TMDStats[]> res.json())
+                        .map(res => <TMDStats> res.json())
   }
 
   public getTPMStats(token: string) {
@@ -100,70 +116,6 @@ export class OrganogramService {
                                'Authorization': 'Token ' + token });
     let options = new RequestOptions({headers: headers});
     return this._http.get('/api/tpm_stats', options)
-                        .map(res => <TPMStats[]> res.json())
-  }
-
-  public getSpeciality(stype: string): Speciality{
-    if(stype === 'trauma_surgery') {
-      let ret: Speciality = {
-        name: 'Trauma Surgery',
-        properties: [
-          '24/7 coverage',
-          'Designated liaison to trauma'
-        ],
-        doctors: 3,
-        dr_cme: 3,
-        dr_priv: 1
-      };
-      return ret;
-    } else if(stype === 'surgery') {
-      let ret: Speciality = {
-        name: 'General Surgery',
-        properties: [
-          '24/7 coverage',
-          'Backup plan',
-          'Trauma QI program',
-          'Designated liaison to trauma'
-        ],
-        doctors: 5,
-        dr_board: 4,
-        dr_internal: 2,
-        dr_cme: 3,
-        dr_priv: 1
-      };
-      return ret;
-    } else if(stype === 'orthopedic') {
-      let ret: Speciality = {
-        name: 'Orthopedic Surgery',
-        properties: [
-          'Backup plan',
-          'Designated liaison to trauma'
-        ],
-        doctors: 3,
-        dr_board: 2,
-        dr_internal: 2
-      };
-      return ret;
-    } else if(stype === 'neurosurgery') {
-      let ret: Speciality = {
-        name: 'Neurosurgery',
-        properties: [
-          'Designated liaison to trauma'
-        ],
-        doctors: 1
-      };
-      return ret;
-    } else if(stype === 'anesthesiology'){
-      let ret: Speciality = {
-        name: 'Anesthesiology',
-        properties: [
-          'Backup plan',
-          'Trauma QI program'
-        ],
-        doctors: 2,
-        dr_board: 1
-      };
-      return ret;
-    }
+                        .map(res => <TPMStats> res.json())
   }
 }

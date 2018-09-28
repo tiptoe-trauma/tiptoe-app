@@ -7,14 +7,17 @@
 .us {
   border: 1px black solid;
   background-color: #81cc8e;
-  border-radius: 15px 15px 0px 0px;
+  border-radius: 15px;
   padding: 1em;
 }
 
-.them {
-  border: 1px black solid;
-  background-color: #90D1E2;
-  border-radius: 0px 0px 15px 15px;
+.floater {
+  position: fixed;
+}
+
+.placeholder {
+  width: 531px;
+  height: 311px;
   padding: 1em;
 }
 

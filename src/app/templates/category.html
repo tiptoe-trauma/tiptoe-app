@@ -7,29 +7,26 @@
   </div>
 
   <div *ngIf="our_tmd_stats" class="tmd_comparison org_box">
-    <div class="us">
-      <span>Ours</span>
+    <div class="placeholder"></div>
+    <div class="us floater">
+      <span>Certified TMD</span>
       <app-org-tmd-svg [tmd_stats]="our_tmd_stats"></app-org-tmd-svg>
-    </div>
-    <div class="them">
-      <span>Theirs</span>
-      <app-org-tmd-svg [tmd_stats]="average_tmd_stats"></app-org-tmd-svg>
     </div>
   </div>
 
   <div *ngIf="our_tpm_stats" class="tmd_comparison org_box">
-    <div class="us">
-      <span>Ours</span>
+    <div class="placeholder"></div>
+    <div class="us floater">
+      <span>Certified TPM</span>
       <app-org-tpm-svg [tpm_stats]="our_tpm_stats"></app-org-tpm-svg>
-    </div>
-    <div class="them">
-      <span>Theirs</span>
-      <app-org-tpm-svg [tpm_stats]="average_tpm_stats"></app-org-tpm-svg>
     </div>
   </div>
 
   <div *ngIf="policies" class="org_box">
-    <app-org-policies #policies class="org-section"></app-org-policies>
-    <app-org-joyplot #joyplot class="org-section"></app-org-joyplot>
+    <div class="placeholder"></div>
+    <div class="floater">
+      <app-org-policies #policies [speciality]="translate_speciality(category.name)" class="org-section"></app-org-policies>
+      <app-org-joyplot #joyplot [speciality]="translate_speciality(category.name)" class="org-section"></app-org-joyplot>
+    </div>
   </div>
 </div>
