@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {QuestionService} from './question.service';
 import { UserService } from './user.service';
 import {Category, Completion} from './question';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import {ErrorService} from './errors';
 import 'rxjs/add/operator/switchMap';
@@ -27,18 +27,19 @@ export class QuestionnaireComponent implements OnInit {
                 private _router: Router){ }
 
     ngOnInit(){
-        this._route.params
-            .switchMap((params: Params) =>
-                       this._questionService.getCategories(params['type']))
-            .subscribe(categories => this.setCategories(categories),
-                       error => {
-                         console.log(error);
-                         this._errorService.announceError('Server Error',
-                                `Unable to load questions.
-                                 Please try reloading the page,
-                                 if this problem persists use the
-                                 contact information at the bottom`, 2);
-                       });
+        this._route.paramMap
+            .switchMap((params: ParamMap) =>
+               this._questionService.getCategories(params.get('type')))
+                 .subscribe(
+                   categories => this.setCategories(categories),
+                   error => {
+                     console.log(error);
+                     this._errorService.announceError('Server Error',
+                            `Unable to load questions.
+                             Please try reloading the page,
+                             if this problem persists use the
+                             contact information at the bottom`, 2);
+             });
         this.updatePercent();
     }
 
@@ -74,7 +75,7 @@ export class QuestionnaireComponent implements OnInit {
     setCategories(categories: Category[]){
         this.categories = categories;
         if(this.categories && this.categories.length > 0){
-            this.selectedCategory = this.categories[0];
+          this.selectedCategory = this.categories[0];
         }
         // parse out groups
         this.groups = [];
