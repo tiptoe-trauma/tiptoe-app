@@ -1,15 +1,19 @@
 <div class="bar_chart">
   <div class="axis_box">
     <div *ngFor="let label of axises" class="axis">
-        {{label}}
+        {{label}}%
     </div>
   </div>
   <div class="bar_box">
     <div *ngFor="let bar of data.bars"
          class="bar"
-         [title]="bar.label"
+         [title]="text_clean(bar.label)"
+         (mouseenter)="mouse_over(bar.label)"
+         (mouseleave)="mouse_exit()"
          [style.background-color]="bar.color"
          [style.height.%]="bar.height">
     </div>
   </div>
 </div>
+<h4 *ngIf="hover == null">{{data.name}}</h4>
+<h4 class="hover" *ngIf="hover">{{hover}}</h4>

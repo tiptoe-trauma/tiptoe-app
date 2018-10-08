@@ -1,5 +1,6 @@
 .bar_chart{
   height: 100%;
+  width: 220px;
   display: flex;
 }
 
@@ -23,10 +24,18 @@
 }
 
 .bar {
-  width: 10px;
+  width: 15px;
 }
 
 .bar:hover {
   filter: brightness(.9);
 
+}
+
+h4 {
+  text-align: center;
+}
+
+.hover {
+  text-transform: capitalize;
 }

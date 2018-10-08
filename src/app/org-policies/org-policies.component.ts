@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrganogramService, JoyPlotNumbers } from '../organogram.service';
+import { OrganogramService } from '../organogram.service';
 import { UserService } from '../user.service';
 
 @Component({

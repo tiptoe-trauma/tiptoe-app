@@ -4,23 +4,14 @@ button.current {
 
 .policy_holder {
   display: flex;
-  flex-direction: column;
-}
-
-.policy_comparison {
-  width: 80%;
-  display: flex;
-}
-
-.policy_button_box {
-  display: flex;
   flex-direction: row;
+  width: 531px;
 }
 
 .groups {
   flex-basis: 33%;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
 }
 
 .group_name {
@@ -32,14 +23,16 @@ button.current {
   display: flex;
   justify-content: center;
 }
+
 .compliant {
   border: 1px black solid;
   background-color: #81cc8e;
   border-radius: 15px 0px 0px 15px;
 }
+
 .notcompliant {
   border: 1px black solid;
-  background-color: #90D1E2;
+  background-color: #e28a9d;
   border-radius: 0px 15px 15px 0px;
 }
 
@@ -55,4 +48,8 @@ button.current {
   background-color: white;
   color: black;
   text-transform: capitalize;
+}
+
+.info_box {
+  width: 400px;
 }

@@ -3,7 +3,7 @@ import {Question, Category} from './question';
 import {QuestionService} from './question.service';
 import {UserService} from './user.service';
 import {ErrorService} from './errors';
-import { TMDStats, TPMStats , OrganogramService } from './organogram.service';
+import { OrganogramService } from './organogram.service';
 import { OrgPoliciesComponent } from './org-policies/org-policies.component';
 import { OrgJoyplotComponent } from './org-joyplot/org-joyplot.component';
 
@@ -20,9 +20,9 @@ export class CategoryComponent implements OnChanges, OnInit {
     @ViewChild('joyplot') joyplot_component: OrgJoyplotComponent;
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
-    public our_tmd_stats: TMDStats;
+    public our_tmd_stats: object;
 
-    public our_tpm_stats: TPMStats;
+    public our_tpm_stats: object;
 
     public policies: boolean = false;
 

@@ -13,12 +13,11 @@
 
 .floater {
   position: fixed;
+  right: 5px;
 }
 
 .placeholder {
-  width: 531px;
-  height: 311px;
-  padding: 1em;
+  width: 536px;
 }
 
 .category {
@@ -33,4 +32,8 @@
 
 .org_box {
   margin-left: 1em;
+}
+
+.info_box {
+  width: 500px;
 }
