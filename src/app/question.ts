@@ -17,6 +17,7 @@ export interface Category {
     id: number;
     name: string;
     group: string;
+    questionnaire: string;
 }
 
 export interface Opt {

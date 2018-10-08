@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export interface TMDStats {
   organization: string;
@@ -26,37 +26,33 @@ export interface TPMStats {
 @Injectable()
 export class OrganogramService {
 
-  constructor(private _http: Http) { }
+  constructor(private http: HttpClient) { }
 
   public getSpecialityStats(token: string, speciality: string){
-    let headers = new Headers({'Accept': 'application/json',
-                               'Authorization': 'Token ' + token });
-    let options = new RequestOptions({headers: headers});
-    return this._http.get('/api/stats/' + speciality, options)
-                        .map(res => res.json())
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token })
+                   };
+    return this.http.get('/api/stats/' + speciality, options);
   }
 
   public getSpecialityPolicies(token: string, speciality: string){
-    let headers = new Headers({'Accept': 'application/json',
-                               'Authorization': 'Token ' + token });
-    let options = new RequestOptions({headers: headers});
-    return this._http.get('/api/policies/' + speciality, options)
-                        .map(res => res.json())
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token })
+                   };
+    return this.http.get('/api/policies/' + speciality, options);
   }
 
   public getTMDStats(token: string) {
-    let headers = new Headers({'Accept': 'application/json',
-                               'Authorization': 'Token ' + token });
-    let options = new RequestOptions({headers: headers});
-    return this._http.get('/api/tmd_stats', options)
-                        .map(res => <TMDStats> res.json())
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token })
+                   };
+    return this.http.get<TMDStats>('/api/tmd_stats', options);
   }
 
   public getTPMStats(token: string) {
-    let headers = new Headers({'Accept': 'application/json',
-                               'Authorization': 'Token ' + token });
-    let options = new RequestOptions({headers: headers});
-    return this._http.get('/api/tpm_stats', options)
-                        .map(res => <TPMStats> res.json())
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token })
+                   };
+    return this.http.get<TPMStats>('/api/tpm_stats', options);
   }
 }

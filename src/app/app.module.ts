@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule }    from '@angular/forms';
 import { AppComponent }       from './app.component';
 import { HttpModule }    from '@angular/http';
+import { HttpClientModule }    from '@angular/common/http';
 import { routing,
          appRoutingProviders } from './app.routing';
 import {QuestionnaireComponent} from './questionnaire.component';
@@ -35,6 +36,7 @@ import { OrgTpmSvgComponent } from './org-tpm-svg/org-tpm-svg.component';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     routing,
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
   ],

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Stat, Question, Category, Answer, Definition, Completion} from './question';
 import {User} from './user';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -9,109 +9,73 @@ export class QuestionService {
     public defObserver: Observable<Definition[]>;
     private _definitionUrl = '/api/definitions/';
 
-    constructor(private _http: Http) {
-        this.defObserver = _http.get(this._definitionUrl)
-                            .map(res => <Definition[]> res.json())
-                            .catch(this.handleError)
-                            .share();
+    constructor(private http: HttpClient) {
+        this.defObserver = http.get<Definition[]>(this._definitionUrl).share();
     }
 
     private _categoryUrl = '/api/categories/';
 
     getCategories(type: string){
-        let headers = new Headers({'Accept': 'application/json'});
-        let options = new RequestOptions({headers: headers});
-
-        return this._http.get(this._categoryUrl, options)
-                            .map(res => <Category[]> res.json().results.filter(
-                                    category => category.questionnaire === type)
-                                )
-                            .catch(this.handleError);
+        return this.http.get<Category[]>(this._categoryUrl)
+                            .map(res => res.filter(
+                              category => category.questionnaire === type));
     }
 
     private _questionsUrl = '/api/questions/';
 
     getQuestions(category: number, token: string){
-        let headers = new Headers({'Accept': 'application/json'});
+        let headers = new HttpHeaders();
         if(token){
-            headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + token });
+            headers = new HttpHeaders({Authorization: 'Token ' + token });
         }
-        let options = new RequestOptions({headers: headers});
-
-        return this._http.get(this._questionsUrl + category + '/', options)
-                            .map(res => <Question[]> res.json())
-                            .catch(this.handleError);
+        let options = {headers: headers};
+        return this.http.get<Question[]>(this._questionsUrl + category + '/', options);
     }
 
     private _completionUrl = '/api/completion/';
 
     getCompletion(token: string){
-        let headers = new Headers({'Accept': 'application/json'});
+        let headers = new HttpHeaders();
         if(token){
-            headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + token });
+            headers = new HttpHeaders({Authorization: 'Token ' + token });
         }
-        let options = new RequestOptions({headers: headers});
-
-        return this._http.get(this._completionUrl, options)
-                            .map(res => <Completion[]> res.json())
-                            .catch(this.handleError);
+        let options = {headers: headers};
+        return this.http.get<Completion[]>(this._completionUrl, options);
     }
 
     private _questionUrl = '/api/question/';
 
     getQuestion(question: number, token: string){
-        let headers = new Headers({'Accept': 'application/json'});
+        let headers = new HttpHeaders();
         if(token){
-            headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + token });
+            headers = new HttpHeaders({Authorization: 'Token ' + token });
         }
-        let options = new RequestOptions({headers: headers});
-
-        return this._http.get(this._questionUrl + question + '/', options)
-                            .map(res => <Question> res.json())
-                            .catch(this.handleError);
+        let options = {headers: headers};
+        return this.http.get<Question>(this._questionUrl + question + '/', options);
     }
 
     private _statUrl = '/api/stats/';
 
     getStats(question: number, token: string){
-        let headers = new Headers({'Accept': 'application/json'});
+        let headers = new HttpHeaders();
         if(token){
-            headers = new Headers({'Accept': 'application/json',
-                                       'Authorization': 'Token ' + token });
+            headers = new HttpHeaders({Authorization: 'Token ' + token });
         }
-        let options = new RequestOptions({headers: headers});
-
-        return this._http.get(this._statUrl + question + '/', options)
-                            .map(res => <Stat> res.json())
-                            .catch(this.handleError);
+        let options = {headers: headers};
+        return this.http.get<Stat>(this._statUrl + question + '/', options);
     }
 
     private _answerUrl = '/api/answer/';
 
     setValue(answer: Answer, token: string){
         if(token){
-            let body = JSON.stringify(answer);
-            let headers = new Headers({'Content-Type': 'application/json',
-                                       'Accept': 'application/json',
-                                       'Authorization': 'Token ' + token });
-            let options = new RequestOptions({headers: headers});
-
-            return this._http.post(this._answerUrl, body, options)
-                          .map(res => <Answer> res.json().results)
-                          .catch(this.handleError);
+            let headers = new HttpHeaders({Authorization: 'Token ' + token });
+            let options = {headers: headers};
+            return this.http.post<Answer>(this._answerUrl, answer, options);
         }
     }
 
-
     getDefinitions(){
         return this.defObserver;
-    }
-
-    private handleError(error: Response){
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server Error');
     }
 }
