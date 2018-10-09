@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Stat, Question, Category, Answer, Definition, Completion} from './question';
-import {User} from './user';
+import {Stat, Question, Category, Answer, Definition, Completion} from '../question';
+import {User} from '../user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 

@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {QuestionService} from './question.service';
-import { UserService } from './user.service';
-import {Category, Completion} from './question';
+import {QuestionService} from '../services/question.service';
+import { UserService } from '../services/user.service';
+import {Category, Completion} from '../question';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
-import {ErrorService} from './errors';
+import {ErrorService} from '../errors';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'my-questionnaire',
-    templateUrl: 'templates/questionnaire.html',
-    styleUrls: ['../css/questionnaire.css'],
+    templateUrl: './questionnaire.html',
+    styleUrls: ['./questionnaire.css'],
 })
 
 export class QuestionnaireComponent implements OnInit {

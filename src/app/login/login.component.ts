@@ -1,12 +1,12 @@
-import {User} from './user';
+import {User} from '../user';
 import {Component} from '@angular/core';
-import {UserService} from './user.service';
+import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
-import { ErrorService } from './errors';
+import { ErrorService } from '../errors';
 
 @Component ({
   selector: 'my-login',
-  templateUrl: 'templates/login.html',
+  templateUrl: './login.html',
 })
 
 export class LoginComponent {

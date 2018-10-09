@@ -1,11 +1,11 @@
 import {Input, Component, OnInit, EventEmitter} from '@angular/core';
 import {state, trigger, style, animate, transition, keyframes} from '@angular/animations';
-import {Question, Answer, Stat} from './question';
-import {User} from './user';
-import {ErrorService} from './errors';
-import {QuestionService} from './question.service';
-import {DefinitionService} from './definition.service';
-import {UserService} from './user.service';
+import {Question, Answer, Stat} from '../question';
+import {User} from '../user';
+import {ErrorService} from '../errors';
+import {QuestionService} from '../services/question.service';
+import {DefinitionService} from '../services/definition.service';
+import {UserService} from '../services/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angulartics2 } from 'angulartics2';
 
@@ -13,7 +13,7 @@ declare var $:any;
 
 @Component({
     selector: 'my-question',
-    templateUrl: 'templates/question.html',
+    templateUrl: './question.html',
     animations: [
         trigger('visibilityChanged', [
             state('true', style({ opacity: 1, display: 'flex'})),
@@ -32,8 +32,7 @@ declare var $:any;
             transition('* => newfalse', animate('0s')),
         ])
     ],
-    styleUrls: ['../css/question.css',
-                '../css/guage.css'],
+    styleUrls: ['./question.css'],
     outputs: ['changed'],
 })
 

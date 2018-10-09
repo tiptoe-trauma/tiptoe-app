@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from './user.service';
+import {UserService} from './services/user.service';
 import {User} from './user';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
 
@@ -8,8 +8,8 @@ declare function ga(a, b, c): void;
 
 @Component({
     selector: 'cafe-app',
-    templateUrl: 'templates/app.html',
-    styleUrls: ['../css/app.css'],
+    templateUrl: './app.html',
+    styleUrls: ['./app.css'],
 })
 
 

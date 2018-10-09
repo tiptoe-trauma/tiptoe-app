@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TPMStats } from '../organogram.service';
+import { TPMStats } from '../services/organogram.service';
 
 @Component({
   selector: 'app-org-tpm-svg',

@@ -1,16 +1,16 @@
 import {Component, OnChanges, Input, EventEmitter, OnInit, ViewChild} from '@angular/core';
-import {Question, Category} from './question';
-import {QuestionService} from './question.service';
-import {UserService} from './user.service';
-import {ErrorService} from './errors';
-import { OrganogramService } from './organogram.service';
-import { OrgPoliciesComponent } from './org-policies/org-policies.component';
-import { OrgJoyplotComponent } from './org-joyplot/org-joyplot.component';
+import {Question, Category} from '../question';
+import {QuestionService} from '../services/question.service';
+import {UserService} from '../services/user.service';
+import {ErrorService} from '../errors';
+import { OrganogramService } from '../services/organogram.service';
+import { OrgPoliciesComponent } from '../org-policies/org-policies.component';
+import { OrgJoyplotComponent } from '../org-joyplot/org-joyplot.component';
 
 @Component({
     selector: 'my-category',
-    templateUrl: 'templates/category.html',
-    styleUrls: ['../css/category.css'],
+    templateUrl: './category.html',
+    styleUrls: ['./category.css'],
     outputs: ['changed']
 })
 

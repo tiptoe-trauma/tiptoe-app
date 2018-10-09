@@ -1,6 +1,6 @@
 import {Injectable, EventEmitter} from '@angular/core';
-import {User, Organization} from './user';
-import {Question} from './question';
+import {User, Organization} from '../user';
+import {Question} from '../question';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { tap } from 'rxjs/operators';

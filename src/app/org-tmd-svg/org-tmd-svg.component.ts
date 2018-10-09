@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TMDStats } from '../organogram.service';
+import { TMDStats } from '../services/organogram.service';
 
 @Component({
   selector: 'app-org-tmd-svg',

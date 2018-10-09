@@ -1,7 +1,7 @@
 import {Input, Component, OnInit} from '@angular/core';
 import {Question, Stat} from './question';
 import {User} from './user';
-import {QuestionService} from './question.service';
+import {QuestionService} from './services/question.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 //declare var jquery:any;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrganogramService } from '../organogram.service';
-import { UserService } from '../user.service';
+import { OrganogramService } from '../services/organogram.service';
+import { UserService } from '../services/user.service';
 import { Bar, BarChart } from '../compact-bar/compact-bar.component';
 
 @Component({

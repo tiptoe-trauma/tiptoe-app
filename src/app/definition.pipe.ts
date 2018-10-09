@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {DefinitionService} from './definition.service';
+import {DefinitionService} from './services/definition.service';
 import {Definition} from './question';
 import { DomSanitizer } from '@angular/platform-browser';
 

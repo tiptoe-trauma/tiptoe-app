@@ -1,12 +1,12 @@
-import {User, Organization} from './user';
+import {User, Organization} from '../user';
 import {Component, OnInit} from '@angular/core';
-import {UserService} from './user.service';
+import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
-import {ErrorService} from './errors';
+import {ErrorService} from '../errors';
 
 @Component ({
   selector: 'my-user',
-  templateUrl: 'templates/user.html'
+  templateUrl: './user.html'
 })
 
 export class UserComponent implements OnInit {
