@@ -24,13 +24,14 @@
     "@angular/platform-server": "^6.1.9",
     "@angular/router": "^6.1.9",
     "angulartics2": "^2.4.0",
-    "bootstrap": "4.0.0-alpha.5",
+    "bootstrap": "4.1.2",
     "core-js": "^2.4.1",
     "jquery": "^3.1.1",
     "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.0.0-rc.0",
+    "tether": "^1.4.5",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.8.26",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.8.0",
