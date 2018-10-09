@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs/subject';
 import { Component } from '@angular/core';
 
 export interface Error {
@@ -10,9 +10,7 @@ export interface Error {
 
 @Injectable()
 export class ErrorService {
-  private errorAnnounceSource = new Subject<Error>();
-
-  errorAnnounced$ = this.errorAnnounceSource.asObservable();
+  errorAnnouncer = new Subject<Error>();
 
   constructor() { }
 
@@ -22,7 +20,7 @@ export class ErrorService {
           description: description,
           severity: severity
       };
-      this.errorAnnounceSource.next(error);
+      this.errorAnnouncer.next(error);
   }
 }
 
@@ -44,7 +42,7 @@ export class ErrorComponent {
   public errors: Error[] = [];
 
   constructor(private _errorService: ErrorService) {
-      _errorService.errorAnnounced$.subscribe(
+      _errorService.errorAnnouncer.subscribe(
           error => this.errors.push(error)
       );
   }

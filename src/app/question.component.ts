@@ -1,5 +1,5 @@
-import {Input, Component, OnInit, EventEmitter,
-    state, trigger, style, animate, transition, keyframes} from '@angular/core';
+import {Input, Component, OnInit, EventEmitter} from '@angular/core';
+import {state, trigger, style, animate, transition, keyframes} from '@angular/animations';
 import {Question, Answer, Stat} from './question';
 import {User} from './user';
 import {ErrorService} from './errors';
