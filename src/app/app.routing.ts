@@ -1,6 +1,5 @@
 import {Routes, RouterModule} from '@angular/router';
 import {QuestionnaireComponent} from './questionnaire/questionnaire.component';
-import {AboutComponent} from './about.component';
 import {UserComponent} from './user/user.component';
 import {LoginComponent} from './login/login.component';
 // Until useAsDefault: true has returned

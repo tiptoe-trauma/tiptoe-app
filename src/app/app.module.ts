@@ -7,15 +7,12 @@ import { HttpClientModule }    from '@angular/common/http';
 import { routing,
          appRoutingProviders } from './app.routing';
 import {QuestionnaireComponent} from './questionnaire/questionnaire.component';
-import {AboutComponent} from './about.component';
 import {UserComponent} from './user/user.component';
 import {LoginComponent} from './login/login.component';
 // Until useAsDefault: true has returned
 import {NotFoundComponent} from './notfound.component';
 import { CategoryComponent } from './category/category.component';
 import { QuestionComponent } from './question/question.component';
-import { OrganogramComponent } from './organogram.component';
-import { StatComponent } from './stat.component';
 import { DefinitionPipe } from './definition.pipe';
 import { UserService } from './services/user.service';
 import { QuestionService } from './services/question.service';
@@ -42,13 +39,10 @@ import { OrgTpmSvgComponent } from './org-tpm-svg/org-tpm-svg.component';
     QuestionComponent,
     CategoryComponent,
     QuestionnaireComponent,
-    AboutComponent,
     UserComponent,
     LoginComponent,
     NotFoundComponent,
     AppComponent,
-    StatComponent,
-    OrganogramComponent,
     DefinitionPipe,
     ErrorComponent,
     CompactBarComponent,
