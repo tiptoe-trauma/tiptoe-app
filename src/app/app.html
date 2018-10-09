@@ -4,11 +4,16 @@
     <h2 *ngIf="user && user.active_organization" class="navbar-brand">{{user.active_organization.name}}</h2>
     <div class="nav-buttons float-xs-right">
     <a *ngIf="user && user.is_staff" href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
-    <a routerLink="/organogram"> <button type="button" class="nav-item btn btn-secondary">Compare</button></a>
     <a routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Home</button></a>
     </div>
 </nav>
 <div class="main">
     <app-error id='errorBar'></app-error>
-    <router-outlet></router-outlet>
+    <div *ngIf="register">
+      <h2>Welcome to the CAFE questionnaire</h2>
+      <p>This is a description of the questionnaire</p>
+      <button (click)="startQuestionnaire('center')">Center</button>
+      <button (click)="startQuestionnaire('system')">System</button>
+    </div>
+    <router-outlet *ngIf="user"></router-outlet>
 </div>

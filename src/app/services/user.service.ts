@@ -45,6 +45,13 @@ export class UserService {
         this.userChanged.emit(this.user);
     }
 
+    private _createUrl: string = '/api/create_user/';
+
+    createUser(questionnaire_type: string){
+      return this.http.post<Token>(this._createUrl + questionnaire_type, {})
+                      .map(res => this.requestUser(res.token));
+    }
+
     private _loginUrl: string = '/api/auth/';
 
     // TODO: Change this to use a hash
