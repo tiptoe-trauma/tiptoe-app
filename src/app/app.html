@@ -12,8 +12,13 @@
     <div *ngIf="register">
       <h2>Welcome to the CAFE questionnaire</h2>
       <p>This is a description of the questionnaire</p>
+      <input [(ngModel)]="email">
       <button (click)="startQuestionnaire('center')">Center</button>
       <button (click)="startQuestionnaire('system')">System</button>
+
+      <h5>Retrieve Previous Questionnaire</h5>
+      <input [(ngModel)]="email2">
+      <button (click)="retrieveUser()">Send Email</button>
     </div>
     <router-outlet *ngIf="user"></router-outlet>
 </div>

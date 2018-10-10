@@ -47,8 +47,30 @@ export class UserService {
 
     private _createUrl: string = '/api/create_user/';
 
-    createUser(questionnaire_type: string){
-      return this.http.post<Token>(this._createUrl + questionnaire_type, {})
+    createUser(questionnaire_type: string, email: string): Observable<Observable<User>> {
+      return this.http.post<Token>(this._createUrl + questionnaire_type, {email: email})
+                      .map(res => this.requestUser(res.token));
+    }
+
+    private _updateEmailUrl: string = '/api/update_email/';
+
+    updateEmail(new_email: string): Observable<User> {
+      let options = { headers: new HttpHeaders(
+                                  {Authorization: 'Token ' + this.token })
+                     };
+      return this.http.post<User>(this._updateEmailUrl, {email: new_email}, options);
+    }
+
+    private _retrieveUrl: string = '/api/retrieve_user/';
+
+    retrieveUser(email: string) {
+      return this.http.post(this._retrieveUrl, {email: email});
+    }
+
+    private _tokenUrl: string = '/api/token_login/';
+
+    tokenLogin(login_token: string): Observable<Observable<User>> {
+      return this.http.post<Token>(this._tokenUrl, {login_token: login_token})
                       .map(res => this.requestUser(res.token));
     }
 

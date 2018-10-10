@@ -8,7 +8,6 @@ import { routing,
          appRoutingProviders } from './app.routing';
 import {QuestionnaireComponent} from './questionnaire/questionnaire.component';
 import {UserComponent} from './user/user.component';
-import {LoginComponent} from './login/login.component';
 // Until useAsDefault: true has returned
 import {NotFoundComponent} from './notfound.component';
 import { CategoryComponent } from './category/category.component';
@@ -40,7 +39,6 @@ import { OrgTpmSvgComponent } from './org-tpm-svg/org-tpm-svg.component';
     CategoryComponent,
     QuestionnaireComponent,
     UserComponent,
-    LoginComponent,
     NotFoundComponent,
     AppComponent,
     DefinitionPipe,

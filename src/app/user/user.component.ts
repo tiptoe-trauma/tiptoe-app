@@ -22,8 +22,8 @@ export class UserComponent implements OnInit {
 
     ngOnInit(){
         if (!this._userService.haveUser()){
-            console.log('no user, navigating to login');
-            this._router.navigate(['/login']);
+            console.log('no user, navigating to home');
+            this._router.navigate(['/']);
         } else {
             this._userService.getUser().subscribe(
                 user => this.user = user
@@ -36,6 +36,12 @@ export class UserComponent implements OnInit {
                 user => this.user = user
             )
         }
+    }
+
+    updateEmail(){
+      this._userService.updateEmail(this.user.email).subscribe(
+        user => this.user = user
+      );
     }
 
     createOrganization(){
@@ -92,6 +98,6 @@ export class UserComponent implements OnInit {
     logout(){
         this._userService.logout();
         this.user = null;
-        this._router.navigate(['/login']);
+        this._router.navigate(['/']);
     }
 }

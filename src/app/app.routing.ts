@@ -8,7 +8,6 @@ import {NotFoundComponent} from './notfound.component';
 const appRoutes: Routes = [
     //{path: 'about', component: AboutComponent},
     {path: 'user', component: UserComponent},
-    {path: 'login', component: LoginComponent},
     {path: 'questionnaire/:type', component: QuestionnaireComponent},
     // Until useAsDefault: true has returned
     {path: '**', component: NotFoundComponent}
