@@ -17,9 +17,9 @@ declare function ga(a, b, c): void;
 
 export class AppComponent implements OnInit {
   public user: User;
-  private register: boolean = false;
-  private email: string;
-  private email2: string;
+  public register: boolean = false;
+  public email: string;
+  public email2: string;
 
   constructor(private _userService: UserService,
               private _router: Router,

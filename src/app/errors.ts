@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/subject';
+import { Subject } from 'rxjs';
 import { Component } from '@angular/core';
 
 export interface Error {
