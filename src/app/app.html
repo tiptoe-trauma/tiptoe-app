@@ -1,24 +1,43 @@
 <nav class="navbar navbar-light bg-faded">
     <img class="navbar-brand" src="https://cafe-trauma.com/images/cafe_logo_white.png">
     <h2 class="navbar-brand">CAFE</h2>
-    <h2 *ngIf="user && user.active_organization" class="navbar-brand">{{user.active_organization.name}}</h2>
     <div class="nav-buttons float-xs-right">
     <a *ngIf="user && user.is_staff" href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
-    <a routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Home</button></a>
+    <a *ngIf="user" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Quesionnaire Management</button></a>
     </div>
 </nav>
 <div class="main">
     <app-error id='errorBar'></app-error>
-    <div *ngIf="register">
-      <h2>Welcome to the CAFE questionnaire</h2>
-      <p>This is a description of the questionnaire</p>
-      <input [(ngModel)]="email">
-      <button (click)="startQuestionnaire('center')">Center</button>
-      <button (click)="startQuestionnaire('system')">System</button>
+    <div class="registration" *ngIf="register">
+      <div class="newUser">
+        <img src="https://cafe-trauma.com/cafe_logo.png">
+        <p>
+          Welcome to the CAFE questionnaire.
+          This questionnaire is designed to assist in pre-assesment of Trauma Centers and Trauma Systems for ACS verification.
+          The questions collect non-identifying information about your institution and stores them for use by public health researchers.
+          No registration is required to being answering questions, however if you would like to access your answers or complete the questionnaire at a later time please provide an email address below.
+          This email will only be used for providing a link back to your quesionnaire and never shared with any third parties.
+          Finally this questionnaire relies on cookies to function and by starting one you consent to their use.
+        </p>
+        <h5>Start a new Questionnaire</h5>
+        <div class="emailForm">
+          <label for="email">Optional email address for quesionnaire retreival</label>
+          <input name="email" [(ngModel)]="email" placeholder="Email Address" type="email">
+        </div>
+        <br/>
+        <small>There are two separate questionnaires, please select the one you would like to start with and you will be taken to it.</small>
+        <div class="startButtons">
+          <button (click)="startQuestionnaire('center')">Trauma Center</button>
+          <button (click)="startQuestionnaire('system')">Trauma System</button>
+        </div>
+      </div>
 
-      <h5>Retrieve Previous Questionnaire</h5>
-      <input [(ngModel)]="email2">
-      <button (click)="retrieveUser()">Send Email</button>
+      <div class="oldUser">
+        <h5>Retrieve Previous Questionnaire</h5>
+        <p>If you have previously started or completed a questionnaire and would like to retrieve it please enter your registered email address and an email will be sent with a link to your questionnaire.</p>
+        <input [(ngModel)]="email2" placeholder="Email Address" type="email">
+        <button (click)="retrieveUser()">Send Email</button>
+      </div>
     </div>
     <router-outlet *ngIf="user"></router-outlet>
 </div>

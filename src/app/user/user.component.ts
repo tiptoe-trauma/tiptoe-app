@@ -6,7 +6,8 @@ import {ErrorService} from '../errors';
 
 @Component ({
   selector: 'my-user',
-  templateUrl: './user.html'
+  templateUrl: './user.html',
+  styleUrls: ['./user.css'],
 })
 
 export class UserComponent implements OnInit {
@@ -96,8 +97,16 @@ export class UserComponent implements OnInit {
     }
 
     logout(){
+      let conf = false;
+      if(this.user.email){
+        conf = confirm("Are you sure you want to logout?");
+      } else {
+        conf = confirm("Are you sure you want to logout, you have not saved an email address and there will be no way to return to this questionnaire.");
+      }
+      if(conf){
         this._userService.logout();
         this.user = null;
         this._router.navigate(['/']);
+      }
     }
 }

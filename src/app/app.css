@@ -38,3 +38,18 @@ button.btn-secondary {
     border-color: #A65900;
     color: white;
 }
+
+.registration {
+  text-align: center;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80vh;
+}
+
+.startButtons {
+  display: flex;
+  justify-content: space-evenly;
+}

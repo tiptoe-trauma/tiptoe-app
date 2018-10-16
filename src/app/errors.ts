@@ -28,6 +28,7 @@ export class ErrorService {
   selector: 'app-error',
   template: `<div *ngFor="let error of errors"
      class="alert"
+     style="display:flex;justify-content:space-between"
      [class]="getSeverityClass(error.severity)"
      role="alert">
     <strong>{{error.title}}</strong>
