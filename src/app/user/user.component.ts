@@ -41,7 +41,9 @@ export class UserComponent implements OnInit {
 
     updateEmail(){
       this._userService.updateEmail(this.user.email).subscribe(
-        user => this.user = user
+        user => this.user = user,
+        error => this._errorService.announceError('Email update error',
+                                                  error['error'], 3)
       );
     }
 

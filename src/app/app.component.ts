@@ -57,7 +57,9 @@ export class AppComponent implements OnInit {
     this._userService.createUser(questionnaire_type, this.email).subscribe(
       user => user.subscribe(
         user => this.setUser(user)),
-      error => console.log(error)
+      error => this._errorService.announceError('Start Error',
+                                                 error['error'],
+                                                 3)
     );
   }
 
