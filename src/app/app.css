@@ -46,10 +46,13 @@ button.btn-secondary {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 80vh;
 }
 
 .startButtons {
   display: flex;
   justify-content: space-evenly;
+}
+
+.oldUser {
+  margin-top: 5rem;
 }
