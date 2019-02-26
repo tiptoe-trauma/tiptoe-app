@@ -5,6 +5,11 @@
   z-index: 100;
 }
 
+.logo {
+  width: 40vw;
+  opacity: .75;
+}
+
 nav button.router-link-active {
     background-color: #A65900;
     color: #FFF;
@@ -40,7 +45,7 @@ button.btn-secondary {
 }
 
 .registration {
-  text-align: center;
+  text-align: left;
   margin-left: 20vw;
   margin-right: 20vw;
   display: flex;
@@ -53,6 +58,15 @@ button.btn-secondary {
   justify-content: space-evenly;
 }
 
-.oldUser {
-  margin-top: 5rem;
+.startSelect {
+  margin-bottom: 2em;
+}
+
+.form-box {
+  width: 40vw;
+}
+
+.new-buttons {
+  display: flex;
+  justify-content: space-evenly;
 }

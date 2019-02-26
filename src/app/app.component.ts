@@ -18,8 +18,10 @@ declare function ga(a, b, c): void;
 export class AppComponent implements OnInit {
   public user: User;
   public register: boolean = false;
+  public retreival: boolean = false;
   public email: string;
   public email2: string;
+  public finished: boolean = false;
 
   constructor(private _userService: UserService,
               private _router: Router,
@@ -29,17 +31,27 @@ export class AppComponent implements OnInit {
   setUser(user: User){
     if(user == undefined){
       this.angulartics2GoogleAnalytics.setUsername(undefined);
-      this.register = true;
+      this.finished = false;
       this.user = user;
     } else {
       this.angulartics2GoogleAnalytics.setUsername(user.username);
       ga('set', 'userId', user.username);
-      this.register = false;
+      this.finished = true;
       this.user = user;
       if(this.user.active_organization){
         this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
       }
     }
+  }
+
+  newQuestionnaire() {
+    this.register = true;
+    this.retreival = false;
+  }
+
+  retreiveQuesionnaire(){
+    this.register = false;
+    this.retreival = true;
   }
 
   retrieveUser(){
@@ -71,7 +83,7 @@ export class AppComponent implements OnInit {
         res => res.subscribe(
           user => this.setUser(user)),
         error => {
-          this.register = true;
+          this.finished = false;
           this._errorService.announceError('Login Error',
                                            error['error'],
                                            3);
@@ -79,7 +91,7 @@ export class AppComponent implements OnInit {
     } else {
       this._userService.getUser().subscribe(
         user => this.setUser(user),
-        error => this.register = true
+        error => this.finished = false
       );
     }
     this._userService.userChanged.subscribe(
