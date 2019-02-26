@@ -29,7 +29,7 @@
                 (click)="retreiveQuesionnaire()">
                 Retreive Previous Quesionnaire</button>
       </div>
-      <form class="form-box" *ngIf="register">
+      <div class="form-box" *ngIf="register">
         <div class="form-group">
           <label for="email">Optional email address for quesionnaire retreival</label>
           <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email Address" type="email">
@@ -39,13 +39,13 @@
           <button class="btn btn-primary" (click)="startQuestionnaire('center')">Trauma Center</button>
           <button class="btn btn-primary" (click)="startQuestionnaire('system')">Trauma System</button>
         </div>
-      </form>
+      </div>
 
-      <form class="form-box" *ngIf="retreival">
+      <div class="form-box" *ngIf="retreival">
         <p>If you have previously started or completed a questionnaire and would like to retrieve it please enter your registered email address and an email will be sent with a link to your questionnaire.</p>
         <input [(ngModel)]="email2" placeholder="Email Address" type="email">
         <button class="btn btn-primary" (click)="retrieveUser()">Send Email</button>
-      </form>
+      </div>
     </div>
     <router-outlet *ngIf="user"></router-outlet>
 </div>
