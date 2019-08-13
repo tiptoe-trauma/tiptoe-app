@@ -25,13 +25,13 @@
                 (click)="newQuestionnaire()">
                 New Questionnaire</button>
         <button class="btn btn-lg btn-light"
-                [class.btn-secondary]="retreival"
-                (click)="retreiveQuesionnaire()">
-                Retreive Previous Quesionnaire</button>
+                [class.btn-secondary]="retrieval"
+                (click)="retrieveQuesionnaire()">
+                Retrieve Previous Quesionnaire</button>
       </div>
       <div class="form-box" *ngIf="register">
         <div class="form-group">
-          <label for="email">Optional email address for quesionnaire retreival</label>
+          <label for="email">Optional email address for quesionnaire retrieval</label>
           <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email Address" type="email">
         </div>
         <p>There are two separate questionnaires, please select the one you would like to start with and you will be taken to it.</p>
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="form-box" *ngIf="retreival">
+      <div class="form-box" *ngIf="retrieval">
         <p>If you have previously started or completed a questionnaire and would like to retrieve it please enter your registered email address and an email will be sent with a link to your questionnaire.</p>
         <input [(ngModel)]="email2" placeholder="Email Address" type="email">
         <button class="btn btn-primary" (click)="retrieveUser()">Send Email</button>

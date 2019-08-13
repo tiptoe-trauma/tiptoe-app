@@ -1,7 +1,7 @@
 <div *ngIf="user">
   <div class="user_management">
     <div>
-      <small>This email address can be used to retreive this questionnaire at a later time or on another computer</small>
+      <small>This email address can be used to retrieve this questionnaire at a later time or on another computer</small>
       <br/>
       <input [(ngModel)]="user.email" type="email" placeholder="Email Address"><button type="button" class="btn" (click)="updateEmail()">Update Email</button>
     </div>

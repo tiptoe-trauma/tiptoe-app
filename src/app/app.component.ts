@@ -18,7 +18,7 @@ declare function ga(a, b, c): void;
 export class AppComponent implements OnInit {
   public user: User;
   public register: boolean = false;
-  public retreival: boolean = false;
+  public retrieval: boolean = false;
   public email: string;
   public email2: string;
   public finished: boolean = false;
@@ -46,12 +46,12 @@ export class AppComponent implements OnInit {
 
   newQuestionnaire() {
     this.register = true;
-    this.retreival = false;
+    this.retrieval = false;
   }
 
-  retreiveQuesionnaire(){
+  retrieveQuesionnaire(){
     this.register = false;
-    this.retreival = true;
+    this.retrieval = true;
   }
 
   retrieveUser(){
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     let url = new URL(window.location.href);
-    if(url.href.search("/login") > 0 && url.searchParams.has('token')){
+    if(url.searchParams.has('token')){
       let login_token = url.searchParams.get('token');
       this._userService.tokenLogin(login_token).subscribe(
         res => res.subscribe(
