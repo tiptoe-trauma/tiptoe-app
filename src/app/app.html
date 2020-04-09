@@ -45,6 +45,7 @@
         <p>If you have previously started or completed a questionnaire and would like to retrieve it please enter your registered email address and an email will be sent with a link to your questionnaire.</p>
         <input [(ngModel)]="email2" placeholder="Email Address" type="email">
         <button class="btn btn-primary" (click)="retrieveUser()">Send Email</button>
+      </div>
     </div>
     <router-outlet *ngIf="user"></router-outlet>
 </div>
