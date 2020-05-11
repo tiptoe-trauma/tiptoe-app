@@ -6,38 +6,49 @@
       </div>
   </div>
 
-  <div *ngIf="our_tmd_stats" class="tmd_comparison org_box">
-    <div class="floater">
-      <div class='info_box'>
-        <p>An indication of which areas your TMD differs from a certified TMD.</p>
-      </div>
-      <div class="us">
-        <h3>Certified TMD</h3>
-        <app-org-tmd-svg [tmd_stats]="our_tmd_stats"></app-org-tmd-svg>
+  <div id="rightColumn" class="sidebar">
+    <button id="testbutton" onclick="test()">Testing</button>
+    <div class="sidebarContent">
+      <button id="openbtn" class="collapsible" onclick="showFigure()">Show Comparison</button>
+
+      <div id="figure" class="figure">
+        <p>Figures here</p>
+        <!-- <div *ngIf="our_tmd_stats" class="tmd_comparison org_box">
+          <div class="floater">
+            <div class='info_box'>
+              <p>An indication of which areas your TMD differs from a certified TMD.</p>
+            </div>
+            <div class="us">
+              <h3>Certified TMD</h3>
+              <app-org-tmd-svg [tmd_stats]="our_tmd_stats"></app-org-tmd-svg>
+            </div>
+          </div>
+          <div class="placeholder"></div>
+        </div>
+
+        <div *ngIf="our_tpm_stats" class="tmd_comparison org_box">
+          <div class="floater">
+            <div class='info_box'>
+              <p>An indication of which areas your TPM differs from a certified TPM.</p>
+            </div>
+            <div class="us">
+              <h3>Certified TPM</h3>
+              <app-org-tpm-svg [tpm_stats]="our_tpm_stats"></app-org-tpm-svg>
+            </div>
+          </div>
+          <div class="placeholder"></div>
+        </div>
+
+        <div *ngIf="policies" class="org_box">
+          <div class="floater">
+            <app-org-policies #policies [speciality]="translate_speciality(category.name)" class="org-section"></app-org-policies>
+            <br/>
+            <app-org-joyplot #joyplot [speciality]="translate_speciality(category.name)" class="org-section"></app-org-joyplot>
+          </div>
+          <div class="placeholder"></div>
+        </div> -->
       </div>
     </div>
-    <div class="placeholder"></div>
   </div>
 
-  <div *ngIf="our_tpm_stats" class="tmd_comparison org_box">
-    <div class="floater">
-      <div class='info_box'>
-        <p>An indication of which areas your TPM differs from a certified TPM.</p>
-      </div>
-      <div class="us">
-        <h3>Certified TPM</h3>
-        <app-org-tpm-svg [tpm_stats]="our_tpm_stats"></app-org-tpm-svg>
-      </div>
-    </div>
-    <div class="placeholder"></div>
-  </div>
-
-  <div *ngIf="policies" class="org_box">
-    <div class="floater">
-      <app-org-policies #policies [speciality]="translate_speciality(category.name)" class="org-section"></app-org-policies>
-      <br/>
-      <app-org-joyplot #joyplot [speciality]="translate_speciality(category.name)" class="org-section"></app-org-joyplot>
-    </div>
-    <div class="placeholder"></div>
-  </div>
 </div>

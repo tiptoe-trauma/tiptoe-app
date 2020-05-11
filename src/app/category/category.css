@@ -11,23 +11,61 @@
   padding: 1em;
 }
 
-.floater {
+.category {
+  /* display: flex; */
+  max-width: 1200px;
+}
+
+.questions {
+  width: 60%;
+  float: left;
+}
+
+.sidebar {
+  float: right;
+  width: 40%;
+  padding-left: 2em;
+}
+
+.sidebarContent {
   position: fixed;
+}
+
+.figure {
+  /* height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden; */
+  padding-top: 0px;
+  transition: 0.5s;
+  display: none;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.active .openbtn:hover {
+  background-color: #444;
+}
+
+.floater {
+  /* position: fixed; */
+  position: absolute;
   right: 5px;
 }
 
 .placeholder {
   width: 536px;
-}
-
-.category {
-  display: flex;
-  max-width: 1200px;
-}
-
-.questions {
-  display: flex;
-  flex-direction: column;
 }
 
 .org_box {
