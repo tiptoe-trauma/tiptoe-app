@@ -15,7 +15,7 @@ button.current {
 }
 
 .group_name {
-  margin: .5em;
+  margin: .2em 1em;
 }
 
 .spec_box {
@@ -28,28 +28,30 @@ button.current {
   border: 1px black solid;
   background-color: #81cc8e;
   border-radius: 15px 0px 0px 15px;
+  width: 60%;
 }
 
 .notcompliant {
   border: 1px black solid;
   background-color: #e28a9d;
   border-radius: 0px 15px 15px 0px;
+  width: 40%;
 }
 
 .spec {
   border: 1px black solid;
-  border-radius: 5px;
-  padding: 5px;
+  /* border-radius: 5px;
+  padding: 5px; */
+  border-radius: .2em;
+  padding: .2em;
   text-align: center;
-  margin-left: 1em;
-  margin-right: 1em;
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin: .5em;
   background-color: white;
   color: black;
   text-transform: capitalize;
 }
 
 .info_box {
-  width: 400px;
+  /* width: 400px; */
+  width: 90%;
 }
