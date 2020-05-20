@@ -1,0 +1,17 @@
+.percentage{
+    width: 90%;
+    height: 20px;
+}
+
+.percent_yes{
+    float: left;
+    background: #8FECA5;
+    height: 100%;
+    text-align: left;
+}
+
+.percent_no{
+    float: right;
+    background: #f98b95;
+    height: 100%
+}

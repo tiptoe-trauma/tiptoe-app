@@ -11,6 +11,13 @@
       <button id="openbtn" class="collapsible" onclick="showFigure()">Show Comparison</button>
 
       <div id="figure" class="figure">
+        <div *ngIf="percents" class="org_box">
+          <div class="floater">
+            <app-org-percent [category]="category.name" [wanted_ids]="get_ids(category.name)"></app-org-percent>
+          </div>
+          <div class="placeholder"></div>
+        </div>
+
         <div *ngIf="our_tmd_stats" class="tmd_comparison org_box">
           <div class="floater">
             <div class='info_box'>
