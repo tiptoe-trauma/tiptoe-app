@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 class AnswerResults {
     keyword: string;
     percent_yes: number;
+    special_text: string;
     // cert_results: number;
     // other_results: number;
 
@@ -48,6 +49,7 @@ export class OrgPercentsComponent implements OnInit {
                 let keyword = q_text.substring(q_text.indexOf('{')+1, q_text.indexOf('|'));
                 let percent_yes = percents[key]["percent_yes"];
                 let result = new AnswerResults(keyword, percent_yes);
+                result.special_text = this.get_special_text(parseInt(key))
                 this.results.push(result)
             }
         }
@@ -66,6 +68,15 @@ export class OrgPercentsComponent implements OnInit {
         return [34]
       } else if(this.category === "General Surgery"){
         return [41]
+      }
+    }
+
+    get_special_text(q_id: number){
+      if(q_id==148){
+        return "Percent part of a trauma system"
+      }
+      else{
+        return null
       }
     }
 }
