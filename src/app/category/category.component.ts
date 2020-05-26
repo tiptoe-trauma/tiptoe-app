@@ -6,7 +6,7 @@ import {ErrorService} from '../errors';
 import { OrganogramService } from '../services/organogram.service';
 import { OrgPoliciesComponent } from '../org-policies/org-policies.component';
 import { OrgJoyplotComponent } from '../org-joyplot/org-joyplot.component';
-import { OrgPercentComponent } from '../org-percent/org-percent.component';
+import { OrgPercentsComponent } from '../org-percents/org-percents.component';
 
 @Component({
     selector: 'my-category',
@@ -17,17 +17,18 @@ import { OrgPercentComponent } from '../org-percent/org-percent.component';
 
 export class CategoryComponent implements OnChanges, OnInit {
     @Input() category: Category;
-    @ViewChild('percent') percent_component: OrgPercentComponent;
     @ViewChild('policies') policy_component: OrgPoliciesComponent;
     @ViewChild('joyplot') joyplot_component: OrgJoyplotComponent;
+    @ViewChild('percents') percent_component: OrgPercentsComponent;
+
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
 
-    // public percent_stats: object;
     public our_tmd_stats: object;
     public our_tpm_stats: object;
 
     public percents: boolean = false;
+
     public policies: boolean = false;
 
     constructor(private _questionService: QuestionService,
@@ -40,7 +41,6 @@ export class CategoryComponent implements OnChanges, OnInit {
     }
 
     ngOnChanges() {
-      // this.percent_stats = null;
       this.percents = false;
       this.our_tmd_stats = null;
       this.our_tpm_stats = null;
@@ -52,22 +52,6 @@ export class CategoryComponent implements OnChanges, OnInit {
                        this.questions = [];
                        this._errorService.announceError('Server Error', 'Unable to load questions. Please try reloading the page, if this problem persists use the contact information at the bottom', 2);
                      });
-    }
-
-    get_ids(category: string){
-      if(category === "Basic"){
-        return [129, 1, 25, 12, 33]
-      } else if(category === "Trauma Program"){
-        return [100]
-      } else if(category === "Regional Traums Infrastructure"){
-        return [148]
-      } else if(category === "Emergency Medicine"){
-        return [121, 101, 110]
-      } else if(category === "Trauma Registrar"){
-        return [34]
-      } else if(category === "General Surgery"){
-        return [41]
-      }
     }
 
     translate_speciality(long_form: string){
@@ -85,14 +69,13 @@ export class CategoryComponent implements OnChanges, OnInit {
 
     updateComparisons(){
       let token = this._userService.token;
-      let percent_categories = ["Basic", "Trauma Program", "Regional Traums Infrastructure",
+      let percent_categories = ["Basic", "Trauma Program", "Regional Trauma Infrastructure",
                                 "Emergency Medicine", "Trauma Registrar", "General Surgery"]
       if(percent_categories.includes(this.category.name)){
         this.percents = true;
-        this.percent_component.getResponses(this.category.name);
-        // this._organogramService.getPercentStats(token, this.category.name).subscribe(
-        //   res => this.percent_stats = res
-        // );
+        if(this.percent_component){
+          this.percent_component.getResponses(this.category.name);
+        }
       }
 
       if(this.category.name == "Trauma Medical Director"){
