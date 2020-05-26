@@ -13,7 +13,7 @@
       <div id="figure" class="figure">
         <div *ngIf="percents" class="org_box">
           <div class="floater">
-            <app-org-percent [category]="category.name" [wanted_ids]="get_ids(category.name)"></app-org-percent>
+            <app-org-percents #percents [category]="category.name"></app-org-percents>
           </div>
           <div class="placeholder"></div>
         </div>

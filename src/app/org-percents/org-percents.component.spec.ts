@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrgPercentComponent } from './org-percent.component';
+import { OrgPercentsComponent } from './org-percents.component';
 
-describe('OrgPercentComponent', () => {
-  let component: OrgPercentComponent;
-  let fixture: ComponentFixture<OrgPercentComponent>;
+describe('OrgPercentsComponent', () => {
+  let component: OrgPercentsComponent;
+  let fixture: ComponentFixture<OrgPercentsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrgPercentComponent ]
+      declarations: [ OrgPercentsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrgPercentComponent);
+    fixture = TestBed.createComponent(OrgPercentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
