@@ -47,8 +47,8 @@ export class UserService {
 
     private _createUrl: string = '/api/create_user/';
 
-    createUser(questionnaire_type: string, email: string): Observable<Observable<User>> {
-      return this.http.post<Token>(this._createUrl + questionnaire_type, {email: email})
+    createUser(questionnaire_type: string, email: string, name?: string): Observable<Observable<User>> {
+      return this.http.post<Token>(this._createUrl + questionnaire_type, {email: email, name: name})
                       .map(res => this.requestUser(res.token));
     }
 
