@@ -5,12 +5,14 @@ import { UserService } from '../services/user.service';
 class AnswerResults {
     keyword: string;
     percent_yes: number;
+    questionnaire: string;
     special_text: string;
     // cert_results: number;
     // other_results: number;
 
-    constructor(keyword: string, percent_yes: number,)
-               {this.keyword = keyword; this.percent_yes = percent_yes;};
+    constructor(keyword: string, percent_yes: number, questionnaire: string)
+               {this.keyword = keyword; this.percent_yes = percent_yes;
+                this.questionnaire = questionnaire};
 }
 
 @Component ({
@@ -46,9 +48,10 @@ export class OrgPercentsComponent implements OnInit {
         for(let key of Object.keys(percents)){
             if (this.wanted_ids.includes(parseInt(key))){
                 let q_text = percents[key]["q_text"];
+                let questionnaire = percents[key]["questionnaire"];
                 let keyword = q_text.substring(q_text.indexOf('{')+1, q_text.indexOf('|'));
                 let percent_yes = percents[key]["percent_yes"];
-                let result = new AnswerResults(keyword, percent_yes);
+                let result = new AnswerResults(keyword, percent_yes, questionnaire);
                 result.special_text = this.get_special_text(parseInt(key))
                 this.results.push(result)
             }
@@ -73,7 +76,7 @@ export class OrgPercentsComponent implements OnInit {
 
     get_special_text(q_id: number){
       if(q_id==148){
-        return "Percent part of a trauma system"
+        return "Percent of centers that are part of a trauma system"
       }
       else{
         return null

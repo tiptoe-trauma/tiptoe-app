@@ -2,7 +2,7 @@
 <div class="percents">
     <div class="result" *ngFor="let result of results">
         <p *ngIf="result.special_text; else generic_text">{{result.special_text}}</p>
-        <ng-template #generic_text><p>Percent with {{result.keyword}}</p></ng-template>
+        <ng-template #generic_text><p>Percent of {{result.questionnaire}}s with {{result.keyword}}</p></ng-template>
         <div class="percentage">
             <div class="percent_yes" [style.width.%]="result.percent_yes">{{result.percent_yes}}%</div>
             <div class="percent_no" [style.width.%]="100-result.percent_yes"></div>
