@@ -69,9 +69,12 @@ export class CategoryComponent implements OnChanges, OnInit {
 
     updateComparisons(){
       let token = this._userService.token;
-      let percent_categories = ["Basic", "Trauma Program", "Regional Trauma Infrastructure",
-                                "Emergency Medicine", "Trauma Registrar", "General Surgery"]
-      if(percent_categories.includes(this.category.name)){
+      if(['Basic',
+          'Trauma Program',
+          'Regional Trauma Infrastructure',
+          'Emergency Medicine',
+          'Trauma Registrar',
+          'General Surgery'].includes(this.category.name)){
         this.percents = true;
         if(this.percent_component){
           this.percent_component.getResponses(this.category.name);
