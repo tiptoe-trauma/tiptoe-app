@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
       ga('set', 'userId', user.username);
       this.finished = true;
       this.user = user;
-      if(this.user.active_organization){
-        this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
-      }
+      // if(this.user.active_organization){
+      //   this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
+      // }
     }
   }
 
