@@ -1,0 +1,17 @@
+<h3>Result Comparison</h3>
+<div class="result" *ngFor="let result of results">
+    <p *ngIf="result.special_text; else generic_text" class="fig_label">{{result.special_text}}</p>
+    <ng-template #generic_text><p class="fig_label">Percent of {{result.questionnaire}}s with {{result.keyword}}</p></ng-template>
+    <div *ngIf="result.percent_yes" class="percentage hoverable">
+        <div class="percent_yes hoverable" [style.width.%]="result.percent_yes"></div>
+        <div class="percent_no hoverable" [style.width.%]="100-result.percent_yes"></div>
+        <span class="hover_text">{{result.percent_yes}}%</span>
+    </div>
+    <div *ngIf="result.numbers" class="barbox">
+        <p>♦♦♦♦♦♦♦♦♦♦</p>
+        <p>{{result.numbers}}</p>
+    </div>
+    <div *ngIf="result.options" class="barbox">
+        <app-compact-bar [data]="result.options" ></app-compact-bar>
+    </div>
+</div>
