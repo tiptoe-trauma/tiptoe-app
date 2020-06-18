@@ -62,4 +62,11 @@ export class OrganogramService {
                   };
     return this.http.get('/api/percent_yes/' + category, options);
   }
+
+  public getAnswers(token: string, category: string){
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token})
+                  };
+      return this.http.get('api/answers/' + category, options);
+  }
 }
