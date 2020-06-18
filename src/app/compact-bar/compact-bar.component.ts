@@ -6,6 +6,7 @@ export interface Bar {
   num: number;
   height?: number;
   color?: string;
+  active?: boolean;
 }
 
 export interface BarChart {
@@ -51,8 +52,12 @@ export class CompactBarComponent implements OnInit {
     return text;
   }
 
-  mouse_over(text: string){
-    this.hover = this.text_clean(text);
+  mouse_over(text: string, active: boolean){
+    if(active){
+      this.hover = this.text_clean(text) + '*';
+    } else if(!active){
+      this.hover = this.text_clean(text);
+    }
   }
 
   mouse_exit() {
