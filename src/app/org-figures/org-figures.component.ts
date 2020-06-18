@@ -87,60 +87,6 @@ export class OrgFigureComponent implements OnInit {
         return percentile;
     }
 
-    // sortNumbers(response){
-    //     let numbers = response["numbers"].sort((a,b) => a - b);
-    //     var max = numbers[numbers.length - 1]
-    //     var first = 0;
-    //     var second = 0;
-    //     var third = 0;
-    //     var fourth = 0;
-    //     var fifth = 0;
-    //     for(let num in numbers){
-    //        var placement = parseInt(num)/max;
-    //        if(placement<=.2){
-    //            first++;
-    //        }
-    //        else if(placement<=.4){
-    //            second++;
-    //        }
-    //        else if(placement<=.6){
-    //            third++;
-    //        }
-    //        else if(placement<=.8){
-    //            fourth++;
-    //        }
-    //        else if(placement<=1){
-    //            fifth++;
-    //        }
-    //     }
-
-    //     let barchart = <BarChart>{};
-    //     barchart.axis_value = 100;
-    //     barchart.bars = [];
-    //     let q_text = response['q_text'];
-    //     let keyword = q_text.substring(q_text.indexOf('{')+1, q_text.indexOf('|'));
-    //     barchart.name = keyword; 
-    //     // barchart.name = response['keyword'];
-    //     var active = parseInt(response["active_answer"])/max;
-    //     barchart.bars.push({'label': "1-10%",
-    //                         'num': (first/response['total']) * 100,
-    //                         'active': (active/max)<=.2});
-    //     barchart.bars.push({'label': "21-40%",
-    //                         'num': (second/response['total']) * 100,
-    //                         'active': (.2 < (active/max) && (active/max) <=.4)});
-    //     barchart.bars.push({'label': "41-60%",
-    //                         'num': (third/response['total']) * 100,
-    //                         'active': (.4 < (active/max) && (active/max) <=.6)});
-    //     barchart.bars.push({'label': "61-80%",
-    //                         'num': (fourth/response['total']) * 100,
-    //                         'active': (.6 < (active/max) && (active/max) <=.8)});
-    //     barchart.bars.push({'label': "81-100%",
-    //                         'num': (fifth/response['total']) * 100,
-    //                         'active': (.8 < (active/max) && (active/max) <= 1)});
-
-    //     return barchart;
-    // }
-
     sortOptions(response){
         let options = response["options"];
         let barchart = <BarChart>{};
