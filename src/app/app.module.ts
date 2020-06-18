@@ -8,6 +8,7 @@ import { routing,
          appRoutingProviders } from './app.routing';
 import {QuestionnaireComponent} from './questionnaire/questionnaire.component';
 import {UserComponent} from './user/user.component';
+// import {AboutComponent} from './about.component';
 // Until useAsDefault: true has returned
 import {NotFoundComponent} from './notfound.component';
 import { CategoryComponent } from './category/category.component';
@@ -24,7 +25,7 @@ import { OrgJoyplotComponent } from './org-joyplot/org-joyplot.component';
 import { OrgPoliciesComponent } from './org-policies/org-policies.component';
 import { OrgTmdSvgComponent } from './org-tmd-svg/org-tmd-svg.component';
 import { OrgTpmSvgComponent } from './org-tpm-svg/org-tpm-svg.component';
-import { OrgPercentsComponent } from './org-percents/org-percents.component';
+import { OrgFigureComponent } from './org-figures/org-figures.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,7 @@ import { OrgPercentsComponent } from './org-percents/org-percents.component';
     OrgPoliciesComponent,
     OrgTmdSvgComponent,
     OrgTpmSvgComponent,
-    OrgPercentsComponent,
+    OrgFigureComponent,
   ],
   providers: [
     appRoutingProviders,
