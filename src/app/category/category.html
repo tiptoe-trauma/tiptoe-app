@@ -11,9 +11,15 @@
       <button id="openbtn" class="collapsible" onclick="showFigure()">Show Comparison</button>
 
       <div id="figure" class="figure">
-        <div *ngIf="percents" class="org_box">
+        <div class="answers">
           <div class="floater">
-            <app-org-percents #percents [category]="category.name"></app-org-percents>
+            <app-org-figures #figures [category]="category.name"></app-org-figures>
+          </div>
+          <div class="placeholder"></div>
+        </div>
+        <!-- <div *ngIf="yesno" class="org_box"> -->
+          <!-- <div class="floater">
+            <app-org-yesno #yesno [category]="category.name" [questions]="questions"></app-org-yesno>
           </div>
           <div class="placeholder"></div>
         </div>
@@ -51,8 +57,8 @@
             <app-org-joyplot #joyplot [speciality]="translate_speciality(category.name)" class="org-section"></app-org-joyplot>
           </div>
           <div class="placeholder"></div>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
     </div>
   </div>
 

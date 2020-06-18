@@ -6,7 +6,8 @@ import {ErrorService} from '../errors';
 import { OrganogramService } from '../services/organogram.service';
 import { OrgPoliciesComponent } from '../org-policies/org-policies.component';
 import { OrgJoyplotComponent } from '../org-joyplot/org-joyplot.component';
-import { OrgPercentsComponent } from '../org-percents/org-percents.component';
+import { OrgYesNoComponent } from '../org-yesno/org-yesno.component';
+import { OrgFigureComponent} from '../org-figures/org-figures.component';
 
 @Component({
     selector: 'my-category',
@@ -19,7 +20,8 @@ export class CategoryComponent implements OnChanges, OnInit {
     @Input() category: Category;
     @ViewChild('policies') policy_component: OrgPoliciesComponent;
     @ViewChild('joyplot') joyplot_component: OrgJoyplotComponent;
-    @ViewChild('percents') percent_component: OrgPercentsComponent;
+    @ViewChild('yesno') yesno_component: OrgYesNoComponent;
+    @ViewChild('figures') figure_component: OrgFigureComponent;
 
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
@@ -27,9 +29,11 @@ export class CategoryComponent implements OnChanges, OnInit {
     public our_tmd_stats: object;
     public our_tpm_stats: object;
 
-    public percents: boolean = false;
+    public yesno: boolean = false;
 
     public policies: boolean = false;
+
+    public figures: boolean = false;
 
     constructor(private _questionService: QuestionService,
                 private _errorService: ErrorService,
@@ -41,7 +45,8 @@ export class CategoryComponent implements OnChanges, OnInit {
     }
 
     ngOnChanges() {
-      this.percents = false;
+      this.figures = false;
+      this.yesno = false;
       this.our_tmd_stats = null;
       this.our_tpm_stats = null;
       this.policies = false;
@@ -69,15 +74,20 @@ export class CategoryComponent implements OnChanges, OnInit {
 
     updateComparisons(){
       let token = this._userService.token;
+      this.figures = true;
+      if(this.figure_component){
+        this.figure_component.getResponses(this.category.name);
+      }
+
       if(['Basic',
           'Trauma Program',
           'Regional Trauma Infrastructure',
           'Emergency Medicine',
           'Trauma Registrar',
           'General Surgery'].includes(this.category.name)){
-        this.percents = true;
-        if(this.percent_component){
-          this.percent_component.getResponses(this.category.name);
+        this.yesno = true;
+        if(this.yesno_component){
+          this.yesno_component.getResponses(this.category.name);
         }
       }
 
