@@ -1,0 +1,113 @@
+.cafe-description {
+    margin-top:25px;
+}
+.social-content {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.member-content {
+    margin-bottom:30px;
+}
+
+.tag {
+    padding-top:50px;
+}
+
+.progress-title {
+    height: 2em;
+}
+
+.progress-details {
+}
+
+.person {
+    padding:1em;
+    text-align: center;
+}
+
+.title {
+    opacity: .75;
+}
+
+.institution {
+
+}
+
+.bar-section {
+    height: 12em;
+}
+
+.bar-left {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.bar-right {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+footer {
+    height: 100px;
+    bottom: 0;
+    position: absolute;
+}
+
+#wrapper {
+    position: relative;
+    min-height: 100%;
+
+}
+
+#content {
+    padding-bottom: 150px;
+
+}
+
+.navbar-inverse {
+    background-image: none;
+    background-color: #F77515;
+    color: #F5F5F5;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #F5F5F5;
+}
+
+img.navbar-brand {
+    padding: 5px;
+}
+
+.logo {
+    width: 3em;
+    margin: 1em;
+}
+
+.jumbotron {
+    background-color: rgba(247,117,21,.20);
+}
+
+.citation {
+    text-indent: -2em;
+    margin-left: 6em;
+    line-height: 2;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+}
+
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

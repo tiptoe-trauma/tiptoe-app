@@ -8,7 +8,11 @@ import { routing,
          appRoutingProviders } from './app.routing';
 import {QuestionnaireComponent} from './questionnaire/questionnaire.component';
 import {UserComponent} from './user/user.component';
-// import {AboutComponent} from './about.component';
+import {PartnersComponent} from './info/partners/partners.component';
+import {PublicationsComponent} from './info/publications/publications.component';
+import {ResourcesComponent} from './info/resources/resources.component';
+import {TrainingMaterialComponent} from './info/training-material/training-material.component';
+import {UseCasesComponent} from './info/use-cases/use-cases.component';
 // Until useAsDefault: true has returned
 import {NotFoundComponent} from './notfound.component';
 import { CategoryComponent } from './category/category.component';
@@ -37,6 +41,11 @@ import { OrgFigureComponent } from './org-figures/org-figures.component';
     Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
   ],
   declarations: [
+    PartnersComponent,
+    PublicationsComponent,
+    ResourcesComponent,
+    TrainingMaterialComponent,
+    UseCasesComponent,
     QuestionComponent,
     CategoryComponent,
     QuestionnaireComponent,

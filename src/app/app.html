@@ -5,11 +5,13 @@
       <a *ngIf="user && user.is_staff" href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
       <a *ngIf="user" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Questionnaire Management</button></a>
       <div class="dropdown">
-        <button type="button" class="dropbtn nav-item btn btn-secondary">About Cafe</button>
+        <button type="button" class="dropbtn nav-item btn btn-secondary">About CAFE</button>
         <div class="dropdown-content">
-          <a href="info/partners.html">Partners</a>
-          <a href=#>Link 2</a>
-          <a href=#>Link 3</a>
+          <a routerLink="/partners" routerLinkActive="active">Partners</a>
+          <a routerLink="/publications" routerLinkActive="active">Publications</a>
+          <a routerLink="/resources" routerLinkActive="active">Resources</a>
+          <a routerLink="/training" routerLinkActive="active">Training</a>
+          <a routerLink="/uses" routerLinkActive="active">Use Cases</a>
         </div>
       </div>
     </div>
