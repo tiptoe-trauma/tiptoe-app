@@ -6,7 +6,6 @@ import {ErrorService} from '../errors';
 import { OrganogramService } from '../services/organogram.service';
 import { OrgPoliciesComponent } from '../org-policies/org-policies.component';
 import { OrgJoyplotComponent } from '../org-joyplot/org-joyplot.component';
-import { OrgYesNoComponent } from '../org-yesno/org-yesno.component';
 import { OrgFigureComponent} from '../org-figures/org-figures.component';
 
 @Component({
@@ -20,7 +19,6 @@ export class CategoryComponent implements OnChanges, OnInit {
     @Input() category: Category;
     @ViewChild('policies') policy_component: OrgPoliciesComponent;
     @ViewChild('joyplot') joyplot_component: OrgJoyplotComponent;
-    @ViewChild('yesno') yesno_component: OrgYesNoComponent;
     @ViewChild('figures') figure_component: OrgFigureComponent;
 
     public questions: Question[];
@@ -29,7 +27,7 @@ export class CategoryComponent implements OnChanges, OnInit {
     public our_tmd_stats: object;
     public our_tpm_stats: object;
 
-    public yesno: boolean = false;
+    // public yesno: boolean = false;
 
     public policies: boolean = false;
 
@@ -46,7 +44,7 @@ export class CategoryComponent implements OnChanges, OnInit {
 
     ngOnChanges() {
       this.figures = false;
-      this.yesno = false;
+      // this.yesno = false;
       this.our_tmd_stats = null;
       this.our_tpm_stats = null;
       this.policies = false;
@@ -79,17 +77,17 @@ export class CategoryComponent implements OnChanges, OnInit {
         this.figure_component.getResponses(this.category.name);
       }
 
-      if(['Basic',
-          'Trauma Program',
-          'Regional Trauma Infrastructure',
-          'Emergency Medicine',
-          'Trauma Registrar',
-          'General Surgery'].includes(this.category.name)){
-        this.yesno = true;
-        if(this.yesno_component){
-          this.yesno_component.getResponses(this.category.name);
-        }
-      }
+      // if(['Basic',
+      //     'Trauma Program',
+      //     'Regional Trauma Infrastructure',
+      //     'Emergency Medicine',
+      //     'Trauma Registrar',
+      //     'General Surgery'].includes(this.category.name)){
+      //   this.yesno = true;
+      //   if(this.yesno_component){
+      //     this.yesno_component.getResponses(this.category.name);
+      //   }
+      // }
 
       if(this.category.name == "Trauma Medical Director"){
         this._organogramService.getTMDStats(token).subscribe(

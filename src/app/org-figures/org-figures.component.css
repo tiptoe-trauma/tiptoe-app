@@ -32,19 +32,19 @@
     width: 120px;
     top: 100%;
     left: 50%;
-    margin-left: -60px;
+    /* margin-left: -60px; */
 }
 
-.hoverable .hover_text:before{
+/* .hoverable .hover_text:before{
     content: " ";
     position: absolute; 
     bottom: 100%;  /* At the top of the tooltip */
-    left: 50%;
+    /* left: 50%;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent black transparent;
-}
+} */
 
 .barbox {
     display: flex;
@@ -52,4 +52,8 @@
     flex-wrap: wrap;
     width: fit-content;
     padding-bottom: 2em;
+}
+
+.tick {
+    display: inline-block;
 }

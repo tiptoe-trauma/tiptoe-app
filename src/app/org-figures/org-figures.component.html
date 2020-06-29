@@ -8,8 +8,13 @@
         <span class="hover_text">{{result.percent_yes}}%</span>
     </div>
     <div *ngIf="result.numbers" class="percentile">
-        <p>♦♦♦♦♦♦♦♦♦♦</p>
-        <p>{{result.numbers}}</p>
+        <div class="hoverable">
+            <div *ngFor="let item of [].constructor(10); let i=index" class='tick'>
+                <span *ngIf="(i+1)==result.percentile_mark; else generic_mark" class="active_percentile" style="color:red">♦</span>
+                <ng-template #generic_mark><span>♦</span></ng-template>
+            </div>
+            <div class="hover_text">{{result.numbers}} percentile</div>
+        </div>
     </div>
     <div *ngIf="result.options" class="barbox">
         <app-compact-bar [data]="result.options" ></app-compact-bar>
