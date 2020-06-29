@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   public org_name: string;
   public email2: string;
   public finished: boolean = false;
+  public about: boolean = false;
 
   constructor(private _userService: UserService,
               private _router: Router,
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
               private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics){ }
 
   setUser(user: User){
+    this.about = false;
     if(user == undefined){
       this.angulartics2GoogleAnalytics.setUsername(undefined);
       this.finished = false;
@@ -43,6 +45,10 @@ export class AppComponent implements OnInit {
       //   this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
       // }
     }
+  }
+
+  toAbout() {
+    this.about = true;
   }
 
   newQuestionnaire() {
