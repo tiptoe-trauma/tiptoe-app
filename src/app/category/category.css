@@ -56,12 +56,12 @@
   overflow-x: hidden; */
   padding-top: 0px;
   transition: 0.5s;
-  display: none;
+  display: block;
 }
 
 .floater {
   /* position: fixed; */
-  position: absolute;
+  /* position: absolute; */
   right: 5px;
   width: 100%;
 }
