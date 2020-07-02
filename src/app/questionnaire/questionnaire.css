@@ -50,3 +50,7 @@ label.btn-primary {
   height: 100%;
   background-color: #a2cca2;
 }
+
+.next {
+  width: 65%;
+}
