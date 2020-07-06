@@ -12,6 +12,7 @@
          (mouseleave)="mouse_exit()"
          [style.background-color]="bar.color"
          [style.height.%]="bar.height">
+         <p *ngIf="bar.active" class="marked">*</p>
     </div>
   </div>
 </div>

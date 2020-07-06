@@ -39,3 +39,9 @@ h4 {
 .hover {
   text-transform: capitalize;
 }
+
+.marked{
+  text-align: center;
+  color: beige;
+  font-weight: bold;
+}

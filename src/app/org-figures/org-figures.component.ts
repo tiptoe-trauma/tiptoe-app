@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { OrganogramService } from '../services/organogram.service';
 import { UserService } from '../services/user.service';
 import { Bar, BarChart } from '../compact-bar/compact-bar.component';
+import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
 
 class AnswerResult {
     keyword: string;
@@ -11,6 +12,7 @@ class AnswerResult {
     percent_yes: number;
     numbers: number;
     percentile_mark: number;
+    ordinal: string;
     options: BarChart;
     active_answer: any;
 
@@ -60,8 +62,17 @@ export class OrgFigureComponent implements OnInit {
                 } else if(answers[key]["numbers"]){
                     result.numbers = this.sortNumbers(answers[key]);
                     result.percentile_mark = Math.round(result.numbers/10);
-                    console.log(result.percentile_mark);
-                    // result.numbers = answers[key]["numbers"];
+                    if(result.numbers == 0){
+                      result.ordinal = "0th";
+                    } else if(result.numbers.toString().endsWith('1')){
+                      result.ordinal = result.numbers + "st";
+                    } else if(result.numbers.toString().endsWith('2')){
+                      result.ordinal = result.numbers + "nd";
+                    } else if(result.numbers.toString().endsWith('3')){
+                      result.ordinal = result.numbers + "rd";
+                    } else {
+                      result.ordinal = result.numbers + "th";
+                    }
                 } else if(answers[key]["options"]){
                     result.options = this.sortOptions(answers[key]);
                 }
@@ -82,13 +93,13 @@ export class OrgFigureComponent implements OnInit {
             }
         }
         let percentile = Math.round(((index+1)/numbers.length)*100);
-        console.log(percentile);
 
         return percentile;
     }
 
     sortOptions(response){
         let options = response["options"];
+        let active = response["active_answer"]
         let barchart = <BarChart>{};
         barchart.axis_value = 100;
         barchart.bars = [];
@@ -98,7 +109,7 @@ export class OrgFigureComponent implements OnInit {
         // barchart.name = response['keyword'];
         for(let key of Object.keys(options)){
             let ratio = (options[key]/response['total']) * 100;
-            barchart.bars.push({'label': key, 'num': ratio});
+            barchart.bars.push({'label': key, 'num': ratio, 'active': active.includes(key)});
         }
 
         return barchart;
