@@ -15,7 +15,7 @@ const appRoutes: Routes = [
     {path: 'resources', component: ResourcesComponent},
     {path: 'training', component: TrainingMaterialComponent},
     {path: 'uses', component: UseCasesComponent},
-    {path: 'user', component: UserComponent},
+    // {path: 'user', component: UserComponent},
     {path: 'questionnaire/:type', component: QuestionnaireComponent},
     // Until useAsDefault: true has returned
     {path: '**', component: NotFoundComponent}
