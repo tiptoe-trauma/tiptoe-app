@@ -53,11 +53,7 @@ export class CompactBarComponent implements OnInit {
   }
 
   mouse_over(text: string, active: boolean){
-    if(active){
-      this.hover = this.text_clean(text) + '*';
-    } else if(!active){
-      this.hover = this.text_clean(text);
-    }
+    this.hover = this.text_clean(text);
   }
 
   mouse_exit() {
