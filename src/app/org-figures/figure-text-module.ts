@@ -220,7 +220,7 @@ export function get_figure_text(q_id: number){
         return 'Percentile ranks for number of neurosurgeons who, when on call, take call exclusively';
     } else if(q_id==84){
         return 'Percent of facilities with neurosurgery residency program';
-    }   else
+    } else
     // Anesthesiology
     if(q_id==87){
         return 'Percent of facilities with 24/7 neurosurgical coverage';
@@ -236,7 +236,13 @@ export function get_figure_text(q_id: number){
         return 'Percentile ranks for number of anesthesiologists taking call who have successfully completed an anesthesiology residency';
     }  else if(q_id==98){
         return 'Percentile ranks for number of CRNAs';
-    } 
+    } else 
+    // Additional Specialties
+    if(q_id==115){
+        return 'Available Medical Specialties';
+    } else if (q_id==116){
+        return 'Available Surgical Specialties';
+    }
     else {
         return null;
     }
