@@ -4,6 +4,8 @@ import { UserService } from '../services/user.service';
 import { Bar, BarChart } from '../compact-bar/compact-bar.component';
 import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
 
+import { get_figure_text } from './figure-text-module';
+
 class AnswerResult {
     keyword: string;
     special_text: string;
@@ -55,7 +57,7 @@ export class OrgFigureComponent implements OnInit {
                 let order = answers[key]["order"];
 
                 let result = new AnswerResult(keyword, questionnaire, order);
-                result.special_text = this.get_special_text(parseInt(key));
+                result.special_text = get_figure_text(parseInt(key));
                 result.active_answer = answers[key]["active_answer"];
                 if(answers[key]["trues"]){
                     result.percent_yes = Math.round((answers[key]["trues"]/answers[key]["total"]) * 100);
@@ -74,7 +76,7 @@ export class OrgFigureComponent implements OnInit {
                       result.ordinal = result.numbers + "th";
                     }
                 } else if(answers[key]["options"]){
-                    result.options = this.sortOptions(answers[key]);
+                    result.options = this.sortOptions(answers[key], result.special_text);
                 }
                 this.results.push(result);
                 // console.log(result);
@@ -97,15 +99,19 @@ export class OrgFigureComponent implements OnInit {
         return percentile;
     }
 
-    sortOptions(response){
+    sortOptions(response, title: string){
         let options = response["options"];
         let active = response["active_answer"]
         let barchart = <BarChart>{};
         barchart.axis_value = 100;
         barchart.bars = [];
         let q_text = response['q_text'];
-        let keyword = q_text.substring(q_text.indexOf('{')+1, q_text.indexOf('|'));
-        barchart.name = keyword; 
+        if(title){
+          barchart.name = title; 
+        } else{
+          let keyword = q_text.substring(q_text.indexOf('{')+1, q_text.indexOf('|'));
+          barchart.name = keyword;
+        }
         // barchart.name = response['keyword'];
         for(let key of Object.keys(options)){
             let ratio = (options[key]/response['total']) * 100;
