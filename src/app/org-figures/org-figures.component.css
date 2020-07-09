@@ -24,6 +24,10 @@
     height: 100%
 }
 
+.percentile{
+    margin-bottom: .5em;
+}
+
 .hoverable .hover_text{
     visibility: hidden;
 }
