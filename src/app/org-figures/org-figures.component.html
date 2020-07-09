@@ -1,7 +1,7 @@
 <h3>Result Comparison</h3>
 <div class="result" *ngFor="let result of results">
     <p *ngIf="result.special_text; else generic_text" class="fig_label">{{result.special_text}}</p>
-    <ng-template #generic_text><p class="fig_label">Percent of {{result.questionnaire}}s with {{result.keyword}}</p></ng-template>
+    <ng-template #generic_text><p class="fig_label">{{result.questionnaire}}s with {{result.keyword}}</p></ng-template>
     <div *ngIf="result.percent_yes" class="hoverable">
         <div class="hover_text">{{result.percent_yes}}%</div>
         <div class="percentage">
