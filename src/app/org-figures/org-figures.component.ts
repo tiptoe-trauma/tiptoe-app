@@ -100,7 +100,7 @@ export class OrgFigureComponent implements OnInit {
     }
 
     sortOptions(response, title: string){
-        let options = response["options"];
+        let options = response["or_options"];
         let active = response["active_answer"]
         let barchart = <BarChart>{};
         barchart.axis_value = 100;
@@ -113,10 +113,14 @@ export class OrgFigureComponent implements OnInit {
           barchart.name = keyword;
         }
         // barchart.name = response['keyword'];
-        for(let key of Object.keys(options)){
-            let ratio = (options[key]/response['total']) * 100;
-            barchart.bars.push({'label': key, 'num': ratio, 'active': active.includes(key)});
+        for(let i = 0; i < options.length; i++){
+          let ratio = (options[i][1]/response['total']) * 100;
+          barchart.bars.push({'label': options[i][0], 'num': ratio, 'active': active.includes(options[i][0])});
         }
+        // for(let key of Object.keys(options)){
+        //     let ratio = (options[key]/response['total']) * 100;
+        //     barchart.bars.push({'label': key, 'num': ratio, 'active': active.includes(key)});
+        // }
 
         return barchart;
     }
