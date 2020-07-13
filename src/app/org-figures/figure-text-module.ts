@@ -9,7 +9,7 @@ export function get_figure_text(q_id: number){
     } else if(q_id==124){
         return 'Trauma Center level';
     } else if(q_id==12){
-        return 'Percent of programs with a trauma medical director role';
+        return 'Percent of programs with a trauma medical director';
     } else if(q_id==25){
         return 'Percent of institutions with a trauma program manager';
     } else if(q_id==33){
@@ -25,15 +25,15 @@ export function get_figure_text(q_id: number){
     } else
     // Trauma Program
     if(q_id==100){
-        return 'Percent of programs with an EMS acting as a liasion';
+        return 'Percent of programs with an EMS liasion';
     } else if(q_id==147){
-        return 'Trauma Program Leadership';
+        return 'Members of Trauma Program Leadership';
     }  else if(q_id==9){
         return 'Percent of programs with leadership with the authority to develop, oversee, and improve the care of the injured within the facility';
     }  else if(q_id==74){
-        return 'Trauma Care Participants';
+        return 'Involvement of physical therapists, occupational therapists, and rehabilitation specialists';
     }  else if(q_id==37){
-        return 'Physician Liasisons';
+        return 'Official Physician Liasisons';
     } else
     // Regional Trauma Infrastructure
     if(q_id==148){
@@ -41,9 +41,9 @@ export function get_figure_text(q_id: number){
     } else if(q_id==149){
         return 'Percent of trauma programs with trauma systems in service area';
     } else if(q_id==150){
-        return 'Percentile of level 1 trauma centers in service area';
+        return 'Percentile ranks for number of level 1 trauma centers in service area';
     } else if(q_id==151){
-        return 'Percentile ranks of number of level 2 trauma centers in service area';
+        return 'Percentile ranks for number of level 2 trauma centers in service area';
     } else if(q_id==7){
         return 'Percent of centers with government efforts to create a trauma system in service area';
     } else if(q_id==8){
@@ -53,17 +53,17 @@ export function get_figure_text(q_id: number){
     } else
     // Emergency Medicine
     if(q_id==102){
-        return 'Percent of emergency medical liaisons with verigifably 18 hours of trauma-specific education every three years';
+        return 'Percent of emergency medical liaisons with verifable 18 hours of trauma-specific education every three years';
     } else if(q_id==103){
         return 'Percent of emergency medical liaisons with documented 50% attendance of Trauma Peer Review Committee meetings';
     } else if(q_id==158){
         return 'Percent of emergency medicial liaisons with documented 50% attendance of trauma QI meetings';
     } else if(q_id==121){
-        return 'Percent of programs with an emergency department nursing liaison designated';
+        return 'Percent of programs with an emergency department designated nursing liaison';
     } else if(q_id==101){
-        return 'Percent of programs with a designated emergency physician';
+        return 'Percent of programs with a designated emergency physician available to TMD for QI issues in the ED”';
     } else if(q_id==135){
-        return 'Percent of programs with an emergency department representative participating in a QI program';
+        return 'Percent of programs with an emergency department representative participating in the QI program';
     } else if(q_id==141){
         return 'Percentile ranks for number of emergency physicians in program';
     } else if(q_id==106){
@@ -75,7 +75,7 @@ export function get_figure_text(q_id: number){
     } else if(q_id==108){
         return 'Percentile ranks for number of physicisnas that are both board-certified in emergence medicine and current in ATLS';
     } else if(q_id==109){
-        return 'Percentage of organizations with provide for the presence of a board certified emergency physician at all times';
+        return 'Percentage of organizations with presence of a board certified emergency physician at all times';
     } else if(q_id==111){
         return 'Percentage of institutions with emergency physician roles approved by tauma medical director';
     } else if(q_id==110){
@@ -93,13 +93,13 @@ export function get_figure_text(q_id: number){
     } else if(q_id==21){
         return 'Percent of TMDs who comply with the 18-hour trauma specific CME';
     } else if(q_id==138){
-        return 'Who TMD reports to';
+        return 'TMD reports to...';
     } else if(q_id==14){
         return 'Percent of TMDs who participate in trauma calls';
     } else if(q_id==15){
         return 'Percent of TMDs who lead trauma QI and patient safety program';
     } else if(q_id==19){
-        return 'Percent of TMDs with authority to contribute to TPM performanc3 evaluation';
+        return 'Percent of TMDs with authority to contribute to TPM performance evaluation';
     } else if(q_id==22){
         return 'Percent of TMDs with authority to set qualifications for trauma panel members';
     } else if(q_id==24){
@@ -111,7 +111,7 @@ export function get_figure_text(q_id: number){
     if(q_id==16){
         return 'TPM education level';
     } else if(q_id==26){
-        return 'Percent of TPMs responsible for evaluating nursing care';
+        return 'Percent of TPMs responsible for evaluating nursing care for trauma patients';
     } else if(q_id==156){
         return 'Percent of TPMs responsible for trauna quality improvement and patient safety program coordination';
     } else if(q_id==27){
@@ -129,7 +129,7 @@ export function get_figure_text(q_id: number){
     } else if(q_id==36){
         return 'Percent of registrars who have attended abbreviated injury scale training course';
     } else if(q_id==35){
-        return 'Percent of facilities with full time registrar position';
+        return 'Percent of facilities with full time trauma registrar position';
     } else
     // General Surgery
     if(q_id==41){
@@ -145,7 +145,7 @@ export function get_figure_text(q_id: number){
     if(q_id==43){
         return 'Percentile ranks for number of trauma surgeons with privileges in general surgery';
     } else if(q_id==159){
-        return 'Percent of institutions with traum surgeon roles being approved by TMD';
+        return 'Percent of institutions with trauma surgeon roles being approved by TMD';
     } else if(q_id==42){
         return 'Percentile ranks for number of trauma surgeons on trauma panel';
     } else if(q_id==47){
@@ -157,7 +157,7 @@ export function get_figure_text(q_id: number){
     }  else if(q_id==152){
         return 'Percentile ranks for number of trauma surgeons on trauma panel who are board-certified';
     }  else if(q_id==54){
-        return 'Percentile ranks for number of trauma surgeons who, when on call, take call exclusively';
+        return 'Percentile ranks for number of trauma surgeons who, when on call, take call exclusively for your trauma center';
     }  else if(q_id==56){
         return 'Percentile ranks for number of trauma surgeons who provide care for non-trauma emergencies when on call';
     }  else if(q_id==57){
@@ -189,7 +189,7 @@ export function get_figure_text(q_id: number){
     }  else if(q_id==145){
         return 'Percentile ranks for number of orthopedic surgeons on trauma panel who are board-certified';
     }  else if(q_id==67){
-        return 'Percentile ranks for number of orthopedic surgeons who, when on-call, take call exclusively';
+        return 'Percentile ranks for number of orthopedic surgeons who, when on-call, take call exclusively for your trauma center';
     }  else if(q_id==72){
         return 'Percent of facilities with an orthopedic surgery residency program';
     }  else if(q_id==73){
