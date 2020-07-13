@@ -28,7 +28,8 @@
                    placeholder="Number"
                    (blur)="setValue()"
                    [(ngModel)]="answer.integer"
-                   name="number">
+                   name="number"
+                   min=0>
           </fieldset>
         </ng-template>
         <ng-template [ngIf]="question.q_type === 'combo'">
