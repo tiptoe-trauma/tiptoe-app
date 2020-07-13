@@ -117,6 +117,7 @@ export class QuestionComponent implements OnInit {
 
     setValue(){
         if(this.user){
+            // Prevent negative numbers from being submitted for int type questions
             if (this.question.q_type == 'int' && this.answer.integer < 0) {
                 this.answer.integer = null;
             }
