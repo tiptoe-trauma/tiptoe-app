@@ -6,7 +6,7 @@
         <div class="hover_text">{{result.percent_yes}}%</div>
         <div class="percentage">
             <div class="percent_yes hoverable" [style.width.%]="result.percent_yes"><p *ngIf="result.active_answer" class='marked'>*</p></div>
-            <div class="percent_no hoverable" [style.width.%]="100-result.percent_yes"><p *ngIf="result.active_answer===false" class='marked'>*</p></div>
+            <div class="percent_no hoverable" [style.width.%]="100-result.percent_yes"><p *ngIf="result.active_answer===false && result.percent_yes != 100" class='marked'>*</p></div>
         </div>
     </div>
     <div *ngIf="result.numbers" class="percentile">
