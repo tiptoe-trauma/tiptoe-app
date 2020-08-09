@@ -25,6 +25,19 @@
     height: 100%
 }
 
+.marked{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    line-height: 100%;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
 .percentile{
     margin-bottom: .5em;
 }
