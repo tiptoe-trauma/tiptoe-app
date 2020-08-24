@@ -1,19 +1,3 @@
-// var coll = document.getElementByClassName("collapsible");
-// var i;
-
-// for (i=0; i < coll.length; i++) {
-//     coll[i].addEventListener("click", function() {
-//         this.classList.toggle("active");
-//         var content = document.getElementsByClassName("sidebar");
-//         if (content.style.display === "block") {
-//             content.style.display = "none";
-//         } else {
-//             content.style.display = "block";
-//         }
-//     });
-// }
-
-
 function showFigure() {
     var sidebar = document.getElementById("figure")
     if (sidebar.style.display === "block") {
@@ -41,16 +25,17 @@ window.onscroll = function adjustSidebar() {
     var current_offset = parseInt($("#sidebarContent").css("transform").split(',')[5]);
 
     if (figure_size > question_size){
-        console.log('hit');
         content.style.setProperty("max-height", question_size + "px");
-        content.style.setProperty("overflow", "scroll");
+        content.style.setProperty("max-width", "40%");
+        content.style.setProperty("overflow-y", "scroll");
 
         var offset_increase = question_pos.top - current_pos.top;
         var new_offset = current_offset + offset_increase;
         content.style.setProperty('transform', "translateY(" + new_offset + "px)");
     } else {
         content.style.removeProperty("max-height");
-        content.style.removeProperty("overflow");
+        content.style.removeProperty("max-width");
+        content.style.removeProperty("overflow-y");
         if ((current_pos.top - current_offset) > cutoff) {
             var offset_increase = cutoff - current_pos.top;
             var new_offset = current_offset + offset_increase;
