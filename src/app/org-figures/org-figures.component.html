@@ -1,4 +1,5 @@
 <h3>Result Comparison</h3>
+<p class="explanation">An asterisk marks your answer.</p>
 <div class="result" *ngFor="let result of results">
     <p *ngIf="result.special_text; else generic_text" class="fig_label">{{result.special_text}}</p>
     <ng-template #generic_text><p class="fig_label">{{result.questionnaire}}s with {{result.keyword}}</p></ng-template>

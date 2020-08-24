@@ -51,6 +51,6 @@ label.btn-primary {
   background-color: #a2cca2;
 }
 
-.next {
-  width: 65%;
+.next label {
+  width: 30em;
 }

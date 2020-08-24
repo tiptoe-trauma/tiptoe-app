@@ -25,6 +25,7 @@
 
 .bar {
   width: 15px;
+  overflow: hidden;
 }
 
 .bar:hover {

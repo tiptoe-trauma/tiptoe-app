@@ -1,3 +1,8 @@
+.explanation {
+    font-size: .9em;
+    margin-bottom: .5em;
+}
+
 .fig_label{
     font-weight: bold;
     width: 60%;
