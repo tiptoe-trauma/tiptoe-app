@@ -2,8 +2,9 @@
   <div *ngIf="category" class="questions">
       <h3>{{category.name}}</h3>
       <div class="question" *ngFor="let question of questions">
-          <my-question (changed)="checkDeps($event)" [question]="question"></my-question>
+        <my-question (changed)="checkDeps($event)" [question]="question"></my-question>
       </div>
+    <div id="no_questions">Due to your previous responses, this section has no questions.</div>
   </div>
 
   <div id="rightColumn" class="sidebar">
