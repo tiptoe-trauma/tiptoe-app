@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-faded">
-    <img class="navbar-brand" src="/images/cafe_logo_white.png">
+    <img class="navbar-brand" alt="CAFE logo" src="/images/cafe_logo_white.png">
     <a href="index.html"><h2 class="navbar-brand">CAFE</h2></a>
     <div class="nav-buttons float-xs-right">
       <a *ngIf="user && user.is_staff" href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
@@ -19,7 +19,7 @@
 <div class="main">
     <app-error id='errorBar'></app-error>
     <div class="registration" *ngIf="!finished && !about">
-      <img class="logo" src="/images/cafe_logo.png">
+      <img class="logo" alt="CAFE logo" src="/images/cafe_logo.png">
       <p>
         Welcome to the CAFE questionnaire. This questionnaire assists in pre-assessment of Trauma Centers and Trauma Systems for ACS verification.
         It  collects non-identifying information about your institution and stores the data in the CAFE data repository.
