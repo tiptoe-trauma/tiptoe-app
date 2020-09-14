@@ -1,0 +1,9 @@
+<div id="data-feedback" class="container tag">
+    <form (ngSubmit)='onSubmit(myQuery.value)' id='sparqlQuery'>
+        <label for='query'>Query:</label>
+        <textarea #myQuery class='long-text' name='query' id='query' value='activeQuery'></textarea>
+        <input type='submit' value='Submit'>
+    </form>
+    <label for='output'>Output:</label>
+    <textarea class='long-text' id='output' name='output' readonly></textarea>
+</div>
