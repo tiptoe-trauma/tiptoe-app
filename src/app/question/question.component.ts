@@ -74,6 +74,13 @@ export class QuestionComponent implements OnInit {
               error => console.error(error)
           );
         }
+        if(this.visibility.includes('false')){
+            this.answer.integer = null;
+            this.answer.options = [];
+            this.answer.text = null;
+            this.answer.yesno = null;
+            this.setValue();
+        }
     }
 
     setUser(user: User){
