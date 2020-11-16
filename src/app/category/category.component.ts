@@ -100,8 +100,6 @@ export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
            this.joyplot_component.updateNumbers(this.translate_speciality(this.category.name));
          }
        }
-        let adjuster = document.getElementById("adjuster")
-        adjuster.click()
     }
 
     checkDeps(answer) {

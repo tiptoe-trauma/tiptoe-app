@@ -154,4 +154,8 @@ export class OrgFigureComponent implements OnInit {
       }
     }
 
+    answerCallAdjust(){
+      let adjuster = document.getElementById("adjuster")
+      adjuster.click()
+    }
 }
