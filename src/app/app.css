@@ -59,17 +59,18 @@ button.btn-secondary {
 .dropdown-content a{
   min-width: 100px;
   float: none;
-  color: black;
+  color: white;
   text-decoration: none;
   display: block;
   text-align: left;
   z-index: 1;
-  background-color: #5BC0DE;
+  background-color: #6C9AC3;
   padding-left: .25em;
+  padding-right: .2em;
 }
 
 .dropdown-content a:hover{
-  background-color: #ddd;
+  background-color: #FFA640;
 }
 
 .dropdown:hover .dropdown-content{
