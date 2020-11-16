@@ -1,19 +1,4 @@
-function showFigure() {
-    var sidebar = document.getElementById("figure")
-    if (sidebar.style.display === "block") {
-        sidebar.style.display = "none";
-        sidebar.style.paddingTop = "0";
-        sidebar.style.transition = "0.5s";
-        document.getElementById("openbtn").innerHTML = "Show Comparison";
-    } else {
-        sidebar.style.display = "block";
-        sidebar.style.paddingTop = "20px";
-        sidebar.style.transition = "0.5s";
-        document.getElementById("openbtn").innerHTML = "Hide Comparison";
-    }
-}
-
-window.onscroll = function adjustSidebar() {
+function adjustSidebar() {
     var window_height = document.body.scrollHeight;
     var figure_size = $("#sidebarContent").prop("scrollHeight");
     var question_size = $(".questions").prop("scrollHeight");
@@ -44,5 +29,8 @@ window.onscroll = function adjustSidebar() {
             content.style.setProperty('transform', "translateY(0px)");
         }
     }
+}
 
+window.onscroll = function scrollCallAdjust() {
+    adjustSidebar()
 }
