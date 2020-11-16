@@ -50,7 +50,9 @@ export class OrgFigureComponent implements OnInit {
     fillResults(answers: Object){
         this.results = [];
         for(let key of Object.keys(answers)){
-            if(answers[key]["active_answer"] != null){
+            if((answers[key]["active_answer"] != null) && 
+                (!(Array.isArray(answers[key]["active_answer"]) && 
+                   answers[key]["active_answer"].length < 1))){
                 let q_text = answers[key]["q_text"];
                 let questionnaire = answers[key]["questionnaire"];
                 let keyword = q_text.substring(q_text.indexOf('{')+1, q_text.indexOf('|'));
@@ -66,6 +68,8 @@ export class OrgFigureComponent implements OnInit {
                     result.percentile_mark = Math.round(result.numbers/10);
                     if(result.numbers == 0){
                       result.ordinal = "0th";
+                    } else if([11, 12, 13].includes(result.numbers)){
+                      result.ordinal = result.numbers + "th";
                     } else if(result.numbers.toString().endsWith('1')){
                       result.ordinal = result.numbers + "st";
                     } else if(result.numbers.toString().endsWith('2')){
@@ -149,4 +153,5 @@ export class OrgFigureComponent implements OnInit {
         return null
       }
     }
+
 }
