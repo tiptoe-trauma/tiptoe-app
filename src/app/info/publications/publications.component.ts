@@ -14,11 +14,12 @@ export class PublicationsComponent implements OnInit {
     getPubs(){
         let base_endpoint = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/'
         // let proxy_url = 'https://salty-castle-05953.herokuapp.com/'
-        let proxy_url = 'https://cors-anywhere.herokuapp.com/'
+        // let proxy_url = 'https://cors-anywhere.herokuapp.com/'
         let grant_number = 'R01+GM111324\[Grant+Number\]'
+        // let grant_number = 'R01GM111324[Full+Text]'
         
-        let id_list = []
-        let id_request = new XMLHttpRequest();
+        // let id_list = []
+        // let id_request = new XMLHttpRequest();
         // let id_url = proxy_url + base_endpoint + 'esearch.fcgi?db=pubmed&retmode=json&term=' + grant_number
         let id_url = base_endpoint + 'esearch.fcgi?db=pubmed&retmode=json&term=' + grant_number
 
@@ -27,13 +28,17 @@ export class PublicationsComponent implements OnInit {
             .then(
                 function(res) {
                     if (res.status !== 200) {
-                        console.log("It's busted: " + res.status);
+                        console.log("Error accessing PubMed: " + res.status);
                         return;
                     }
 
                     res.json().then(function(resData) {
-                        console.log(resData);
                         let id_list = resData["esearchresult"]["idlist"];
+
+                        // This publication does not seem to be configured properly to be pulled by API query
+                        if (id_list.indexOf('32789188') === -1) {
+                            id_list.push('32789188')
+                        }
 
                         if (id_list.length > 0) {
                             // let info_url = proxy_url + base_endpoint + 'esummary.fcgi?db=pubmed&retmode=json&id=' + String(id_list);
@@ -46,8 +51,6 @@ export class PublicationsComponent implements OnInit {
                                     }
 
                                     rez.json().then(function(rezData) {
-                                        console.log(rezData);
-                                        console.log(this)
                                         pubfill(rezData)
                                         // this.fillPubs(rezData);
                                     })
@@ -64,12 +67,23 @@ export class PublicationsComponent implements OnInit {
     }
 
     fillPubs(results) {
-        console.log(results)
         let uids = results["result"]["uids"];
         let citation_block = "";
+
+        // Get dates from publications
+        let dates = new Array;
         for (let uid of uids){
+            dates.push([uid, results["result"][uid].pubdate.substring(0,4)])
+        }
+
+        // Order the publications by pub date
+        dates.sort(function(first, second) {
+            return second[1] - first[1];
+        });
+
+        for (let entry of dates){
+            let uid = entry[0];
             let citation = "";
-            console.log(results["result"][uid])
             let result = results["result"][uid];
 
             for (let name of result.authors){
@@ -79,19 +93,32 @@ export class PublicationsComponent implements OnInit {
                 citation += name.name;
             }
 
-            citation += ". " + result.title;
+            citation += ". <a href='https://pubmed.ncbi.nlm.nih.gov/" + result.uid + "' target='_blank'>" +result.title;
             if (!result.title.endsWith('.')){
                 citation += ".";
             }
+            citation += "</a>"
 
             citation += " " + result.source + ". ";
 
             citation += result.pubdate.substring(0, 4);
+
+            if (result.volume){
+                citation += "; " + result.volume;
+                if (result.issue){
+                    citation += "(" + result.issue + ")"
+                }
+            }
+
             if (result.pages){
-                citation += "; " + result.pages;
+                if (result.volume){
+                    citation += ", " + result.pages;
+                }
+                else {
+                    citation += "; " + result.pages;
+                }
             }
             citation += ".";
-            console.log(citation)
             citation_block += '<div _ngcontent-c1 class ="citation"><span>' + citation + '</span></div>'
         }
 
