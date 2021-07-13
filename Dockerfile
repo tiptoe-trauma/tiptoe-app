@@ -1,11 +1,14 @@
 FROM alpine:latest as angular-builder
 RUN apk add --update nodejs npm
+WORKDIR /code
 
-COPY . /code
-RUN cd /code && \
-		rm -rf node_modeules && \
-    npm install && \
-    npx ng build --prod
+COPY package-lock.json .
+COPY package.json .
+RUN rm -rf node_modules && \
+    npm ci
+
+COPY . .
+RUN npx ng build --prod
 
 FROM nginxinc/nginx-unprivileged as cafe-static
 
