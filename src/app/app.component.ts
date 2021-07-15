@@ -72,13 +72,22 @@ export class AppComponent implements OnInit {
     );
   }
 
+  loginNavigation(questionnaire_type: string) {
+    if (questionnaire_type == 'tiptoe') {
+      this._router.navigate(['tiptoe']);
+    } else {
+      this._router.navigate(['user']);
+    }
+  }
+
   startQuestionnaire(questionnaire_type: string){
     this._userService.createUser(questionnaire_type, this.email, this.org_name).subscribe(
       user => user.subscribe(
         user => this.setUser(user)),
       error => this._errorService.announceError('Start Error',
                                                  error['error'],
-                                                 3)
+                                                 3),
+      ( ) => this.loginNavigation(questionnaire_type)
     );
   }
 

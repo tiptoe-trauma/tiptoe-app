@@ -4,6 +4,7 @@
     <div class="nav-buttons float-xs-right">
       <a *ngIf="user && user.is_staff" href="/admin/" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
       <a *ngIf="user" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Questionnaire Management</button></a>
+      <a *ngIf="user" routerLink="/tiptoe"> <button type="button" class="nav-item btn btn-secondary">TIPTOE Management</button></a>
       <div class="dropdown">
         <button type="button" class="dropbtn nav-item btn btn-secondary">About CAFE</button>
         <div class="dropdown-content">
@@ -56,6 +57,10 @@
         <div class="form-group new-buttons">
           <button class="btn btn-primary" (click)="startQuestionnaire('center')">Trauma Center</button>
           <button class="btn btn-primary" (click)="startQuestionnaire('system')">Trauma System</button>
+        </div>
+        <p>There is a separate TIPTOE questionnaire.</p>
+        <div class="form-group new-buttons">
+          <button class="btn btn-primary" (click)="startQuestionnaire('tiptoe')">Trauma Center - TIPTOE</button>
         </div>
       </form>
 
