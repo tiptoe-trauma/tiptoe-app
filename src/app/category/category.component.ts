@@ -17,9 +17,9 @@ import { OrgFigureComponent} from '../org-figures/org-figures.component';
 
 export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
     @Input() category: Category;
-    @ViewChild('policies') policy_component: OrgPoliciesComponent;
-    @ViewChild('joyplot') joyplot_component: OrgJoyplotComponent;
-    @ViewChild('figures') figure_component: OrgFigureComponent;
+    @ViewChild('policies', { static: false }) policy_component: OrgPoliciesComponent;
+    @ViewChild('joyplot', { static: false }) joyplot_component: OrgJoyplotComponent;
+    @ViewChild('figures', { static: true }) figure_component: OrgFigureComponent;
 
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
