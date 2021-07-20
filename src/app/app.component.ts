@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from './services/user.service';
 import { ErrorService } from './errors';
 import {User} from './user';
-import { Angulartics2GoogleAnalytics } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Router, ActivatedRoute } from '@angular/router';
 
 declare function ga(a, b, c): void;
