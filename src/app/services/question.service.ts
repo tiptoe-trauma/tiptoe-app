@@ -1,8 +1,10 @@
+
+import {map, share} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Stat, Question, Category, Answer, Definition, Completion} from '../question';
 import {User} from '../user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class QuestionService {
@@ -10,15 +12,15 @@ export class QuestionService {
     private _definitionUrl = '/api/definitions/';
 
     constructor(private http: HttpClient) {
-        this.defObserver = http.get<Definition[]>(this._definitionUrl).share();
+        this.defObserver = http.get<Definition[]>(this._definitionUrl).pipe(share());
     }
 
     private _categoryUrl = '/api/categories/';
 
     getCategories(type: string){
-        return this.http.get<Category[]>(this._categoryUrl)
-                            .map(res => res.filter(
-                              category => category.questionnaire === type));
+        return this.http.get<Category[]>(this._categoryUrl).pipe(
+                            map(res => res.filter(
+                              category => category.questionnaire === type)));
     }
 
     private _questionsUrl = '/api/questions/';

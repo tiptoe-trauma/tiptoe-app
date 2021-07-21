@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../services/question.service';
 import { UserService } from '../services/user.service';
@@ -5,7 +7,7 @@ import {Category, Completion} from '../question';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import {ErrorService} from '../errors';
-import 'rxjs/add/operator/switchMap';
+
 
 @Component({
     selector: 'my-questionnaire',
@@ -27,9 +29,9 @@ export class QuestionnaireComponent implements OnInit {
                 private _router: Router){ }
 
     ngOnInit(){
-        this._route.paramMap
-            .switchMap((params: ParamMap) =>
-               this._questionService.getCategories(params.get('type')))
+        this._route.paramMap.pipe(
+            switchMap((params: ParamMap) =>
+               this._questionService.getCategories(params.get('type'))))
                  .subscribe(
                    categories => this.setCategories(categories),
                    error => {

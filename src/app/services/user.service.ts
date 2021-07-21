@@ -1,9 +1,11 @@
+
+import {throwError as observableThrowError, of as observableOf, Observable} from 'rxjs';
+
+import {map,  tap } from 'rxjs/operators';
 import {Injectable, EventEmitter} from '@angular/core';
 import {User, Organization} from '../user';
 import {Question} from '../question';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 interface Token {
    token: string;
@@ -28,11 +30,11 @@ export class UserService {
 
     getUser(): Observable<User>{
         if(this.user){
-            return Observable.of(this.user);
+            return observableOf(this.user);
         } else if(this.token){
             return this.requestUser(this.token);
         } else {
-            return Observable.throw(new Error("No User"));
+            return observableThrowError(new Error("No User"));
         }
     }
 
@@ -48,8 +50,8 @@ export class UserService {
     private _createUrl: string = '/api/create_user/';
 
     createUser(questionnaire_type: string, email: string, name?: string): Observable<Observable<User>> {
-      return this.http.post<Token>(this._createUrl + questionnaire_type, {email: email, name: name})
-                      .map(res => this.requestUser(res.token));
+      return this.http.post<Token>(this._createUrl + questionnaire_type, {email: email, name: name}).pipe(
+                      map(res => this.requestUser(res.token)));
     }
 
     private _updateEmailUrl: string = '/api/update_email/';
@@ -70,8 +72,8 @@ export class UserService {
     private _tokenUrl: string = '/api/token_login/';
 
     tokenLogin(login_token: string): Observable<Observable<User>> {
-      return this.http.post<Token>(this._tokenUrl, {login_token: login_token})
-                      .map(res => this.requestUser(res.token));
+      return this.http.post<Token>(this._tokenUrl, {login_token: login_token}).pipe(
+                      map(res => this.requestUser(res.token)));
     }
 
     private _loginUrl: string = '/api/auth/';
@@ -79,8 +81,8 @@ export class UserService {
     // TODO: Change this to use a hash
     login(username: string, password: string): Observable<Observable<User>> {
         let body = {username: username, password: password};
-        return this.http.post<Token>(this._loginUrl, body)
-                      .map(res => this.requestUser(res.token));
+        return this.http.post<Token>(this._loginUrl, body).pipe(
+                      map(res => this.requestUser(res.token)));
     }
 
     private _userUrl: string = '/api/user/';
@@ -114,7 +116,7 @@ export class UserService {
                                         );
             //              .map(user => this.setUser(user, this.token));
         } else {
-            return Observable.throw("Must be logged in to set active organization");
+            return observableThrowError("Must be logged in to set active organization");
         }
     }
 
@@ -127,7 +129,7 @@ export class UserService {
                            };
             return this.http.post<Organization>(this._organizationUrl, org, options);
         } else {
-            return Observable.throw("Must be logged in to create organizations");
+            return observableThrowError("Must be logged in to create organizations");
         }
     }
 
@@ -136,13 +138,13 @@ export class UserService {
             let options = { headers: new HttpHeaders(
                                         {Authorization: 'Token ' + this.token })
                            };
-            return this.http.delete(this._organizationUrl + org.id + '/', options)
-                              .map( res => {
+            return this.http.delete(this._organizationUrl + org.id + '/', options).pipe(
+                              map( res => {
                                   this.user.active_organization = null;
                                   this.setUser(this.user, this.token);
-                              });
+                              }));
         } else {
-            return Observable.throw("Must be logged in to delete organizations");
+            return observableThrowError("Must be logged in to delete organizations");
         }
     }
 
@@ -154,7 +156,7 @@ export class UserService {
                            };
             return this.http.get<Organization[]>(this._organizationUrl, options);
         } else {
-            return Observable.throw("Must be logged in to request organizations");
+            return observableThrowError("Must be logged in to request organizations");
         }
     }
 }
