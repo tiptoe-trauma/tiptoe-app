@@ -1,5 +1,5 @@
-<div *ngIf="user" id="user_home">
-  <div class="user_management">
+<div *ngIf="user" id="tiptoe_home">
+  <div class="tiptoe_management">
     <div>
       <small>This email address can be used to retrieve this questionnaire at a later time or on another computer</small>
       <br/>
@@ -9,12 +9,12 @@
   </div>
   <br/>
   <br/>
-  <p>Here you can manage or create questionnaires for trauma organizations.</p>
+  <p>Here you can manage or create TIPTOE questionnaires for trauma centers.</p>
   <p>You can continue or review answers to the questionnaire for any of your existing organizations by clicking the name.</p>
   <p>Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.</p>
   <p>Please direct feedback about the questionnaire to the email address at the bottom of the page.</p>
   <br/>
-  <h3>Your Trauma Questionnaires</h3>
+  <h3>Your TIPTOE Questionnaires</h3>
   <table class="table">
       <thead>
           <tr>
@@ -23,13 +23,11 @@
           </tr>
       </thead>
       <ng-container *ngFor="let organization of organizations">
-          <tr *ngIf="organization.org_type == 'center' || organization.org_type == 'system'">
+          <tr *ngIf="organization.org_type== 'tiptoe'">
               <td><button type="button"
                   class="btn"
-                  [class.btn-info]="organization.org_type == 'center'"
-                  [class.center-button]="organization.org_type == 'center'"
-                  [class.btn-warning]="organization.org_type == 'system'"
-                  [class.system-button]="organization.org_type == 'system'"
+                  [class.btn-primary]="organization.org_type == 'tiptoe'"
+                  [class.tiptoe-button]="organization.org_type == 'tiptoe'"
                   (click)="setActiveOrganization(organization)">{{organization.name}}</button></td>
               <td><button type="button" class="btn btn-danger delete-button"(click)="deleteOrganization(organization)">Delete</button></td>
           </tr>
@@ -39,19 +37,13 @@
 
     <h4>Create Questionnaire for new Organization</h4>
     <form class="form-inline">
-    <input style="width:300px" type="text" name="newOrgName" [(ngModel)]="new_org_name" placeholder="New Organization Name">
-    <label style="padding:.25em" class="radio-inline alert-info">
-      <input type="radio" name="inlineRadioOptions" id="center_radio"
-      (click)="new_org_type='center'"
-      [checked]="new_org_type === 'center'"
-      name="radioc">Trauma Center
-    </label>
-    <label style="padding:.25em" class="radio-inline alert-warning">
-      <input type="radio" name="inlineRadioOptions" id="system_radio"
-      (click)="new_org_type='system'"
-      [checked]="new_org_type === 'system'"
-      name="radios">Trauma System
-    </label>
-    <button type="button" class="btn btn-success" (click)="createOrganization()">Create Organization</button>
+      <input style="width:300px" type="text" name="newOrgName" [(ngModel)]="new_org_name" placeholder="New Organization Name">
+      <label style="padding:.25em" class="radio-inline alert-primary">
+        <input type="radio" name="inlineRadioOptions" id="tiptoe_radio"
+        (click)="new_org_type='tiptoe'"
+        checked
+        name="radioc">TIPTOE - Trauma Center
+      </label>
+      <button type="button" class="btn btn-success" (click)="createOrganization()">Create Organization</button>
     </form>
 </div>

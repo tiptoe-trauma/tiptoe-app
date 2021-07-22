@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-faded">
     <img class="navbar-brand" alt="CAFE logo" src="/images/cafe_logo_white.png">
-    <a href="index.html"><h2 class="navbar-brand">CAFE</h2></a>
+    <a href="index.html" class="text-underline-none"><h2 class="navbar-brand">CAFE</h2></a>
     <div class="nav-buttons float-xs-right">
       <a *ngIf="user && user.is_staff" href="/admin" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
       <a *ngIf="user" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Questionnaire Management</button></a>

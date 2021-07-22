@@ -5,6 +5,10 @@
   z-index: 100;
 }
 
+.navbar {
+  padding: .5rem 1rem;
+}
+
 .logo {
   width: 40vw;
   opacity: .75;
@@ -32,6 +36,10 @@ h2.navbar-brand {
     padding-top: 12px;
     color: white;
     font-size: 1.5em;
+}
+
+.text-underline-none {
+    text-decoration: none;
 }
 
 nav.bg-faded {

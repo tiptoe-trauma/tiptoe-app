@@ -1,18 +1,14 @@
-.user_management {
+.tiptoe_management {
   display: flex;
   justify-content: space-evenly;
 }
 
-#user_home{
+#tiptoe_home{
   padding-left: 1em;
 }
 
-.center-button {
-  background-color: #17a2b8;
-}
-
-.system-button {
-  background-color: #ffc107;
+.tiptoe-button {
+  background-color: #007bff;
 }
 
 .delete-button {
