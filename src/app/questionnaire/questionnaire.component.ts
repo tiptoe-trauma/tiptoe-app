@@ -91,8 +91,13 @@ export class QuestionnaireComponent implements OnInit {
     nextCategory(){
         let index = this.categories.indexOf(this.selectedCategory);
         if(index + 1 === this.categories.length){
-            this._router.navigate(['/user']);
-            this.selectedCategory = this.categories[0];
+            if(this._route.snapshot.paramMap.get('type') === 'tiptoe') {
+                this._router.navigate(['/tiptoe']);
+                this.selectedCategory = this.categories[0];
+            } else { 
+                this._router.navigate(['/user']);
+                this.selectedCategory = this.categories[0];
+            }
         } else {
             this.selectedCategory = this.categories[index + 1]
         }
