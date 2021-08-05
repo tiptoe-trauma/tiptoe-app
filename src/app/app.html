@@ -3,8 +3,8 @@
     <a href="index.html" class="text-underline-none"><h2 class="navbar-brand">CAFE</h2></a>
     <div class="nav-buttons float-xs-right">
       <a *ngIf="user && user.is_staff" href="/admin/" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
-      <a *ngIf="user" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Questionnaire Management</button></a>
-      <a *ngIf="user" routerLink="/tiptoe"> <button type="button" class="nav-item btn btn-secondary">TIPTOE Management</button></a>
+      <a *ngIf="user" (click)="toCafe()" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Questionnaire Management</button></a>
+      <a *ngIf="user" (click)="toTiptoe()" routerLink="/tiptoe"> <button type="button" class="nav-item btn btn-secondary">TIPTOE Management</button></a>
       <div class="dropdown">
         <button type="button" class="dropbtn nav-item btn btn-secondary">About CAFE</button>
         <div class="dropdown-content">
@@ -35,7 +35,7 @@
         This email will only be used for providing a link back to your questionnaire and never shared with third parties.
         This questionnaire relies on cookies to function and by starting one you consent to their use.
       </p>
-      <div class="startSelect">
+      <div *ngIf="!user" class="startSelect">
         <p>Would you like to create a new quesionnaire or continue a previous one?</p>
         <button class="btn btn-lg btn-light"
                 [class.btn-secondary]="register"
@@ -46,7 +46,7 @@
                 (click)="retrieveQuesionnaire()">
                 Retrieve Previous Quesionnaire</button>
       </div>
-      <form class="form-box" *ngIf="register">
+      <form class="form-box" *ngIf="!user && register">
         <div class="form-group">
           <label for="email">Optional email address for quesionnaire retrieval</label>
           <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email Address" type="email">
@@ -61,11 +61,18 @@
         </div>
       </form>
 
-      <div class="form-box" *ngIf="retrieval">
+      <div class="form-box" *ngIf="!user && retrieval">
         <p>If you have previously started or completed a questionnaire and would like to retrieve it please enter your registered email address and an email will be sent with a link to your questionnaire.</p>
         <input [(ngModel)]="email2" placeholder="Email Address" type="email">
         <button class="btn btn-primary" (click)="retrieveUser()">Send Email</button>
       </div>
+    </div>
+    <div *ngIf="user && !finished" class="registration">
+        <p>Would you like to use CAFE or TIPTOE?</p>
+        <div class="form-group new-buttons">
+          <a (click)="toCafe()" routerLink="/user"><button class="btn btn-primary">CAFE</button></a>
+          <a (click)="toTiptoe()" routerLink="/tiptoe"><button class="btn btn-primary">TIPTOE</button></a>
+        </div>
     </div>
     <router-outlet *ngIf="user || about"></router-outlet>
 </div>

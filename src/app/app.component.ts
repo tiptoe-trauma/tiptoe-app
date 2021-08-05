@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {UserService} from './services/user.service';
 import { ErrorService } from './errors';
 import {User} from './user';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 declare function ga(a, b, c): void;
 
@@ -13,6 +14,7 @@ declare function ga(a, b, c): void;
     templateUrl: './app.html',
     styleUrls: ['./app.css'],
 })
+
 
 
 export class AppComponent implements OnInit {
@@ -27,8 +29,14 @@ export class AppComponent implements OnInit {
 
   constructor(private _userService: UserService,
               private _router: Router,
+              private _location: Location,
               private _errorService: ErrorService,
               private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics){ }
+
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    location.reload()
+  }
 
   setUser(user: User){
     this.about = false;
@@ -39,7 +47,6 @@ export class AppComponent implements OnInit {
     } else {
       this.angulartics2GoogleAnalytics.setUsername(user.username);
       ga('set', 'userId', user.username);
-      this.finished = true;
       this.user = user;
       // if(this.user.active_organization){
       //   this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
@@ -49,6 +56,14 @@ export class AppComponent implements OnInit {
 
   toAbout() {
     this.about = true;
+  }
+
+  toCafe() {
+    this.finished= true;
+  }
+
+  toTiptoe() {
+    this.finished= true;
   }
 
   newQuestionnaire() {
@@ -73,6 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   loginNavigation(questionnaire_type: string) {
+    this.finished = true;
     if (questionnaire_type == 'tiptoe') {
       this._router.navigate(['tiptoe']);
     } else {
@@ -92,6 +108,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
+    if(this._location.path() == "/" || this._location.path() == "") {
+      this.finished = false;
+    } else {
+      this.finished = true;
+    }
     let url = new URL(window.location.href);
     if(url.searchParams.has('token')){
       let login_token = url.searchParams.get('token');

@@ -12,7 +12,7 @@
       <div id="figure" class="figure">
         <div class="answers">
           <div class="floater">
-            <app-org-figures #figures [category]="category.name"></app-org-figures>
+            <app-org-figures *ngIf="showResultComparison"  #figures [category]="category.name"></app-org-figures>
           </div>
           <div class="placeholder"></div>
         </div>
