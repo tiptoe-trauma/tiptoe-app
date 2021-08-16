@@ -8,7 +8,7 @@ RUN rm -rf node_modules && \
     npm ci
 
 COPY . .
-RUN npx ng build --prod
+RUN npx ng build --configuration production
 
 FROM nginxinc/nginx-unprivileged as cafe-static
 
