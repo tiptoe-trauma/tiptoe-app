@@ -34,7 +34,7 @@
         </ng-template>
         <ng-template [ngIf]="question.q_type === 'combo'">
           <fieldset class="form-group">
-              <select class="form-control"
+              <select class="form-select"
                   (blur)="setValue()"
                   [(ngModel)]="answer.text"
                   name="combo">
