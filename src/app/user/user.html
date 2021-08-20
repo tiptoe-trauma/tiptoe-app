@@ -1,4 +1,4 @@
-<div *ngIf="user">
+<div *ngIf="user" id="user_home">
   <div class="user_management">
     <div>
       <small>This email address can be used to retrieve this questionnaire at a later time or on another computer</small>
@@ -22,14 +22,18 @@
               <th>Delete</th>
           </tr>
       </thead>
-      <tr *ngFor="let organization of organizations">
-          <td><button type="button"
-              class="btn"
-              [class.btn-info]="organization.org_type == 'center'"
-              [class.btn-warning]="organization.org_type == 'system'"
-              (click)="setActiveOrganization(organization)">{{organization.name}}</button></td>
-          <td><button type="button" class="btn btn-danger"(click)="deleteOrganization(organization)">Delete</button></td>
-      </tr>
+      <ng-container *ngFor="let organization of organizations">
+          <tr *ngIf="organization.org_type == 'center' || organization.org_type == 'system'">
+              <td><button type="button"
+                  class="btn"
+                  [class.btn-info]="organization.org_type == 'center'"
+                  [class.center-button]="organization.org_type == 'center'"
+                  [class.btn-warning]="organization.org_type == 'system'"
+                  [class.system-button]="organization.org_type == 'system'"
+                  (click)="setActiveOrganization(organization)">{{organization.name}}</button></td>
+              <td><button type="button" class="btn btn-danger delete-button"(click)="deleteOrganization(organization)">Delete</button></td>
+          </tr>
+      </ng-container>
   </table>
   <br/>
 

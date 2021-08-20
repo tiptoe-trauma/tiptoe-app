@@ -6,9 +6,9 @@
           <a href="/admin/questionnaire/question/{{question.id}}/change/" target="_blank"><img src="/images/admin_icon.png"></a>
       </div>
       <span class="server_state">
-        <img *ngIf="server_state == 'success'" class="icon" src="/images/success.png">
-        <img *ngIf="server_state == 'loading'" class="icon" src="/images/loading.gif">
-        <img *ngIf="server_state == 'failure'" class="icon" src="/images/failure.png">
+        <img *ngIf="server_state == 'success'" alt="success" class="icon" src="/images/success.png">
+        <img *ngIf="server_state == 'loading'" alt="loading" class="icon" src="/images/loading.gif">
+        <img *ngIf="server_state == 'failure'" alt="failure" class="icon" src="/images/failure.png">
       </span>
     </div>
     <p class="card-text" [innerHTML]="question.text | define"></p>
@@ -28,12 +28,13 @@
                    placeholder="Number"
                    (blur)="setValue()"
                    [(ngModel)]="answer.integer"
-                   name="number">
+                   name="number"
+                   min=0>
           </fieldset>
         </ng-template>
         <ng-template [ngIf]="question.q_type === 'combo'">
           <fieldset class="form-group">
-              <select class="form-control"
+              <select class="form-select"
                   (blur)="setValue()"
                   [(ngModel)]="answer.text"
                   name="combo">

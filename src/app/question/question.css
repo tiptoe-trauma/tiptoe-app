@@ -26,3 +26,15 @@ div.card {
 .question {
   flex-direction: column;
 }
+
+input[type=checkbox] {
+  margin-right: 5px;
+}
+
+input[type=radio] {
+  margin-right: 3px;
+}
+
+.radio-inline {
+  margin-right: 5px;
+}

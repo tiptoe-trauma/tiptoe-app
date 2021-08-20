@@ -25,6 +25,7 @@
 
 .bar {
   width: 15px;
+  overflow: hidden;
 }
 
 .bar:hover {
@@ -38,4 +39,17 @@ h4 {
 
 .hover {
   text-transform: capitalize;
+}
+
+.marked{
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+  line-height: 100%;
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }

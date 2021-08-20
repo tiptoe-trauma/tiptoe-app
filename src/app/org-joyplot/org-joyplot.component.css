@@ -2,8 +2,10 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  width: fit-content;
 }
 
 .info_box {
-  width: 400px;
+  /* width: 400px; */
+  width: 90%;
 }

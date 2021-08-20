@@ -1,0 +1,83 @@
+.explanation {
+    font-size: .9em;
+    margin-bottom: .5em;
+}
+
+.fig_label{
+    font-weight: bold;
+    width: 60%;
+    margin-bottom: 0;
+}
+
+.percentage{
+    width: 50%;
+    height: 20px;
+    outline: 1px solid;
+    margin-bottom: 1em;
+    margin-left: .25em;
+}
+
+.percent_yes{
+    float: left;
+    background: #8FECA5;
+    height: 100%;
+    text-align: left;
+}
+
+.percent_no{
+    float: right;
+    background: #f98b95;
+    height: 100%
+}
+
+.marked{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    line-height: 100%;
+    text-shadow: 
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.percentile{
+    margin-bottom: .5em;
+}
+
+.hoverable .hover_text{
+    visibility: hidden;
+}
+
+.hoverable:hover .hover_text{
+    visibility: visible;
+    width: 120px;
+    top: 100%;
+    left: 50%;
+    /* margin-left: -60px; */
+}
+
+/* .hoverable .hover_text:before{
+    content: " ";
+    position: absolute; 
+    bottom: 100%;  /* At the top of the tooltip */
+    /* left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+} */
+
+.barbox {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: fit-content;
+    padding-bottom: 2em;
+}
+
+.tick {
+    display: inline-block;
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpUrlEncodingCodec } from '@angular/common/http';
 
 export interface TMDStats {
   organization: string;
@@ -54,5 +54,26 @@ export class OrganogramService {
                                 {Authorization: 'Token ' + token })
                    };
     return this.http.get<TPMStats>('/api/tpm_stats', options);
+  }
+
+  public getPercentStats(token: string, category: string){
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token })
+                  };
+    return this.http.get('/api/percent_yes/' + category, options);
+  }
+
+  public getAnswers(token: string, category: string){
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token })
+                  };
+    
+    return this.http.get('api/answers/' + category, options);
+  }
+
+  public runQuery(token: string, query: string){
+    let options = {}
+    let encodedQuery = encodeURIComponent(query);
+    return this.http.get('api/run_query/?query=' + encodedQuery, options);
   }
 }

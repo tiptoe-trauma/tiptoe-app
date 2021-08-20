@@ -1,0 +1,53 @@
+<div id="data-feedback" class="container tag">
+    <form (ngSubmit)="onSubmit(myQuery.value)" id="sparqlQuery">
+        <label for="query">Query:</label>
+        <textarea #myQuery class="long-text" name="query" id="query" value="activeQuery">PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX oostt: <http://purl.obolibrary.org/obo/OOSTT_></textarea>
+        <input type="submit" value="Run Query">
+    </form>
+    <label for="output">Output:</label>
+    <div class="long-text" id="output" name="output">
+        <table><tbody id="data-table"></tbody></table>
+    </div>
+    <button type="button" id="dl-button" (click)="saveFile()">Download JSON</button>
+
+    <br><br>
+    <button type="button" id="show-queries-button" (click)="showQueries()">View Pre-written Queries</button>
+    <div id="prewritten">
+        <table>
+            <tbody id ="query-chart">
+                <tr>
+                    <th scope="col">Query</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Select</th>
+                </tr>
+                <tr>
+                    <td scope="row">SELECT (count(?s) as ?orgs) ?degree_type <br>
+                        WHERE &#123; <br> 
+                        ?s obo:IAO_0000136 ?tpm . <br>
+                        ?s rdf:type ?degree_type . <br>
+                        FILTER regex(str(?tpm), "trauma_program_manager", "i") &#125; <br>
+                        GROUP BY ?degree_type
+                    </td>
+                    <td>Find the number of organizations with TPMs of each education level</td>
+                    <td><button class="select_button" (click)="selectPrewrittenQuery(0)">Select</button></td>
+                </tr>
+                <tr>
+                    <td scope="row">SELECT (count(?tmd) as ?ctmd) ?type ?label <br>
+                        WHERE &#123; <br>
+                        	?tmd obo:RO_0000087 ?x . <br>
+                            ?x rdf:type ?type . <br>
+                            ?type rdfs:label ?label . <br>
+                            FILTER regex(str(?tmd), "trauma_medical_director", "i") <br>
+                            FILTER (?type IN (oostt:00000089, oostt:00000090, oostt:00000091, obo:OMRSE_00000130)) &#125; <br>
+                        GROUP BY ?type ?label
+                    </td>
+                    <td>Find the number of organizations with a TMD of each specialty</td>
+                    <td><button class="select_button" (click)="selectPrewrittenQuery(1)">Select</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

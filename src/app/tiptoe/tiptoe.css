@@ -1,0 +1,16 @@
+.tiptoe_management {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#tiptoe_home{
+  padding-left: 1em;
+}
+
+.tiptoe-button {
+  background-color: #007bff;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}

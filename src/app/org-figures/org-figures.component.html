@@ -1,0 +1,26 @@
+<h3>Result Comparison</h3>
+<p class="explanation">An asterisk marks your answer.</p>
+<div class="result" *ngFor="let result of results">
+    <p *ngIf="result.special_text; else generic_text" class="fig_label">{{result.special_text}}</p>
+    <ng-template #generic_text><p class="fig_label">{{result.questionnaire}}s with {{result.keyword}}</p></ng-template>
+    <div *ngIf="result.percent_yes" class="hoverable">
+        <div class="hover_text">{{result.percent_yes}}%</div>
+        <div class="percentage">
+            <div class="percent_yes hoverable" [style.width.%]="result.percent_yes"><p *ngIf="result.active_answer" class='marked'>*</p></div>
+            <div class="percent_no hoverable" [style.width.%]="100-result.percent_yes"><p *ngIf="result.active_answer===false && result.percent_yes != 100" class='marked'>*</p></div>
+        </div>
+    </div>
+    <div *ngIf="result.numbers" class="percentile">
+        <div class="hoverable">
+            <div class="hover_text">{{result.ordinal}} percentile</div>
+            <div *ngFor="let item of [].constructor(10); let i=index" class='tick'>
+                <span *ngIf="(i+1)==result.percentile_mark; else generic_mark" class="active_percentile" style="color:red">♦</span>
+                <ng-template #generic_mark><span>♦</span></ng-template>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="result.options" class="barbox">
+        <app-compact-bar [data]="result.options" ></app-compact-bar>
+    </div>
+    {{answerCallAdjust()}}
+</div>

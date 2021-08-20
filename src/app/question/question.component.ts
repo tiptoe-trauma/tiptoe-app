@@ -74,6 +74,13 @@ export class QuestionComponent implements OnInit {
               error => console.error(error)
           );
         }
+        if(this.visibility.includes('false')){
+            this.answer.integer = null;
+            this.answer.options = [];
+            this.answer.text = null;
+            this.answer.yesno = null;
+            this.setValue();
+        }
     }
 
     setUser(user: User){
@@ -117,6 +124,10 @@ export class QuestionComponent implements OnInit {
 
     setValue(){
         if(this.user){
+            // Prevent negative numbers from being submitted for int type questions
+            if (this.question.q_type == 'int' && this.answer.integer < 0) {
+                this.answer.integer = null;
+            }
             let action = 'changedAnswer';
             if(this.old_answer === undefined){
                 action = 'newAnswer';

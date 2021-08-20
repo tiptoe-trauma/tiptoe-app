@@ -12,8 +12,10 @@
       </div>
   </div>
   <my-category *ngIf="selectedCategory" (changed)="updatePercent()" [category]="selectedCategory"></my-category>
-  <label class="btn btn-primary col-sm-2"
-      (click)="nextCategory()">
-      Next
-  </label>
+  <div class='next'>
+    <label class="btn btn-primary col-sm-2"
+        (click)="nextCategory()">
+        Next
+    </label>
+  </div>
 </div>

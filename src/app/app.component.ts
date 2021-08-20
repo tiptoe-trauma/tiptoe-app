@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from './services/user.service';
 import { ErrorService } from './errors';
 import {User} from './user';
-import { Angulartics2GoogleAnalytics } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Router, ActivatedRoute } from '@angular/router';
 
 declare function ga(a, b, c): void;
@@ -20,8 +20,10 @@ export class AppComponent implements OnInit {
   public register: boolean = false;
   public retrieval: boolean = false;
   public email: string;
+  public org_name: string;
   public email2: string;
   public finished: boolean = false;
+  public about: boolean = false;
 
   constructor(private _userService: UserService,
               private _router: Router,
@@ -29,6 +31,7 @@ export class AppComponent implements OnInit {
               private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics){ }
 
   setUser(user: User){
+    this.about = false;
     if(user == undefined){
       this.angulartics2GoogleAnalytics.setUsername(undefined);
       this.finished = false;
@@ -38,10 +41,14 @@ export class AppComponent implements OnInit {
       ga('set', 'userId', user.username);
       this.finished = true;
       this.user = user;
-      if(this.user.active_organization){
-        this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
-      }
+      // if(this.user.active_organization){
+      //   this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
+      // }
     }
+  }
+
+  toAbout() {
+    this.about = true;
   }
 
   newQuestionnaire() {
@@ -66,7 +73,7 @@ export class AppComponent implements OnInit {
   }
 
   startQuestionnaire(questionnaire_type: string){
-    this._userService.createUser(questionnaire_type, this.email).subscribe(
+    this._userService.createUser(questionnaire_type, this.email, this.org_name).subscribe(
       user => user.subscribe(
         user => this.setUser(user)),
       error => this._errorService.announceError('Start Error',

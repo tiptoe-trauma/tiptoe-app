@@ -36,3 +36,7 @@
 .definition:hover .definitiontext {
     visibility: visible;
 }
+
+#adjuster {
+    display: none;
+}

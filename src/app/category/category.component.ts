@@ -1,4 +1,4 @@
-import {Component, OnChanges, Input, EventEmitter, OnInit, ViewChild} from '@angular/core';
+import {Component, OnChanges, Input, EventEmitter, OnInit, ViewChild, AfterViewChecked} from '@angular/core';
 import {Question, Category} from '../question';
 import {QuestionService} from '../services/question.service';
 import {UserService} from '../services/user.service';
@@ -6,6 +6,7 @@ import {ErrorService} from '../errors';
 import { OrganogramService } from '../services/organogram.service';
 import { OrgPoliciesComponent } from '../org-policies/org-policies.component';
 import { OrgJoyplotComponent } from '../org-joyplot/org-joyplot.component';
+import { OrgFigureComponent} from '../org-figures/org-figures.component';
 
 @Component({
     selector: 'my-category',
@@ -14,17 +15,21 @@ import { OrgJoyplotComponent } from '../org-joyplot/org-joyplot.component';
     outputs: ['changed']
 })
 
-export class CategoryComponent implements OnChanges, OnInit {
+export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
     @Input() category: Category;
-    @ViewChild('policies') policy_component: OrgPoliciesComponent;
-    @ViewChild('joyplot') joyplot_component: OrgJoyplotComponent;
+    @ViewChild('policies', { static: false }) policy_component: OrgPoliciesComponent;
+    @ViewChild('joyplot', { static: false }) joyplot_component: OrgJoyplotComponent;
+    @ViewChild('figures', { static: true }) figure_component: OrgFigureComponent;
+
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
-    public our_tmd_stats: object;
 
+    public our_tmd_stats: object;
     public our_tpm_stats: object;
 
     public policies: boolean = false;
+
+    public figures: boolean = false;
 
     constructor(private _questionService: QuestionService,
                 private _errorService: ErrorService,
@@ -36,6 +41,7 @@ export class CategoryComponent implements OnChanges, OnInit {
     }
 
     ngOnChanges() {
+      this.figures = false;
       this.our_tmd_stats = null;
       this.our_tpm_stats = null;
       this.policies = false;
@@ -46,6 +52,10 @@ export class CategoryComponent implements OnChanges, OnInit {
                        this.questions = [];
                        this._errorService.announceError('Server Error', 'Unable to load questions. Please try reloading the page, if this problem persists use the contact information at the bottom', 2);
                      });
+    }
+
+    ngAfterViewChecked() {
+      this.showBlankMessage();
     }
 
     translate_speciality(long_form: string){
@@ -63,6 +73,11 @@ export class CategoryComponent implements OnChanges, OnInit {
 
     updateComparisons(){
       let token = this._userService.token;
+      this.figures = true;
+      if(this.figure_component){
+        this.figure_component.getResponses(this.category.name);
+      }
+
       if(this.category.name == "Trauma Medical Director"){
         this._organogramService.getTMDStats(token).subscribe(
           res => this.our_tmd_stats = res
@@ -100,5 +115,23 @@ export class CategoryComponent implements OnChanges, OnInit {
                 }
             }
         }
+    }
+
+    showBlankMessage(){
+      // visibility refers to if the no-question message should be visible or not
+      let visibility = true;
+      var questions = document.querySelectorAll('.card') ;
+      for(let i=0; i < questions.length; i++){
+        if (questions[i]['style']['display'] == 'flex'){
+          visibility = false;
+        }
+      }
+
+      var message = document.querySelector('#no_questions');
+      if (visibility){
+        message['style']['display'] = 'flex';
+      } else {
+        message['style']['display'] = 'none';
+      }
     }
 }

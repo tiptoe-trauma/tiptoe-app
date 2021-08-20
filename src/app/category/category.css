@@ -11,23 +11,39 @@
   padding: 1em;
 }
 
-.floater {
-  position: fixed;
-  right: 5px;
-}
-
-.placeholder {
-  width: 536px;
-}
-
 .category {
-  display: flex;
   max-width: 1200px;
 }
 
 .questions {
-  display: flex;
-  flex-direction: column;
+  width: 60%;
+  float: left;
+}
+
+.sidebar {
+  float: right;
+  width: 40%;
+  padding-left: 2em;
+}
+
+#sidebarContent {
+  position: fixed;
+  transform: translateY(0px);
+}
+
+.figure {
+  padding-top: 0px;
+  transition: 0.5s;
+  display: block;
+}
+
+.floater {
+  right: 5px;
+  width: max-content;
+}
+
+.placeholder {
+  width: 536px;
 }
 
 .org_box {
@@ -36,4 +52,14 @@
 
 .info_box {
   width: 500px;
+}
+
+#no_questions{
+  display: none;
+  margin-bottom: 2em;
+  padding: 1em;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
 }
