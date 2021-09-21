@@ -85,6 +85,8 @@ export class UserComponent implements OnInit {
             this._router.navigate(['/questionnaire/system']);
         } else if(this.user.active_organization.org_type == 'tiptoe'){
             this._router.navigate(['/questionnaire/tiptoe']);
+        } else if(this.user.active_organization.org_type == 'tos'){
+            this._router.navigate(['/questionnaire/tos']);
         } else {
             console.log("incorrect questionnaire type");
         }

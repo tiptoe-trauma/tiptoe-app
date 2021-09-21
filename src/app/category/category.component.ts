@@ -33,6 +33,7 @@ export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
     public figures: boolean = false;
 
     public showResultComparison: boolean = false;
+    public showTosText: boolean = false;
 
     constructor(private _questionService: QuestionService,
                 private _errorService: ErrorService,
@@ -44,13 +45,20 @@ export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
       this.updateComparisons();
       if(this._location.path() === "/questionnaire/tiptoe") {
         this.showResultComparison = false;
+        this.showTosText = false;
+      } else if (this._location.path() === "/questionnaire/tos") {
+        this.showResultComparison = false;
+        this.showTosText = true;
       } else {
         this.showResultComparison= true;
+        this.showTosText = false;
       }
     }
 
     ngOnChanges() {
       if(this._location.path() === "/questionnaire/tiptoe") {
+        this.showResultComparison = false;
+      } else if (this._location.path() === "/questionnaire/tos") {
         this.showResultComparison = false;
       } else {
         this.showResultComparison= true;

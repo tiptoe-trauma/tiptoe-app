@@ -33,6 +33,7 @@ import { OrgTpmSvgComponent } from './org-tpm-svg/org-tpm-svg.component';
 import { OrgFigureComponent } from './org-figures/org-figures.component';
 import { DataFeedbackComponent } from './data-feedback/data-feedback.component';
 import { TiptoeComponent } from './tiptoe/tiptoe.component';
+import { TosComponent } from './tos/tos.component';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { TiptoeComponent } from './tiptoe/tiptoe.component';
     OrgTpmSvgComponent,
     OrgFigureComponent,
     TiptoeComponent,
+    TosComponent,
   ],
   providers: [
     appRoutingProviders,

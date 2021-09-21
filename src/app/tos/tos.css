@@ -1,0 +1,16 @@
+.tos_management {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#tos_home{
+  padding-left: 1em;
+}
+
+.tos-button {
+  background-color: #007bff;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}

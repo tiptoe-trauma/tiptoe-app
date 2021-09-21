@@ -66,6 +66,10 @@ export class AppComponent implements OnInit {
     this.finished= true;
   }
 
+  toTos() {
+    this.finished= true;
+  }
+
   newQuestionnaire() {
     this.register = true;
     this.retrieval = false;
@@ -91,6 +95,8 @@ export class AppComponent implements OnInit {
     this.finished = true;
     if (questionnaire_type == 'tiptoe') {
       this._router.navigate(['tiptoe']);
+    } else if (questionnaire_type == 'tos') {
+      this._router.navigate(['tos']);
     } else {
       this._router.navigate(['user']);
     }

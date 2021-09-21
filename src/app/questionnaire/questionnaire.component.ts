@@ -1,4 +1,3 @@
-
 import {switchMap} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../services/question.service';
@@ -7,6 +6,7 @@ import {Category, Completion} from '../question';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import {ErrorService} from '../errors';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -21,14 +21,22 @@ export class QuestionnaireComponent implements OnInit {
     public groups: string[];
     public completion: Completion[];
 
+    public showCategories: boolean = false;
+
     constructor(private _questionService: QuestionService,
                 private _userService: UserService,
                 private _route: ActivatedRoute,
                 private _angulartics2: Angulartics2,
                 private _errorService: ErrorService,
+                private _location: Location,
                 private _router: Router){ }
 
     ngOnInit(){
+        if (this._location.path() === "/questionnaire/tos") {
+            this.showCategories = false;
+        } else {
+            this.showCategories = true;
+        }
         this._route.paramMap.pipe(
             switchMap((params: ParamMap) =>
                this._questionService.getCategories(params.get('type'))))
@@ -44,6 +52,15 @@ export class QuestionnaireComponent implements OnInit {
              });
         this.updatePercent();
     }
+
+    ngOnChanges() {
+      if (this._location.path() === "/questionnaire/tos") {
+        this.showCategories = false;
+      } else {
+        this.showCategories = true;
+      }
+    }
+
 
     category_group(group: string){
         let cats: Category[] = [];
@@ -93,6 +110,9 @@ export class QuestionnaireComponent implements OnInit {
         if(index + 1 === this.categories.length){
             if(this._route.snapshot.paramMap.get('type') === 'tiptoe') {
                 this._router.navigate(['/tiptoe']);
+                this.selectedCategory = this.categories[0];
+            } else if (this._route.snapshot.paramMap.get('type') === 'tos') {
+                this._router.navigate(['/tos']);
                 this.selectedCategory = this.categories[0];
             } else { 
                 this._router.navigate(['/user']);

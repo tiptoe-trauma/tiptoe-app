@@ -2,12 +2,14 @@
   <div class="categories container-fluid">
       <div class="list-group col-sm-4 col-xs-12" *ngFor="let group of groups">
           <h2 class="text-capitalize">{{group}}</h2>
-          <div class="list-group-item"
-              *ngFor="let category of category_group(group)"
-              [class.list-group-item-info]="category.name === selectedCategory.name"
-              (click)="onSelect(category)">
-            <div class="progress-bar" [style.width]="percent(category)"></div>
-            <label class="category-name">{{category.name}}</label>
+          <div *ngIf="showCategories">
+            <div class="list-group-item"
+                *ngFor="let category of category_group(group)"
+                [class.list-group-item-info]="category.name === selectedCategory.name"
+                (click)="onSelect(category)">
+              <div class="progress-bar" [style.width]="percent(category)"></div>
+              <label class="category-name">{{category.name}}</label>
+            </div>
           </div>
       </div>
   </div>

@@ -5,6 +5,7 @@
       <a *ngIf="user && user.is_staff" href="/admin/" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
       <a *ngIf="user" (click)="toCafe()" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Questionnaire Management</button></a>
       <a *ngIf="user" (click)="toTiptoe()" routerLink="/tiptoe"> <button type="button" class="nav-item btn btn-secondary">TIPTOE Management</button></a>
+      <a *ngIf="user" (click)="toTos()" routerLink="/tos"> <button type="button" class="nav-item btn btn-secondary">TOS Management</button></a>
       <div class="dropdown">
         <button type="button" class="dropbtn nav-item btn btn-secondary">About CAFE</button>
         <div class="dropdown-content">
@@ -53,11 +54,12 @@
           <label for="orgName">Optional name of organization</label>
           <input class="form-control" name="orgName" [(ngModel)]="org_name" placeholder="Organization Name" type="text">
         </div>
-        <p>There are three separate questionnaires, please select the one you would like to start with and you will be taken to it.</p>
+        <p>There are four separate questionnaires, please select the one you would like to start with and you will be taken to it.</p>
         <div class="form-group new-buttons">
           <button class="btn btn-primary" (click)="startQuestionnaire('center')">CAFE - Trauma Center</button>
           <button class="btn btn-primary" (click)="startQuestionnaire('system')">CAFE - Trauma System</button>
           <button class="btn btn-primary" (click)="startQuestionnaire('tiptoe')">TIPTOE</button>
+          <button class="btn btn-primary" (click)="startQuestionnaire('tos')">TOS</button>
         </div>
       </form>
 
@@ -68,10 +70,11 @@
       </div>
     </div>
     <div *ngIf="user && !finished" class="registration">
-        <p>Would you like to use CAFE or TIPTOE?</p>
+        <p>Would you like to use CAFE, TIPTOE, or TOS?</p>
         <div class="form-group new-buttons">
           <a (click)="toCafe()" routerLink="/user"><button class="btn btn-primary">CAFE</button></a>
           <a (click)="toTiptoe()" routerLink="/tiptoe"><button class="btn btn-primary">TIPTOE</button></a>
+          <a (click)="toTos()" routerLink="/tos"><button class="btn btn-primary">TOS</button></a>
         </div>
     </div>
     <router-outlet *ngIf="user || about"></router-outlet>
