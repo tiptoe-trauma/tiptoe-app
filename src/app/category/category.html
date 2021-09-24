@@ -1,6 +1,6 @@
 <div class="category">
   <div *ngIf="category" class="questions">
-      <h3 *ngIf!="showTosText">{{category.name}}</h3>
+      <h3 *ngIf="!showTosText">{{category.name}}</h3>
       <h5 *ngIf="showTosText">Please answer the following questions for your trauma center.</h5>
       <div class="question" *ngFor="let question of questions">
         <my-question (changed)="checkDeps($event)" [question]="question"></my-question>
@@ -8,12 +8,12 @@
     <div id="no_questions">Due to your previous responses, this section has no questions.</div>
   </div>
 
-  <div id="rightColumn" class="sidebar">
+  <div id="rightColumn" class="sidebar" [hidden]="!showResultComparison">
     <div id="sidebarContent">
       <div id="figure" class="figure">
         <div class="answers">
           <div class="floater">
-            <app-org-figures *ngIf="showResultComparison"  #figures [category]="category.name"></app-org-figures>
+            <app-org-figures #figures [category]="category.name"></app-org-figures>
           </div>
           <div class="placeholder"></div>
         </div>

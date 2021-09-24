@@ -121,12 +121,12 @@ export class AppComponent implements OnInit {
     }
     let url = new URL(window.location.href);
     if(url.searchParams.has('token')){
+      this.finished = false;
       let login_token = url.searchParams.get('token');
       this._userService.tokenLogin(login_token).subscribe(
         res => res.subscribe(
           user => this.setUser(user)),
         error => {
-          this.finished = false;
           this._errorService.announceError('Login Error',
                                            error['error'],
                                            3);
