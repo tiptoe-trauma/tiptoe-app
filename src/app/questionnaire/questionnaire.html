@@ -13,11 +13,27 @@
           </div>
       </div>
   </div>
-  <my-category *ngIf="selectedCategory" (changed)="updatePercent()" [category]="selectedCategory"></my-category>
-  <div class='next'>
+  <my-category *ngIf="showCategory" (changed)="updatePercent()" [category]="selectedCategory"></my-category>
+  <div *ngIf="showCategory"  class='next'>
     <label class="btn btn-primary col-sm-2"
         (click)="nextCategory()">
-        Next
+        {{ isDone ? 'Done' : 'Next' }} 
     </label>
+  </div>
+  <div *ngIf="!showCategory"> 
+    <table class="center">
+      <tr>
+        <td valign="middle"><img class="logo" alt="CAFE logo cup" src="/images/cafe_logo_cup.png"></td>
+        <td valign="middle"><h3>Thank you!</h3> </td>
+      </tr>
+    </table>
+    <p>{{surveyEndText}}</p>
+    <div class="form-group new-buttons">
+      <a (click)="toCafe()" routerLink="/user"><button class="btn btn-primary">CAFE</button></a>
+      <a (click)="toTiptoe()" routerLink="/tiptoe"><button class="btn btn-primary">TIPTOE</button></a>
+      <a (click)="toTos()" routerLink="/tos"><button class="btn btn-primary">TOS</button></a>
+    </div>
+
+
   </div>
 </div>

@@ -55,3 +55,31 @@ label.btn-primary {
 .next {
   width: 30em;
 }
+
+.new-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header {
+  justify-content: center;
+  height: 100px;
+}
+
+
+.header h3 {
+  position: relative;
+}
+
+.message {
+  position: relative;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+.logo {
+  width: 100px;
+}
