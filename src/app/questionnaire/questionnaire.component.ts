@@ -1,4 +1,3 @@
-
 import {switchMap} from 'rxjs/operators';
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../services/question.service';
@@ -7,6 +6,7 @@ import {Category, Completion} from '../question';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import {ErrorService} from '../errors';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -20,15 +20,34 @@ export class QuestionnaireComponent implements OnInit {
     public selectedCategory: Category;
     public groups: string[];
     public completion: Completion[];
+    public isDone: boolean = false;
+    public showCategories: boolean = false;
+    public showCategory: boolean = true;
+    public surveyEndText: string;
 
     constructor(private _questionService: QuestionService,
                 private _userService: UserService,
                 private _route: ActivatedRoute,
                 private _angulartics2: Angulartics2,
                 private _errorService: ErrorService,
+                private _location: Location,
                 private _router: Router){ }
 
     ngOnInit(){
+        if (this._location.path() === "/questionnaire/tos") {
+            this.showCategories = false;
+            this.isDone = true;
+        } else {
+            this.showCategories = true;
+            this.isDone = false;
+        }
+        if (this._location.path() === "/questionnaire/tos") {
+          this.surveyEndText = "Thank you for completing the TOS questionnaire.";
+        } else if (this._location.path() === "/questionnaire/tiptoe") {
+          this.surveyEndText = "Thank you for completing the TIPTOE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
+        } else {
+          this.surveyEndText = "Thank you for completing the CAFE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
+        }
         this._route.paramMap.pipe(
             switchMap((params: ParamMap) =>
                this._questionService.getCategories(params.get('type'))))
@@ -43,7 +62,30 @@ export class QuestionnaireComponent implements OnInit {
                              contact information at the bottom`, 2);
              });
         this.updatePercent();
+        let index = this.categories.indexOf(this.selectedCategory);
     }
+
+    ngOnChanges() {
+      if (this._location.path() === "/questionnaire/tos") {
+        this.showCategories = false;
+      } else {
+        this.showCategories = true;
+      }
+      if (this._location.path() === "/questionnaire/tos") {
+        this.surveyEndText = "Thank you for completing the TOS questionnaire.";
+      } else if (this._location.path() === "/questionnaire/tiptoe") {
+        this.surveyEndText = "Thank you for completing the TIPTOE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
+      } else {
+        this.surveyEndText = "Thank you for completing the CAFE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
+      }
+      let index = this.categories.indexOf(this.selectedCategory);
+      if(index + 1 === this.categories.length){
+        this.isDone = true;
+      } else {
+        this.isDone = false;
+      }
+    }
+
 
     category_group(group: string){
         let cats: Category[] = [];
@@ -91,12 +133,25 @@ export class QuestionnaireComponent implements OnInit {
     nextCategory(){
         let index = this.categories.indexOf(this.selectedCategory);
         if(index + 1 === this.categories.length){
-            this._router.navigate(['/user']);
-            this.selectedCategory = this.categories[0];
+            if(this._route.snapshot.paramMap.get('type') === 'tiptoe') {
+                this.selectedCategory = this.categories[0];
+                this.showCategory = false;
+            } else if (this._route.snapshot.paramMap.get('type') === 'tos') {
+                this.selectedCategory = this.categories[0];
+                this.showCategory = false;
+            } else { 
+                this.selectedCategory = this.categories[0];
+                this.showCategory = false;
+            }
         } else {
             this.selectedCategory = this.categories[index + 1]
         }
         document.body.scrollTop = document.documentElement.scrollTop = 0;
+        if(index + 1 === this.categories.length){
+          this.isDone = true;
+        } else {
+          this.isDone = false;
+        }
     }
 
     onSelect(category: Category) {
@@ -109,5 +164,12 @@ export class QuestionnaireComponent implements OnInit {
             }
         });
         this.selectedCategory = category;
+        let index = this.categories.indexOf(this.selectedCategory);
+        if(index + 1 === this.categories.length){
+          this.isDone = true;
+        } else {
+          this.isDone = false;
+        }
+        this.showCategory = true;
     }
 }

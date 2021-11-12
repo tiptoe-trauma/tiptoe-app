@@ -6,6 +6,8 @@ import {TrainingMaterialComponent} from './info/training-material/training-mater
 import {UseCasesComponent} from './info/use-cases/use-cases.component';
 import {QuestionnaireComponent} from './questionnaire/questionnaire.component';
 import {UserComponent} from './user/user.component';
+import {TiptoeComponent} from './tiptoe/tiptoe.component';
+import {TosComponent} from './tos/tos.component';
 // Until useAsDefault: true has returned
 import {NotFoundComponent} from './notfound.component';
 import { DataFeedbackComponent } from './data-feedback/data-feedback.component';
@@ -18,6 +20,8 @@ const appRoutes: Routes = [
     // {path: 'uses', component: UseCasesComponent},
     {path: 'sparql', component: DataFeedbackComponent},
     {path: 'user', component: UserComponent},
+    {path: 'tiptoe', component: TiptoeComponent},
+    {path: 'tos', component: TosComponent},
     {path: 'questionnaire/:type', component: QuestionnaireComponent},
     // Until useAsDefault: true has returned
     {path: '**', component: NotFoundComponent}

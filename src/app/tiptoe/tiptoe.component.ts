@@ -5,12 +5,12 @@ import {Router} from '@angular/router';
 import {ErrorService} from '../errors';
 
 @Component ({
-  selector: 'my-user',
-  templateUrl: './user.html',
-  styleUrls: ['./user.css'],
+  selector: 'my-tiptoe',
+  templateUrl: './tiptoe.html',
+  styleUrls: ['./tiptoe.css'],
 })
 
-export class UserComponent implements OnInit {
+export class TiptoeComponent implements OnInit {
   public user: User;
   public organizations: Organization[];
   public new_org_name: string;
@@ -36,6 +36,7 @@ export class UserComponent implements OnInit {
             this._userService.userChanged.subscribe(
                 user => this.user = user
             )
+            this.new_org_type = 'tiptoe'
         }
     }
 

@@ -7,6 +7,7 @@ import { OrganogramService } from '../services/organogram.service';
 import { OrgPoliciesComponent } from '../org-policies/org-policies.component';
 import { OrgJoyplotComponent } from '../org-joyplot/org-joyplot.component';
 import { OrgFigureComponent} from '../org-figures/org-figures.component';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'my-category',
@@ -31,16 +32,40 @@ export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
 
     public figures: boolean = false;
 
+    public showResultComparison: boolean = false;
+    public showTosText: boolean = false;
+
     constructor(private _questionService: QuestionService,
                 private _errorService: ErrorService,
+                private _location: Location,
                 private _organogramService: OrganogramService,
                 private _userService: UserService){ }
 
     ngOnInit() {
       this.updateComparisons();
+      if(this._location.path() === "/questionnaire/tiptoe") {
+        this.showResultComparison = false;
+        this.showTosText = false;
+      } else if (this._location.path() === "/questionnaire/tos") {
+        this.showResultComparison = false;
+        this.showTosText = true;
+      } else {
+        this.showResultComparison= true;
+        this.showTosText = false;
+      }
     }
 
     ngOnChanges() {
+      if(this._location.path() === "/questionnaire/tiptoe") {
+        this.showResultComparison = false;
+        this.showTosText = false;
+      } else if (this._location.path() === "/questionnaire/tos") {
+        this.showResultComparison = false;
+        this.showTosText = true;
+      } else {
+        this.showResultComparison= true;
+        this.showTosText = false;
+      }
       this.figures = false;
       this.our_tmd_stats = null;
       this.our_tpm_stats = null;
