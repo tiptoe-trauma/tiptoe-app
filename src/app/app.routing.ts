@@ -11,10 +11,6 @@ import {NotFoundComponent} from './notfound.component';
 import { DataFeedbackComponent } from './data-feedback/data-feedback.component';
 
 const appRoutes: Routes = [
-    {path: 'partners', component: PartnersComponent},
-    {path: 'publications', component: PublicationsComponent},
-    {path: 'resources', component: ResourcesComponent},
-    {path: 'training', component: TrainingMaterialComponent},
     // {path: 'uses', component: UseCasesComponent},
     {path: 'sparql', component: DataFeedbackComponent},
     {path: 'tiptoe', component: TiptoeComponent},

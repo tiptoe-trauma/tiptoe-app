@@ -4,16 +4,6 @@
       <div class="dropdown"><div class="nav-item"><a *ngIf="user && user.is_staff" class="nav-link" href="/admin/" target="_">Admin</a></div></div>
       <div class="dropdown"><div class="nav-item"><a *ngIf="user" (click)="toTiptoe()" class="nav-link" routerLink="/tiptoe">Home</a></div></div>
       <div class="dropdown">
-        <div class="nav-item">About TIPTOE <sup>&#8964;</sup></div>
-        <div class="dropdown-content">
-          <a (click)="toAbout()" routerLink="/partners" routerLinkActive="active">Partners</a>
-          <a (click)="toAbout()" routerLink="/publications" routerLinkActive="active">Publications</a>
-          <a (click)="toAbout()" routerLink="/resources" routerLinkActive="active">Resources</a>
-          <a (click)="toAbout()" routerLink="/training" routerLinkActive="active">Training</a>
-          <!-- <a (click)="toAbout()" routerLink="/uses" routerLinkActive="active">Use Cases</a> -->
-        </div>
-      </div>
-      <div class="dropdown">
         <div class="nav-item">Researcher Tools <sup>&#8964;</sup></div>
         <div class="dropdown-content">
           <a (click)="toAbout()" routerLink="/sparql" routerLinkActive="active">SPARQL query</a>
