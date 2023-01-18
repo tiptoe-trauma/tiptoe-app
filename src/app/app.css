@@ -30,6 +30,7 @@ div.main {
 
 .navbar-brand {
     height: 50px;
+    padding-top: 0px;
 }
 
 h2.navbar-brand {
@@ -43,11 +44,11 @@ h2.navbar-brand {
 }
 
 nav.bg-faded {
-    background-color: #FFA640;
+    background-color: #f0eeef;
 }
 
 button.btn-secondary {
-    background-color: #FF8900;
+    background-color: #008dce;
     border-color: #A65900;
     color: white;
 }
@@ -78,7 +79,7 @@ button.btn-secondary {
 }
 
 .dropdown-content a:hover{
-  background-color: #FFA640;
+  background-color: #9d2235;
 }
 
 .dropdown:hover .dropdown-content{
@@ -111,4 +112,21 @@ button.btn-secondary {
 .new-buttons {
   display: flex;
   justify-content: space-evenly;
+}
+
+.nav-item {
+  color: #9d2235;
+  padding: 5px 20px 10px 0;
+  font-family: "Fira Sans",sans-serif;
+  font-weight: 600
+}
+
+.nav-link {
+  color: #9d2235;
+  font-family: "Fira Sans",sans-serif;
+  font-weight: 600
+}
+
+a:hover {
+  text-decoration: underline;
 }

@@ -15,6 +15,8 @@ export class TiptoeComponent implements OnInit {
   public organizations: Organization[];
   public new_org_name: string;
   public new_org_type: string;
+  public new_email: string;
+  public invite_to_org: Organization;
 
   constructor(private _userService: UserService,
               private _errorService: ErrorService,
@@ -37,6 +39,7 @@ export class TiptoeComponent implements OnInit {
                 user => this.user = user
             )
             this.new_org_type = 'tiptoe'
+            this.invite_to_org = null 
         }
     }
 
@@ -48,24 +51,23 @@ export class TiptoeComponent implements OnInit {
       );
     }
 
-    createOrganization(){
-        if(!this.new_org_name || this.new_org_type === undefined){
-            this._errorService.announceError('Organization Creation Error', 'Must enter organization name', 2);
+    compareFn( optionOne, optionTwo ) : boolean {
+      return optionOne === optionTwo;
+    }
+
+    sendInvitation(){
+        if(!this.invite_to_org || this.invite_to_org == null){
+            this._errorService.announceError('Invitation error.', 'Must enter organization name.', 2);
             return;
         }
-        if(this.new_org_type === undefined){
-            this._errorService.announceError('Organization Creation Error', 'Must enter organization type', 2);
+        if(!this.new_email === undefined || this.new_email == null){
+            this._errorService.announceError('Invitation Error', 'Must enter email address.', 2);
             return;
         }
-        let new_org: Organization = {'name': this.new_org_name,
-                                     'org_type': this.new_org_type,
-                                     'users': [this.user.id]};
-        this._userService.createOrganization(new_org).subscribe(
-            org => {
-                this.organizations.push(org);
-                this.new_org_name = '';
-                this.new_org_type = '';
-            }
+        console.log('invite test')
+        this._userService.sendInvitation(this.new_email, this.invite_to_org).subscribe(
+          res => console.log("Invite sent."),
+          error => console.log("organization setting error")
         );
     }
 

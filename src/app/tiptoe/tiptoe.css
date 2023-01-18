@@ -11,6 +11,24 @@
   background-color: #007bff;
 }
 
+.tqip-button {
+  background-color: #17a2b8;
+}
+
+.tqip-text {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 .delete-button {
   background-color: #dc3545;
+}
+
+.registration {
+  text-align: left;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

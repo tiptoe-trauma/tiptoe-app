@@ -1,24 +1,33 @@
 <div *ngIf="user" id="tiptoe_home">
+  <div class="registration">
+    <p>
+      Welcome to the TIPTOE questionnaire. 
+      This questionnaire  collects non-identifying information about your institution and stores the data in the TIPTOE data repository.
+      <b>The non-identifying data in the TIPTOE data repository will be used as comparative data for future users and it will be accessible for use by public health researchers.</b>
+      No registration is required. If you would like to access your answers or complete the questionnaire at a later time please provide an email address below.
+      This email will only be used for providing a link back to your questionnaire and never shared with third parties.
+      This questionnaire relies on cookies to function and by starting one you consent to their use.
+      Please direct feedback about the questionnaire to the email address at the bottom of the page.
+    </p>
+  </div>
   <div class="tiptoe_management">
     <div>
       <small>This email address can be used to retrieve this questionnaire at a later time or on another computer</small>
       <br/>
-      <input [(ngModel)]="user.email" type="email" placeholder="Email Address"><button type="button" class="btn btn-light" (click)="updateEmail()">Update Email</button>
+      <input [(ngModel)]="user.email" type="email" placeholder="Email Address"><button type="button" class="btn btn-secondary" (click)="updateEmail()">Update Email</button>
     </div>
     <button type="button" class="btn btn-danger logout" (click)="logout()">Logout</button>
   </div>
   <br/>
   <br/>
-  <p>Here you can manage or create TIPTOE questionnaires for trauma centers.</p>
-  <p>You can continue or review answers to the questionnaire for any of your existing organizations by clicking the name.</p>
-  <p>Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.</p>
-  <p>Please direct feedback about the questionnaire to the email address at the bottom of the page.</p>
   <br/>
   <h3>Your TIPTOE Questionnaires</h3>
+  <p>You can continue or review answers to the questionnaire for any of your existing organizations by clicking the name.<br>  Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.</p>
   <table class="table">
       <thead>
           <tr>
               <th>Go to questionnaire</th>
+              <th>Submit TQIP</th>
               <th>Delete</th>
           </tr>
       </thead>
@@ -29,21 +38,24 @@
                   [class.btn-primary]="organization.org_type == 'tiptoe'"
                   [class.tiptoe-button]="organization.org_type == 'tiptoe'"
                   (click)="setActiveOrganization(organization)">{{organization.name}}</button></td>
+              <td><button type="button" class="btn btn-info tqip-button"><a class="tqip-text" href="https://uams.app.box.com/f/ffcb38b254cf4868bdb5cd7460cba11c" target="_blank" rel="noopener noreferrer">Submit TQIP</a></button></td>
               <td><button type="button" class="btn btn-danger delete-button"(click)="deleteOrganization(organization)">Delete</button></td>
           </tr>
       </ng-container>
   </table>
   <br/>
 
-    <h4>Create Questionnaire for new Organization</h4>
+    <h4>Invite to Organization</h4>
     <form class="form-inline">
-      <input style="width:300px" type="text" name="newOrgName" [(ngModel)]="new_org_name" placeholder="New Organization Name">
-      <label style="padding:.25em" class="radio-inline alert-primary">
-        <input type="radio" name="inlineRadioOptions" id="tiptoe_radio"
-        (click)="new_org_type='tiptoe'"
-        checked
-        name="radioc">TIPTOE
-      </label>
-      <button type="button" class="btn btn-success" (click)="createOrganization()">Create Organization</button>
+      Invite:
+      <input style="width:300px" type="text" name="newEmail" [(ngModel)]="new_email" placeholder="Email Address">
+      To:
+      <select [(ngModel)]="invite_to_org" id="orgSelect" style="height:30px">
+        <option value=null disabled>--- Select Organization ---</option>
+        <option *ngFor="let organization of organizations" [ngValue]="organization" >
+          {{organization.name}}
+        </option>
+      </select>
+      <button type="button" class="btn btn-success" (click)="sendInvitation()">Send Invite</button>
     </form>
 </div>

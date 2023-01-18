@@ -114,7 +114,7 @@ export class DataFeedbackComponent implements OnInit{
         console.log('x')
         console.log(this.results);
         let data = new Blob([JSON.stringify(this.results)], {type: "application/json"});
-        saveAs(data, 'cafe-response.json');
+        saveAs(data, 'tiptoe-response.json');
     }
 
 }

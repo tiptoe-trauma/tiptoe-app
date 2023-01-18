@@ -1,5 +1,5 @@
 TAG=$(shell git rev-parse --short HEAD)
-IMAGE_NAME=jrutecht/cafe-app
+IMAGE_NAME=jmwhorton/tiptoe-app
 .PHONY: push clean
 
 default: build

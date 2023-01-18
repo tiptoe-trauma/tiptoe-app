@@ -10,7 +10,7 @@ declare function ga(a, b, c): void;
 
 
 @Component({
-    selector: 'cafe-app',
+    selector: 'tiptoe-app',
     templateUrl: './app.html',
     styleUrls: ['./app.css'],
 })
@@ -48,6 +48,10 @@ export class AppComponent implements OnInit {
       this.angulartics2GoogleAnalytics.setUsername(user.username);
       ga('set', 'userId', user.username);
       this.user = user;
+      this.finished = true;
+      if(this._location.path() == "/" || this._location.path() == "" || this._location.path().includes("?")) {
+        this._router.navigate(['tiptoe']);
+      }
       // if(this.user.active_organization){
       //   this._router.navigate(['questionnaire', this.user.active_organization.org_type]);
       // }
@@ -64,10 +68,7 @@ export class AppComponent implements OnInit {
 
   toTiptoe() {
     this.finished= true;
-  }
-
-  toTos() {
-    this.finished= true;
+    this.about = false;
   }
 
   newQuestionnaire() {
@@ -93,13 +94,7 @@ export class AppComponent implements OnInit {
 
   loginNavigation(questionnaire_type: string) {
     this.finished = true;
-    if (questionnaire_type == 'tiptoe') {
-      this._router.navigate(['tiptoe']);
-    } else if (questionnaire_type == 'tos') {
-      this._router.navigate(['tos']);
-    } else {
-      this._router.navigate(['user']);
-    }
+    this._router.navigate(['tiptoe']);
   }
 
   startQuestionnaire(questionnaire_type: string){

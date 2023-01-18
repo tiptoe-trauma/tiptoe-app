@@ -1,11 +1,11 @@
 {
   "/api": {
-    "target": "https://dev.cafe-trauma.com",
+    "target": "http://localhost:49201",
     "secure": false,
     "changeOrigin": true
   },
   "/rdf": {
-    "target": "https://dev.cafe-trauma.com",
+    "target": "http://localhost:49201",
     "secure": false,
     "changeOrigin": true
   }

@@ -10,7 +10,7 @@ RUN rm -rf node_modules && \
 COPY . .
 RUN npx ng build --configuration production
 
-FROM nginxinc/nginx-unprivileged as cafe-static
+FROM nginxinc/nginx-unprivileged as tiptoe-static
 
 COPY --from=angular-builder /code/dist/ /www
 COPY --from=angular-builder /code/src/images /www/images

@@ -34,16 +34,9 @@ export class QuestionnaireComponent implements OnInit {
                 private _router: Router){ }
 
     ngOnInit(){
-        if (this._location.path() === "/questionnaire/tos") {
-            this.showCategories = false;
-            this.isDone = true;
-        } else {
-            this.showCategories = true;
-            this.isDone = false;
-        }
-        if (this._location.path() === "/questionnaire/tos") {
-          this.surveyEndText = "Thank you for completing the TOS questionnaire.";
-        } else if (this._location.path() === "/questionnaire/tiptoe") {
+        this.showCategories = true;
+        this.isDone = false;
+        if (this._location.path() === "/questionnaire/tiptoe") {
           this.surveyEndText = "Thank you for completing the TIPTOE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
         } else {
           this.surveyEndText = "Thank you for completing the CAFE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
@@ -66,14 +59,8 @@ export class QuestionnaireComponent implements OnInit {
     }
 
     ngOnChanges() {
-      if (this._location.path() === "/questionnaire/tos") {
-        this.showCategories = false;
-      } else {
-        this.showCategories = true;
-      }
-      if (this._location.path() === "/questionnaire/tos") {
-        this.surveyEndText = "Thank you for completing the TOS questionnaire.";
-      } else if (this._location.path() === "/questionnaire/tiptoe") {
+      this.showCategories = true;
+      if (this._location.path() === "/questionnaire/tiptoe") {
         this.surveyEndText = "Thank you for completing the TIPTOE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
       } else {
         this.surveyEndText = "Thank you for completing the CAFE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
@@ -134,9 +121,6 @@ export class QuestionnaireComponent implements OnInit {
         let index = this.categories.indexOf(this.selectedCategory);
         if(index + 1 === this.categories.length){
             if(this._route.snapshot.paramMap.get('type') === 'tiptoe') {
-                this.selectedCategory = this.categories[0];
-                this.showCategory = false;
-            } else if (this._route.snapshot.paramMap.get('type') === 'tos') {
                 this.selectedCategory = this.categories[0];
                 this.showCategory = false;
             } else { 

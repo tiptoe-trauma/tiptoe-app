@@ -5,7 +5,7 @@
     "pathRewrite": {"^/api" : ""}
   },
   "/rdf": {
-    "target": "https://dev.cafe-trauma.com",
+    "target": "https://dev.tiptoe-trauma.com",
     "secure": false,
     "changeOrigin": true
   }

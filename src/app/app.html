@@ -1,13 +1,10 @@
 <nav class="navbar navbar-light bg-faded">
-    <img class="navbar-brand" alt="CAFE logo" src="/images/cafe_logo_white.png">
-    <a href="index.html" class="text-underline-none"><h2 class="navbar-brand">CAFE</h2></a>
+    <a href="index.html"><img class="navbar-brand" alt="TIPTOE logo" src="/images/tiptoe_logo_white.png"></a>
     <div class="nav-buttons float-xs-right">
-      <a *ngIf="user && user.is_staff" href="/admin/" target="_"> <button type="button" class="nav-item btn btn-secondary">Admin</button></a>
-      <a *ngIf="user" (click)="toCafe()" routerLink="/user"> <button type="button" class="nav-item btn btn-secondary">Questionnaire Management</button></a>
-      <a *ngIf="user" (click)="toTiptoe()" routerLink="/tiptoe"> <button type="button" class="nav-item btn btn-secondary">TIPTOE Management</button></a>
-      <a *ngIf="user" (click)="toTos()" routerLink="/tos"> <button type="button" class="nav-item btn btn-secondary">TOS Management</button></a>
+      <div class="dropdown"><div class="nav-item"><a *ngIf="user && user.is_staff" class="nav-link" href="/admin/" target="_">Admin</a></div></div>
+      <div class="dropdown"><div class="nav-item"><a *ngIf="user" (click)="toTiptoe()" class="nav-link" routerLink="/tiptoe">Home</a></div></div>
       <div class="dropdown">
-        <button type="button" class="dropbtn nav-item btn btn-secondary">About CAFE</button>
+        <div class="nav-item">About TIPTOE <sup>&#8964;</sup></div>
         <div class="dropdown-content">
           <a (click)="toAbout()" routerLink="/partners" routerLinkActive="active">Partners</a>
           <a (click)="toAbout()" routerLink="/publications" routerLinkActive="active">Publications</a>
@@ -17,7 +14,7 @@
         </div>
       </div>
       <div class="dropdown">
-        <button type="button" class="dropbtn nav-item btn btn-secondary">Researcher Tools</button>
+        <div class="nav-item">Researcher Tools <sup>&#8964;</sup></div>
         <div class="dropdown-content">
           <a (click)="toAbout()" routerLink="/sparql" routerLinkActive="active">SPARQL query</a>
         </div>
@@ -26,56 +23,22 @@
 </nav>
 <div class="main">
     <app-error id='errorBar'></app-error>
-    <div class="registration" *ngIf="!finished && !about">
-      <img class="logo" alt="CAFE logo" src="/images/cafe_logo.png">
+    <div class="registration" *ngIf="!user && !about">
       <p>
-        Welcome to the CAFE questionnaire. This questionnaire assists in pre-assessment of Trauma Centers and Trauma Systems for ACS verification.
-        It  collects non-identifying information about your institution and stores the data in the CAFE data repository.
-        <b>The non-identifying data in the CAFE data repository will be used as comparative data for future users and it will be accessible for use by public health researchers.</b>
+        Welcome to the TIPTOE questionnaire. 
+        This questionnaire  collects non-identifying information about your institution and stores the data in the TIPTOE data repository.
+        <b>The non-identifying data in the TIPTOE data repository will be used as comparative data for future users and it will be accessible for use by public health researchers.</b>
         No registration is required. If you would like to access your answers or complete the questionnaire at a later time please provide an email address below.
         This email will only be used for providing a link back to your questionnaire and never shared with third parties.
         This questionnaire relies on cookies to function and by starting one you consent to their use.
+        Please direct feedback about the questionnaire to the email address at the bottom of the page.
       </p>
-      <div *ngIf="!user" class="startSelect">
-        <p>Would you like to create a new quesionnaire or continue a previous one?</p>
-        <button class="btn btn-lg btn-light"
-                [class.btn-secondary]="register"
-                (click)="newQuestionnaire()">
-                New Questionnaire</button>
-        <button class="btn btn-lg btn-light"
-                [class.btn-secondary]="retrieval"
-                (click)="retrieveQuesionnaire()">
-                Retrieve Previous Quesionnaire</button>
-      </div>
-      <form class="form-box" *ngIf="!user && register">
-        <div class="form-group">
-          <label for="email">Optional email address for quesionnaire retrieval</label>
-          <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email Address" type="email">
-          <label for="orgName">Optional name of organization</label>
-          <input class="form-control" name="orgName" [(ngModel)]="org_name" placeholder="Organization Name" type="text">
-        </div>
-        <p>There are four separate questionnaires, please select the one you would like to start with and you will be taken to it.</p>
-        <div class="form-group new-buttons">
-          <button class="btn btn-primary" (click)="startQuestionnaire('center')">CAFE - Trauma Center</button>
-          <button class="btn btn-primary" (click)="startQuestionnaire('system')">CAFE - Trauma System</button>
-          <button class="btn btn-primary" (click)="startQuestionnaire('tiptoe')">TIPTOE</button>
-          <button class="btn btn-primary" (click)="startQuestionnaire('tos')">TOS</button>
-        </div>
-      </form>
 
-      <div class="form-box" *ngIf="!user && retrieval">
-        <p>If you have previously started or completed a questionnaire and would like to retrieve it please enter your registered email address and an email will be sent with a link to your questionnaire.</p>
+      <div class="form-box" *ngIf="!user">
+        <p>Please enter your email address to login. More instructions here.</p>
         <input [(ngModel)]="email2" placeholder="Email Address" type="email">
         <button class="btn btn-primary" (click)="retrieveUser()">Send Email</button>
       </div>
-    </div>
-    <div *ngIf="user && !finished" class="registration">
-        <p>Would you like to use CAFE, TIPTOE, or TOS?</p>
-        <div class="form-group new-buttons">
-          <a (click)="toCafe()" routerLink="/user"><button class="btn btn-primary">CAFE</button></a>
-          <a (click)="toTiptoe()" routerLink="/tiptoe"><button class="btn btn-primary">TIPTOE</button></a>
-          <a (click)="toTos()" routerLink="/tos"><button class="btn btn-primary">TOS</button></a>
-        </div>
     </div>
     <router-outlet *ngIf="user || about"></router-outlet>
 </div>

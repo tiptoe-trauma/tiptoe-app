@@ -9,14 +9,14 @@ PREFIX oostt: <http://purl.obolibrary.org/obo/OOSTT_></textarea>
     </form>
     <label for="output">Output:</label>
     <div class="long-text" id="output" name="output">
-        <table><tbody id="data-table"></tbody></table>
+        <table class="feedback-table"><tbody id="data-table"></tbody></table>
     </div>
     <button type="button" id="dl-button" (click)="saveFile()">Download JSON</button>
 
     <br><br>
     <button type="button" id="show-queries-button" (click)="showQueries()">View Pre-written Queries</button>
     <div id="prewritten">
-        <table>
+        <table class="feedback-table">
             <tbody id ="query-chart">
                 <tr>
                     <th scope="col">Query</th>

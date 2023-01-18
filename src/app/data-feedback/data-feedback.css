@@ -44,13 +44,13 @@ button {
     resize: both;
 }
 
-table{
+.feedback-table{
     border: 1px solid black;
     table-layout: fixed;
     width: 100%;
 }
 
-::ng-deep th{
+th{
     border: 1px solid black;
     background: #a5a5a5;
     padding: .1em .5em;
@@ -59,7 +59,7 @@ table{
     /* max-width: 30px; */
 }
 
-::ng-deep td{
+td{
     border: 1px solid black;
     padding: .1em .5em;
     word-wrap: break-word;

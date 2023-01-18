@@ -30,6 +30,7 @@ class AnswerResult {
 
 export class OrgFigureComponent implements OnInit {
     public results: AnswerResult[];
+    public sampleSize: string;
     @Input() public category: string;
 
     constructor(private _organogramService: OrganogramService,
@@ -45,6 +46,8 @@ export class OrgFigureComponent implements OnInit {
         let web_category = category.split(' ').join('_');
         this._organogramService.getAnswers(token, web_category)
             .subscribe(answers => this.fillResults(answers));
+        this._organogramService.getSampleSize(token)
+            .subscribe(sample_size => this.sampleSize = sample_size.toString());
     }
 
     fillResults(answers: Object){

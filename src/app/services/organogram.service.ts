@@ -71,6 +71,14 @@ export class OrganogramService {
     return this.http.get('api/answers/' + category, options);
   }
 
+  public getSampleSize(token: string){
+    let options = { headers: new HttpHeaders(
+                                {Authorization: 'Token ' + token })
+                  };
+
+    return this.http.get('api/sample_size/', options);
+  }
+
   public runQuery(token: string, query: string){
     let options = {}
     let encodedQuery = encodeURIComponent(query);

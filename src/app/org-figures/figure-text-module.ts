@@ -33,7 +33,7 @@ export function get_figure_text(q_id: number){
     }  else if(q_id==74){
         return 'Involvement of physical therapists, occupational therapists, and rehabilitation specialists';
     }  else if(q_id==37){
-        return 'Official Physician Liasisons';
+        return 'Official Physician Liaisons';
     } else
     // Regional Trauma Infrastructure
     if(q_id==148){
@@ -73,7 +73,7 @@ export function get_figure_text(q_id: number){
     } else if(q_id==153){
         return 'Percentile ranks for number of emergency physicians who are board-eligible in emergency medicine';
     } else if(q_id==108){
-        return 'Percentile ranks for number of physicisnas that are both board-certified in emergence medicine and current in ATLS';
+        return 'Percentile ranks for number of physicians that are both board-certified in emergence medicine and current in ATLS';
     } else if(q_id==109){
         return 'Percentage of organizations with presence of a board certified emergency physician at all times';
     } else if(q_id==111){
@@ -242,6 +242,86 @@ export function get_figure_text(q_id: number){
         return 'Available Medical Specialties';
     } else if (q_id==116){
         return 'Available Surgical Specialties';
+    } else if (q_id==1001){
+        return 'Percent of organizations affiliated with a medical school';
+    } else if (q_id==1002){
+        return 'Trauma Center level';
+    } else if (q_id==1005){
+        return 'Percent of organizations that are part of a trauma system';
+    } else if (q_id==1006){
+        return 'Percent of trauma programs with trauma systems in service area';
+    } else if (q_id==1007){
+        return 'Percentile ranks for number of level 1 trauma centers in service area';
+    } else if (q_id==1008){
+        return 'Percentile ranks for number of level 2 trauma centers in service area';
+    } else if (q_id==1004){
+        return 'Official Physician Liaisons';
+    } else if (q_id==1009){
+        return 'Percent of programs with hospital staff participating in government planning and development of a trauma system';
+    } else if (q_id==1003){
+        return 'Members of Trauma Program Leadership';
+    } else if (q_id==1022){
+        return 'TPM educatino level';
+    } else if (q_id==1023){
+        return 'Percent of TPMs responsible for evaluating nursing care for trauma patients';
+    } else if (q_id==1024){
+        return 'Percent of TPMs responsible for trauna quality improvement and patient safety program coordination';
+    } else if (q_id==1025){
+        return 'Percent of facilities with full time TPM position';
+    } else if (q_id==1026){
+        return 'TPM reports to';
+    } else if (q_id==1027){
+        return 'Percent of facilities with full time trauma registrar position';
+    } else if (q_id==1017){
+        return 'TMD reports to...';
+    } else if (q_id==1018){
+        return 'Percent of TMDs who lead trauma QI and patient safety program';
+    } else if (q_id==1019){
+        return 'Percent of TMDs with authority to contribute to TPM performance evaluation';
+    } else if (q_id==1020){
+        return 'Percent of TMDs with authority to appoint members to the trauma panel';
+    } else if (q_id==1021){
+        return 'Percent of TMDs with authority to remove members from the trauma panel';
+    } else if (q_id==1010){
+        return 'Percent of emergency medical liaisons with verifable 18 hours of trauma-specific education every three years';
+    } else if (q_id==1012){
+        return 'Percent of programs with an emergency department representative participating in the QI program';
+    } else if (q_id==1013){
+        return 'Percentile ranks for number of emergency physicians current in ATLS';
+    } else if (q_id==1014){
+        return 'Percentile ranks for number of emergency physicians who are board-certified in emergency medicine';
+    } else if (q_id==1015){
+        return 'Percentile ranks for number of physicians that are both board-certified in emergence medicine and current in ATLS';
+    } else if (q_id==1016){
+        return 'Percentage of organizations with presence of a board certified emergency physician at all times';
+    } else if (q_id==1033){
+        return 'Percentile ranks for number of trauma fellowship-trained surgeons on trauma panel';
+    } else if (q_id==1028){
+        return 'Percentile ranks for number of general surgeons current in ATLS';
+    } else if (q_id==1040){
+        return 'Percentile ranks for number of board-certified anesthesiologists on trauma panel';
+    } else if (q_id==1041){
+        return 'Percentile ranks for number of CRNAs';
+    } else if (q_id==1032){
+        return 'Percentile ranks for number of trauma surgeons on trauma panel with added certification in critical care';
+    } else if (q_id==1034){
+        return 'Percentile ranks for number of orthopedic surgeons on trauma panel with documented 18 hours of trauma-specific CME';
+    } else if (q_id==1035){
+        return 'Percentile ranks for number of orthopedic surgeons on trauma panel who are board-certified';
+    } else if (q_id==1036){
+        return 'Percentile ranks for number of orthopedic surgeons who, when on-call, take call exclusively for your trauma center';
+    } else if (q_id==1037){
+        return 'Percentile ranks for number of neurosurgeons on trauma panel who are board-certified';
+    } else if (q_id==1038){
+        return 'Percentile ranks for number of neurosurgeons on trauma panel with 18 hours of trauma-specific CME';
+    } else if (q_id==1039){
+        return 'Percentile ranks for number of neurosurgeons who, when on call, take call exclusively';
+    } else if (q_id==1029){
+        return 'Percentile ranks for number of trauma surgeons on trauma panel with documented 18 hours of trauma-specific CME';
+    } else if (q_id==1030){
+        return 'Percentile ranks for number of trauma surgeons who, when on call, take call exclusively for your trauma center';
+    } else if (q_id==1031){
+        return 'Percentile ranks for number of trauma surgeons who provide care for non-trauma emergencies when on call';
     }
     else {
         return null;

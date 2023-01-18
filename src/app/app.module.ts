@@ -7,7 +7,6 @@ import { HttpClientModule }    from '@angular/common/http';
 import { routing,
          appRoutingProviders } from './app.routing';
 import {QuestionnaireComponent} from './questionnaire/questionnaire.component';
-import {UserComponent} from './user/user.component';
 import {PartnersComponent} from './info/partners/partners.component';
 import {PublicationsComponent} from './info/publications/publications.component';
 import {ResourcesComponent} from './info/resources/resources.component';
@@ -33,7 +32,7 @@ import { OrgTpmSvgComponent } from './org-tpm-svg/org-tpm-svg.component';
 import { OrgFigureComponent } from './org-figures/org-figures.component';
 import { DataFeedbackComponent } from './data-feedback/data-feedback.component';
 import { TiptoeComponent } from './tiptoe/tiptoe.component';
-import { TosComponent } from './tos/tos.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -42,7 +41,8 @@ import { TosComponent } from './tos/tos.component';
     FormsModule,
     HttpClientModule,
     routing,
-    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ])
+    Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
+    RouterModule
   ],
   declarations: [
     PartnersComponent,
@@ -54,7 +54,6 @@ import { TosComponent } from './tos/tos.component';
     QuestionComponent,
     CategoryComponent,
     QuestionnaireComponent,
-    UserComponent,
     NotFoundComponent,
     AppComponent,
     DefinitionPipe,
@@ -66,7 +65,6 @@ import { TosComponent } from './tos/tos.component';
     OrgTpmSvgComponent,
     OrgFigureComponent,
     TiptoeComponent,
-    TosComponent,
   ],
   providers: [
     appRoutingProviders,

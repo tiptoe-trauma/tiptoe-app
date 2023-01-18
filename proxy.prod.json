@@ -1,11 +1,11 @@
 {
   "/api": {
-    "target": "https://app.cafe-trauma.com",
+    "target": "https://app.tiptoe-trauma.com",
     "secure": false,
     "changeOrigin": true
   },
   "/rdf": {
-    "target": "https://app.cafe-trauma.com",
+    "target": "https://app.tiptoe-trauma.com",
     "secure": false,
     "changeOrigin": true
   }
