@@ -4,6 +4,7 @@ import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
 import {ErrorService} from '../errors';
 
+declare var $:any;
 @Component ({
   selector: 'my-tiptoe',
   templateUrl: './tiptoe.html',
@@ -16,6 +17,7 @@ export class TiptoeComponent implements OnInit {
   public new_org_name: string;
   public new_org_type: string;
   public new_email: string;
+  public invite_message: string;
   public invite_to_org: Organization;
 
   constructor(private _userService: UserService,
@@ -40,6 +42,7 @@ export class TiptoeComponent implements OnInit {
             )
             this.new_org_type = 'tiptoe'
             this.invite_to_org = null 
+            this.invite_message = "You have been requested to complete the TIPTOE (Trauma Institutional Priorities and Teams for Outcome Efficacy) questionnaire for your trauma center.  Please use the link below to login and access the questionnaire."
         }
     }
 
@@ -64,10 +67,16 @@ export class TiptoeComponent implements OnInit {
             this._errorService.announceError('Invitation Error', 'Must enter email address.', 2);
             return;
         }
-        console.log('invite test')
-        this._userService.sendInvitation(this.new_email, this.invite_to_org).subscribe(
-          res => console.log("Invite sent."),
-          error => console.log("organization setting error")
+        this._userService.sendInvitation(this.new_email, this.invite_to_org, this.invite_message).subscribe(
+          res => {console.log("Invite sent.");
+                  this._errorService.announceError('Email Sent',
+                                            '',
+                                            0);
+                  },
+          error => {console.log("organization setting error");
+                    this._errorService.announceError('Email update error',
+                                                  error['error'], 3);
+                    }
         );
     }
 

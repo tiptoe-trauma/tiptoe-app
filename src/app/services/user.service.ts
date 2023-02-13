@@ -122,14 +122,12 @@ export class UserService {
 
     private _organizationUrl: string = '/api/organization/';
 
-    sendInvitation(email: string, org: Organization): Observable<void>{
-        console.log('invite test 2')
+    sendInvitation(email: string, org: Organization, message: string): Observable<void>{
         if(this.haveUser()){
             let options = { headers: new HttpHeaders(
                                         {Authorization: 'Token ' + this.token })
                            };
-            console.log('invite test 3')
-            return this.http.post<any>('/api/invite/', [email, org], options);
+            return this.http.post<any>('/api/invite/', [email, org, message], options);
         } else {
             return observableThrowError("Must be logged in to send invitations");
         }

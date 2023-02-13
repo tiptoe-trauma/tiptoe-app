@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 declare function ga(a, b, c): void;
+declare var $:any;
 
 
 @Component({
