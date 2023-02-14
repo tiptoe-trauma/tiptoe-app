@@ -27,7 +27,6 @@
 }
 
 #sidebarContent {
-  position: fixed;
   transform: translateY(0px);
 }
 

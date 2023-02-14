@@ -8,8 +8,12 @@
     <div id="no_questions">Due to your previous responses, this section has no questions.</div>
   </div>
 
-  <div id="rightColumn" class="sidebar" [hidden]="!showResultComparison">
-    <div id="sidebarContent">
+  <div id="rightColumn" class="sidebar"> 
+    <div>
+      <input type="checkbox" id="resultCheckbox" name="resultCheckbox" [(ngModel)]="showResultComparison">
+      <label for="resultCheckbox">&nbsp; Show result comparison</label><br>
+    </div>
+    <div id="sidebarContent" [hidden]="!showResultComparison">
       <div id="figure" class="figure">
         <div class="answers">
           <div class="floater">

@@ -43,23 +43,11 @@ export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
 
     ngOnInit() {
       this.updateComparisons();
-      if(this._location.path() === "/questionnaire/tiptoe") {
-        this.showResultComparison = true;
-        this.showTosText = false;
-      } else {
-        this.showResultComparison= true;
-        this.showTosText = false;
-      }
+      this.showResultComparison = false;
+      this.showTosText = false;
     }
 
     ngOnChanges() {
-      if(this._location.path() === "/questionnaire/tiptoe") {
-        this.showResultComparison = true;
-        this.showTosText = false;
-      } else {
-        this.showResultComparison= true;
-        this.showTosText = false;
-      }
       this.figures = false;
       this.our_tmd_stats = null;
       this.our_tpm_stats = null;
