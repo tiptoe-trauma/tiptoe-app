@@ -3,7 +3,7 @@ import {throwError as observableThrowError, of as observableOf, Observable} from
 
 import {map,  tap } from 'rxjs/operators';
 import {Injectable, EventEmitter} from '@angular/core';
-import {User, Organization} from '../user';
+import {User, Survey, Organization} from '../user';
 import {Question} from '../question';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -63,6 +63,15 @@ export class UserService {
       return this.http.post<User>(this._updateEmailUrl, {email: new_email}, options);
     }
 
+    private _approveOrg: string = '/api/approve/';
+
+    approveOrg(): Observable<Survey> {
+      let options = { headers: new HttpHeaders(
+                                  {Authorization: 'Token ' + this.token })
+                     };
+      return this.http.post<Survey>(this._approveOrg, {approved: true}, options);
+    }
+
     private _retrieveUrl: string = '/api/retrieve_user/';
 
     retrieveUser(email: string) {
@@ -105,7 +114,7 @@ export class UserService {
         return this.user
     }
 
-    setActiveOrganization(org: Organization): Observable<User>{
+    setActiveSurvey(org: Survey): Observable<User>{
         if(this.haveUser()){
             let body = {id: org.id};
             let options = { headers: new HttpHeaders(
@@ -120,10 +129,14 @@ export class UserService {
         }
     }
 
-    private _organizationUrl: string = '/api/organization/';
+    private _surveyUrl: string = '/api/survey/';
+    private _surveyCreate: string = '/api/create_survey/';
+    private _orgUrl: string = '/api/organization/';
 
-    sendInvitation(email: string, org: Organization, message: string): Observable<void>{
+    sendInvitation(email: string, org: number, message: string): Observable<void>{
+        console.log("starting invite")
         if(this.haveUser()){
+          console.log("has user")
             let options = { headers: new HttpHeaders(
                                         {Authorization: 'Token ' + this.token })
                            };
@@ -133,14 +146,25 @@ export class UserService {
         }
     }
 
-    deleteOrganization(org: Organization): Observable<void>{
+    createSurvey(date: string, org: Organization): Observable<Survey>{
+        if(this.haveUser()) {
+            let options = { headers: new HttpHeaders(
+                                         {Authorization: 'Token ' + this.token })
+                           };
+            return this.http.post<any>(this._surveyCreate, [date, org], options);
+        } else {
+            return observableThrowError("Must be logged in to create a survey");
+        }
+    }
+
+    deleteSurvey(org: Survey): Observable<void>{
         if(this.haveUser()){
             let options = { headers: new HttpHeaders(
                                         {Authorization: 'Token ' + this.token })
                            };
-            return this.http.delete(this._organizationUrl + org.id + '/', options).pipe(
+            return this.http.delete(this._surveyUrl + org.id + '/', options).pipe(
                               map( res => {
-                                  this.user.active_organization = null;
+                                  this.user.active_survey= null;
                                   this.setUser(this.user, this.token);
                               }));
         } else {
@@ -154,7 +178,18 @@ export class UserService {
             let options = { headers: new HttpHeaders(
                                         {Authorization: 'Token ' + this.token })
                            };
-            return this.http.get<Organization[]>(this._organizationUrl, options);
+            return this.http.get<Organization[]>(this._orgUrl, options);
+        } else {
+            return observableThrowError("Must be logged in to request organizations");
+        }
+    }
+
+    requestSurveyList(): Observable<Survey[]>{
+        if(this.haveUser()){
+            let options = { headers: new HttpHeaders(
+                                        {Authorization: 'Token ' + this.token })
+                           };
+            return this.http.get<Survey[]>(this._surveyUrl, options);
         } else {
             return observableThrowError("Must be logged in to request organizations");
         }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpUrlEncodingCodec } from '@angular/common/http';
 
 export interface TMDStats {
-  organization: string;
+  survey: string;
   medical_speciality: string;
   reporting: string[];
   trauma_call: boolean;
@@ -15,7 +15,7 @@ export interface TMDStats {
 
 export interface TPMStats {
   continuing_education: boolean;
-  organization: string;
+  survey: string;
   coordinating_quality_improvement: boolean;
   education_level: string;
   evaluating_nursing: boolean;

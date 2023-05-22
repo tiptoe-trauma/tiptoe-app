@@ -13,6 +13,7 @@
 
 .tqip-button {
   background-color: #17a2b8;
+  width: 150px;
 }
 
 .tqip-text {
@@ -36,3 +37,4 @@
 .table {
   max-width: 700px;
 }
+

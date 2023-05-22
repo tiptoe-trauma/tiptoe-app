@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { OrganogramService } from '../services/organogram.service';
 import { UserService } from '../services/user.service';
 import { Bar, BarChart } from '../compact-bar/compact-bar.component';
@@ -28,7 +28,7 @@ class AnswerResult {
     styleUrls: ['./org-figures.component.css']
 })
 
-export class OrgFigureComponent implements OnInit {
+export class OrgFigureComponent implements OnInit, OnChanges {
     public results: AnswerResult[];
     public sampleSize: string;
     @Input() public category: string;
@@ -38,6 +38,10 @@ export class OrgFigureComponent implements OnInit {
 
     ngOnInit() {
         this.getResponses(this.category);
+    }
+
+    ngOnChanges() {
+      this.getResponses(this.category);
     }
 
     public getResponses(category: string){

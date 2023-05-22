@@ -1,8 +1,17 @@
-export interface Organization {
+export interface Survey {
    id?: number;
    name: string;
    org_type: string;
+   approved: boolean
    users: number[];
+}
+
+export interface Organization {
+  id?: number;
+  name: string;
+  org_type: string;
+  users: number[];
+  surveys: Survey[];
 }
 
 export interface User {
@@ -11,5 +20,5 @@ export interface User {
    is_staff: boolean;
    email: string;
    token: string;
-   active_organization: Organization;
+   active_survey: Survey;
 }

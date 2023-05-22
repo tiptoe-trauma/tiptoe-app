@@ -20,27 +20,57 @@
   </div>
   <br/>
   <br/>
-  <br/>
   <div class="registration">
+    <h3>Submit Your TQIP</h3>
+    <p>Use the button below to submit your TQIP. <b>Please submit a new TQIP for every new survey.</b></p>
+    <button type="button" class="btn btn-info tqip-button tqip-text" onclick="window.location.href='https://uams.app.box.com/f/ffcb38b254cf4868bdb5cd7460cba11c';"> Submit TQIP</button>
+    <br/>
     <h3>Your TIPTOE Questionnaires</h3>
-    <p>You can continue or review answers to the questionnaire for any of your existing organizations by clicking the name.<br>  Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.</p>
+    <p>You can continue or review answers to the questionnaire by selecting the Survey Date and clicking Begin.<br>  Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.</p>
     <table class="table">
         <thead>
             <tr>
-                <th>Go to questionnaire</th>
-                <th>Submit TQIP</th>
-                <th>Delete</th>
+                <th>Organization</th>
+                <th></th>
+                <th>Survey Date</th>
+                <th>Complete?</th>
+                <th></th>
             </tr>
         </thead>
-        <ng-container *ngFor="let organization of organizations">
-            <tr *ngIf="organization.org_type== 'tiptoe'">
-                <td><button type="button"
-                    class="btn"
-                    [class.btn-primary]="organization.org_type == 'tiptoe'"
-                    [class.tiptoe-button]="organization.org_type == 'tiptoe'"
-                    (click)="setActiveOrganization(organization)">{{organization.name}}</button></td>
-                <td><button type="button" class="btn btn-info tqip-button tqip-text" onclick="window.location.href='https://uams.app.box.com/f/ffcb38b254cf4868bdb5cd7460cba11c';"> Submit TQIP</button></td>
-                <td><button type="button" class="btn btn-danger delete-button"(click)="deleteOrganization(organization)">Delete</button></td>
+        <ng-container *ngFor="let org of organizations">
+            <tr *ngIf="org.org_type== 'tiptoe'">
+                <td>
+                  <b>{{org.name}}</b>
+                </td>
+                <td><button type="button" class="btn btn-primary tiptoe-button" (click)="setActiveSurvey( org.id)">
+                    Begin Survey 
+                </button>
+                </td>
+                <td><select  id='select{{org.id}}' (init)="updateApproval()" (change)="updateApproval()" > 
+                    <ng-container *ngFor="let survey of surveys; let last = last">
+                      <option *ngIf="survey.organization==org.id"  value={{survey.id}}>
+                        {{survey.date}}
+                        {{last ? updateApproval() : ''}}
+                      </option>
+                    </ng-container>
+                </select>
+                </td>
+                <td *ngIf="approval[org.id]; else notApproved">
+                  yes 
+                  &#10004;
+                </td>
+
+                <ng-template #notApproved>
+                  <td> 
+                    no
+                    &#x2718;
+                  </td>
+                </ng-template>
+                <td><button id='newSurvey{{org.id}}' type="button" (click)="orgForNewSrvy=org" class="btn btn-info tiptoe-button tqip-text" data-bs-toggle="modal"
+                                                                                       data-bs-target="#newModal">
+                    New Survey 
+                </button>
+                </td>
             </tr>
         </ng-container>
     </table>
@@ -53,7 +83,7 @@
         To:
         <select [(ngModel)]="invite_to_org" id="orgSelect" style="height:30px">
           <option value=null disabled>--- Select Organization ---</option>
-          <option *ngFor="let organization of organizations" [ngValue]="organization" >
+          <option *ngFor="let organization of organizations" [ngValue]="organization.id" >
             {{organization.name}}
           </option>
         </select>
@@ -62,7 +92,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Invite Modal -->
 <div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="inviteModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -82,6 +112,31 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" (click)="sendInvitation()" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Survey Modal -->
+<div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newModalLabel">New Survey</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <label for="start">TQIP Date:&nbsp; </label>
+
+              <input type="date" id="start" name="survey-start"
+                     [(ngModel)]="surveyDate">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" (click)="newSurvey()" data-bs-dismiss="modal" class="btn btn-primary">Create</button>
             </div>
         </div>
     </div>

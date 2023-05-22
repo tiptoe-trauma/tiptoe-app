@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {QuestionService} from '../services/question.service';
 import { UserService } from '../services/user.service';
 import {Category, Completion} from '../question';
+import {Survey, User} from '../user';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Angulartics2 } from 'angulartics2';
 import {ErrorService} from '../errors';
@@ -24,6 +25,7 @@ export class QuestionnaireComponent implements OnInit {
     public showCategories: boolean = false;
     public showCategory: boolean = true;
     public surveyEndText: string;
+    public srvy: Survey;
 
     constructor(private _questionService: QuestionService,
                 private _userService: UserService,
@@ -37,7 +39,7 @@ export class QuestionnaireComponent implements OnInit {
         this.showCategories = true;
         this.isDone = false;
         if (this._location.path() === "/questionnaire/tiptoe") {
-          this.surveyEndText = "Thank you for completing the TIPTOE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
+          this.surveyEndText = "";
         } else {
           this.surveyEndText = "Thank you for completing the CAFE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey.";
         }
@@ -72,6 +74,16 @@ export class QuestionnaireComponent implements OnInit {
         this.isDone = false;
       }
     }
+
+  approveOrg() {
+    this._userService.approveOrg().subscribe(
+        srvy => srvy,
+        error => {
+          this._errorService.announceError('Survey Error',
+                                           error['error'],
+                                           3);
+        });
+  }
 
 
     category_group(group: string){

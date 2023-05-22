@@ -1,7 +1,7 @@
 import {Component, OnInit, HostListener} from '@angular/core';
 import {UserService} from './services/user.service';
 import { ErrorService } from './errors';
-import {User} from './user';
+import {User, Survey} from './user';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -23,10 +23,11 @@ export class AppComponent implements OnInit {
   public register: boolean = false;
   public retrieval: boolean = false;
   public email: string;
-  public org_name: string;
+  public srvy_name: string;
   public email2: string;
   public finished: boolean = false;
   public about: boolean = false;
+  public srvy: Survey;
 
   constructor(private _userService: UserService,
               private _router: Router,
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit {
   }
 
   startQuestionnaire(questionnaire_type: string){
-    this._userService.createUser(questionnaire_type, this.email, this.org_name).subscribe(
+    this._userService.createUser(questionnaire_type, this.email, this.srvy_name).subscribe(
       user => user.subscribe(
         user => this.setUser(user)),
       error => this._errorService.announceError('Start Error',

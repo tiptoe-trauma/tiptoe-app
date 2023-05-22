@@ -1,8 +1,10 @@
-import {User, Organization} from '../user';
-import {Component, OnInit} from '@angular/core';
+import {User, Survey, Organization} from '../user';
+import {Component, OnInit, OnChanges, ElementRef, Inject} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
 import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
 import {ErrorService} from '../errors';
+
 
 declare var $:any;
 @Component ({
@@ -11,21 +13,33 @@ declare var $:any;
   styleUrls: ['./tiptoe.css'],
 })
 
-export class TiptoeComponent implements OnInit {
+
+export class TiptoeComponent implements OnInit, OnChanges {
   public user: User;
+  public surveys: Survey[];
   public organizations: Organization[];
-  public new_org_name: string;
+  public surveyDate: string;
+  public new_srvy_name: string;
   public new_org_type: string;
   public new_email: string;
   public invite_message: string;
-  public invite_to_org: Organization;
+  public invite_to_org: number;
+  public approval: { [id: number]: boolean};
+  public orgLoaded: boolean;
+  public srvyLoaded: boolean;
+  public orgForNewSrvy: Organization 
 
-  constructor(private _userService: UserService,
+  constructor(@Inject(DOCUMENT) document: Document,
+              private _userService: UserService,
               private _errorService: ErrorService,
-              private _router: Router){
+              private _router: Router,
+              private elRef: ElementRef){
   }
 
     ngOnInit(){
+        this.orgLoaded = false
+        this.srvyLoaded = false
+        this.approval = {};
         if (!this._userService.haveUser()){
             console.log('no user, navigating to home');
             this._router.navigate(['/']);
@@ -35,7 +49,17 @@ export class TiptoeComponent implements OnInit {
             );
             this.organizations = [];
             this._userService.requestOrganizationList().subscribe(
-                orgs => this.organizations = orgs
+                orgs => {this.organizations = orgs; 
+                         this.orgLoaded = true;
+                         this.updateApproval();
+                        }
+            );
+            this.surveys = [];
+            this._userService.requestSurveyList().subscribe(
+                srvys => {this.surveys = srvys; 
+                          this.srvyLoaded = true;
+                          this.updateApproval();
+                        }
             );
             this._userService.userChanged.subscribe(
                 user => this.user = user
@@ -44,6 +68,11 @@ export class TiptoeComponent implements OnInit {
             this.invite_to_org = null 
             this.invite_message = "You have been requested to complete the TIPTOE (Trauma Institutional Priorities and Teams for Outcome Efficacy) questionnaire for your trauma center.  Please use the link below to login and access the questionnaire."
         }
+
+    }
+
+    ngOnChanges(){
+      this.updateApproval()
     }
 
     updateEmail(){
@@ -53,6 +82,26 @@ export class TiptoeComponent implements OnInit {
                                                   error['error'], 3)
       );
     }
+
+    updateApproval(){
+      if(this.organizations.length > 0 && this.orgLoaded ==true && this.srvyLoaded == true) {
+         for (var org of this.organizations) {
+            if (org.org_type=='tiptoe'){
+              var selectString = 'select' + org.id
+              var inputElement = (<HTMLInputElement>document.getElementById(selectString))
+              if (inputElement) {
+                var surveyId = inputElement.value
+                for (var survey of this.surveys) {
+                  if (survey.id == Number(surveyId)) {
+                    this.approval[org.id] = survey.approved
+                  }
+                }
+              }
+            }
+         }
+      }
+    }
+
 
     compareFn( optionOne, optionTwo ) : boolean {
       return optionOne === optionTwo;
@@ -80,38 +129,73 @@ export class TiptoeComponent implements OnInit {
         );
     }
 
-    deleteOrganization(org: Organization){
-        if(confirm("Are you sure you want to delete: " + org.name) === true){
-            this._userService.deleteOrganization(org).subscribe(
+    newSurvey() {
+        this._userService.createSurvey(this.surveyDate, this.orgForNewSrvy).subscribe(
+            res => {
+              this.surveys.push(res);
+              this._userService.setActiveSurvey(res).subscribe(
+                  user => {
+                      this.user = user;
+                      this.navigateToActiveQuestionnaire();
+                  },
+                  error => console.log("survey setting error")
+              );
+            }
+        );
+    }
+
+    deleteSurvey(srvy: Survey){
+        if(confirm("Are you sure you want to delete: " + srvy.name) === true){
+            this._userService.deleteSurvey(srvy).subscribe(
                 res => {
-                    this.organizations = this.organizations.filter(o => o != org);
+                    this.surveys = this.surveys.filter(o => o != srvy);
                 }
             );
         }
     }
 
     navigateToActiveQuestionnaire(){
-        if(this.user.active_organization.org_type == 'center'){
-            this._router.navigate(['/questionnaire/center']);
-        } else if(this.user.active_organization.org_type == 'system'){
-            this._router.navigate(['/questionnaire/system']);
-        } else if(this.user.active_organization.org_type == 'tiptoe'){
-            this._router.navigate(['/questionnaire/tiptoe']);
-        } else if(this.user.active_organization.org_type == 'tos'){
-            this._router.navigate(['/questionnaire/tos']);
-        } else {
-            console.log("incorrect questionnaire type");
+        this._router.navigate(['/questionnaire/tiptoe']);
+    }
+
+    orgRowIsApproved(id: string){
+        var selectString = 'select' + id
+        var surveyId = (<HTMLInputElement>document.getElementById(selectString)).value
+
+        for (var survey of this.surveys) {
+          if (survey.id == Number (surveyId)) {
+            return survey.approved
+          }
         }
     }
 
-    setActiveOrganization(org: Organization){
-        this._userService.setActiveOrganization(org).subscribe(
-            user => {
-                this.user = user;
-                this.navigateToActiveQuestionnaire();
-            },
-            error => console.log("organization setting error")
-        );
+    setActiveSurvey(id: string){
+        var selectString = 'select' + id
+        var inputElement = (<HTMLInputElement>document.getElementById(selectString))
+        if (inputElement) {
+          var surveyId = inputElement.value
+          var selectedSurvey
+          for (var survey of this.surveys) {
+            if (survey.id == Number(surveyId)) {
+              selectedSurvey = survey
+            }
+
+          }
+          if (selectedSurvey) {
+            this._userService.setActiveSurvey(selectedSurvey).subscribe(
+                user => {
+                    this.user = user;
+                    this.navigateToActiveQuestionnaire();
+                },
+                error => console.log("survey setting error")
+            );
+          } else {
+            var selectButton = 'newSurvey' + id 
+            document.getElementById(selectButton).click();
+
+          }
+        }
+        
     }
 
     logout(){

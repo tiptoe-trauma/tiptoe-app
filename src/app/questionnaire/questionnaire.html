@@ -13,22 +13,23 @@
           </div>
       </div>
   </div>
-  <my-category *ngIf="showCategory" (changed)="updatePercent()" [category]="selectedCategory"></my-category>
-  <div *ngIf="showCategory"  class='next'>
+  <my-category *ngIf="showCategory && selectedCategory.name!='Submit'" (changed)="updatePercent()" [category]="selectedCategory"></my-category>
+  <div *ngIf="showCategory && selectedCategory.name!='Submit'"  class='next'>
     <label class="btn btn-primary col-sm-2"
         (click)="nextCategory()">
         {{ isDone ? 'Done' : 'Next' }} 
     </label>
   </div>
-  <div *ngIf="!showCategory"> 
+  <div *ngIf="selectedCategory.name=='Submit'"> 
     <table class="center">
       <tr>
         <td valign="middle"><h3>Thank you!</h3> </td>
       </tr>
     </table>
-    <p>{{surveyEndText}}</p>
+    <p>Thank you for completing the TIPTOE questionnaire.  If you would like to change any answers, click on the categories above to revisit a section of the survey. <b>Submit</b> results with the button below.</p>
+    <p><b>If you have not already, please be sure to upload the corresponding TQIP.</b></p>
     <div class="form-group new-buttons">
-      <a (click)="toTiptoe()" routerLink="/tiptoe"><button class="btn btn-primary">Finish</button></a>
+      <a (click)="approveOrg()" routerLink="/tiptoe"><button class="btn btn-primary">Submit</button></a>
     </div>
 
 

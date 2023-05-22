@@ -20,7 +20,7 @@ export class CategoryComponent implements OnChanges, OnInit, AfterViewChecked {
     @Input() category: Category;
     @ViewChild('policies', { static: false }) policy_component: OrgPoliciesComponent;
     @ViewChild('joyplot', { static: false }) joyplot_component: OrgJoyplotComponent;
-    @ViewChild('figures', { static: true }) figure_component: OrgFigureComponent;
+    @ViewChild('figures', { static: false}) figure_component: OrgFigureComponent;
 
     public questions: Question[];
     public changed: EventEmitter<any> = new EventEmitter();
