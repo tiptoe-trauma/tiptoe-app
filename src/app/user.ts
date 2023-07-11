@@ -1,7 +1,9 @@
 export interface Survey {
    id?: number;
    name: string;
+   date: string;
    org_type: string;
+   tqip: number;
    approved: boolean
    users: number[];
 }

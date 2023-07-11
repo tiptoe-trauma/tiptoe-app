@@ -1,9 +1,12 @@
 import {User, Survey, Organization} from '../user';
-import {Component, OnInit, OnChanges, ElementRef, Inject} from '@angular/core';
+import {Component, OnInit, OnChanges, ElementRef, Inject, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {UserService} from '../services/user.service';
 import {Router} from '@angular/router';
 import {ErrorService} from '../errors';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
 
 
 declare var $:any;
@@ -25,21 +28,33 @@ export class TiptoeComponent implements OnInit, OnChanges {
   public invite_message: string;
   public invite_to_org: number;
   public approval: { [id: number]: boolean};
+  public approvalTqip: {[id: number]: boolean};
   public orgLoaded: boolean;
   public srvyLoaded: boolean;
-  public orgForNewSrvy: Organization 
+  public orgForNewSrvy: Organization ;
+  public orgForNewTqip: Organization ;
+  public srvyForNewTqip: Survey;
+  public orgId: string;
+  public uploadFile;
+  public location: Location;
+
 
   constructor(@Inject(DOCUMENT) document: Document,
               private _userService: UserService,
               private _errorService: ErrorService,
               private _router: Router,
-              private elRef: ElementRef){
+              private elRef: ElementRef,
+              private http: HttpClient){
   }
 
+
+
     ngOnInit(){
+        this.srvyForNewTqip = null
         this.orgLoaded = false
         this.srvyLoaded = false
         this.approval = {};
+        this.approvalTqip = {};
         if (!this._userService.haveUser()){
             console.log('no user, navigating to home');
             this._router.navigate(['/']);
@@ -75,6 +90,10 @@ export class TiptoeComponent implements OnInit, OnChanges {
       this.updateApproval()
     }
 
+    onChange(event) {
+      this.uploadFile = event.target.files[0];
+    }
+
     updateEmail(){
       this._userService.updateEmail(this.user.email).subscribe(
         user => this.user = user,
@@ -94,6 +113,11 @@ export class TiptoeComponent implements OnInit, OnChanges {
                 for (var survey of this.surveys) {
                   if (survey.id == Number(surveyId)) {
                     this.approval[org.id] = survey.approved
+                    if (survey.tqip) {
+                      this.approvalTqip[org.id] = true
+                    } else {
+                      this.approvalTqip[org.id] = false 
+                    }
                   }
                 }
               }
@@ -169,6 +193,129 @@ export class TiptoeComponent implements OnInit, OnChanges {
         }
     }
 
+    removeTagsFromXML(xmlString, tagsToRemove) {
+      // Step 1: Parse XML string into an XML document
+      console.log('1')
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+      console.log('2')
+
+      // Step 2: Remove the specified tags from the XML document
+      tagsToRemove.forEach(tag => {
+        const elementsToRemove = xmlDoc.getElementsByTagName(tag);
+        for (let i = elementsToRemove.length - 1; i >= 0; i--) {
+          const element = elementsToRemove[i];
+          element.parentNode.removeChild(element);
+        }
+      });
+      console.log('3')
+      // Step 3: Serialize the modified XML document back into a string
+      const serializer = new XMLSerializer();
+      const modifiedXmlString = serializer.serializeToString(xmlDoc);
+      console.log('4')
+
+      return modifiedXmlString;
+    }
+
+
+    uploadTqip(){
+        var fileInfo
+        var selectString = 'select' + this.orgForNewTqip.id
+        var inputElement = (<HTMLInputElement>document.getElementById(selectString))
+        if (inputElement) {
+          var surveyId = inputElement.value
+          var selectedSurvey
+          for (var survey of this.surveys) {
+            if (survey.id == Number(surveyId)) {
+              selectedSurvey = survey
+            }
+
+          }
+          if (selectedSurvey) {
+            var posturl = '/api/submit_tqip/' + selectedSurvey.id
+            var file = this.uploadFile 
+            var fileName = this.uploadFile.name
+            var textType = /text.*/;
+
+            if (file.type.match(textType)) {
+              var reader = new FileReader();
+              const self = this;
+
+              reader.onload = function (e) {
+                  fileInfo = reader.result;
+
+                  const parser = new DOMParser();
+                  const xmlDoc = parser.parseFromString(fileInfo, "text/xml");
+
+                  //const tagsToRemove = ["PatientId", ]; // Replace with your desired tags
+                  const tagsToRemove = ["LastModifiedDateTime", "FacilityId", "PatientId", "HomeZip", "HomeCountry", "HomeCity", "HomeState", "HomeCounty", "HomeResidences", "DateOfBirth", "Age", "AgeUnits", "IncidentDate", "IncidentTime", "PlaceOfInjuryCode", "InjuryZip", "IncidentCountry", "IncidentCity", "IncidentState", "IncidentCounty", "HospitalArrivalDate", "HospitalArrivalTime", "TraumaSurgeonArrivalDate", "TraumaSurgeonArrivalTime", "PatientUUID", "EdDischargeDate", "EdDischargeTime", "HospitalDischargeDate", "HospitalDischargeTime", "WithdrawalOfLifeSupportingTreatmentDate", "WithdrawalOfLifeSupportingTreatmentTime", "NationalProviderIdentifier" ]; // Replace with your desired tags
+
+                  var elements = xmlDoc.getElementsByTagName("*")
+                  const elementsArray = Array.from(elements);
+                  const matching_elements = elementsArray.filter(element => {
+                    const elementTag = element.tagName.toLowerCase();
+                    return tagsToRemove.some(tag => tag.toLowerCase() === elementTag);
+                  });
+
+                  //var matching_elements = [element for element in elements if element.tagName.lower() in [tag.lower() for tag in tagsToRemove]]
+                  for (let i = matching_elements.length - 1; i >= 0; i--) {
+                    const element = matching_elements[i];
+                    element.parentNode.removeChild(element);
+                  }
+
+                  
+                  //tagsToRemove.forEach(tagName => {
+                  //  const elements = xmlDoc.getElementsByTagName(tagName);
+                  //  for (let i = elements.length - 1; i >= 0; i--) {
+                  //    const element = elements[i];
+                  //    element.parentNode.removeChild(element);
+                  //  }
+                  //});
+                  // Serialize the modified XML back to a string
+                  const modifiedXmlString = new XMLSerializer().serializeToString(xmlDoc);
+
+                  // Now you can use the modifiedXmlString as needed
+                  const file = new Blob([modifiedXmlString], { type: 'text/xml' });
+
+                  //TODO: pull old filename
+                  const formData = new FormData();
+                  formData.append('profile', file, fileName);
+    
+                  const headers = new HttpHeaders({
+                    'enctype': 'multipart/form-data' // the enctype is important to work with multer on the server (Django)
+                  });
+                  self.http.post(posturl, formData, { headers })
+                    .subscribe(
+                      res => {self.updateApproval();
+                        self._userService.requestSurveyList().subscribe(
+                            srvys => {self.surveys = srvys; 
+                                      self.srvyLoaded = true;
+                                      self.updateApproval();
+                                      self._errorService.announceError('TQIP submitted successfully.', '', 0);
+                                    }
+                        );
+                      },
+                      error => self._errorService.announceError('TQIP submission error',
+                                                        error['error'], 3)
+                    );
+
+              }
+
+              reader.readAsText(file);
+            } else {
+              fileInfo = "File not supported!"
+            }
+
+
+    
+          } else {
+            console.log("error: survey not found")
+
+          }
+        }
+        
+    }
+
     setActiveSurvey(id: string){
         var selectString = 'select' + id
         var inputElement = (<HTMLInputElement>document.getElementById(selectString))
@@ -210,5 +357,21 @@ export class TiptoeComponent implements OnInit, OnChanges {
         this.user = null;
         this._router.navigate(['/']);
       }
+    }
+
+    handleClick(orgSelected: Organization){
+      this.orgForNewTqip = orgSelected
+      var selectString = 'select' + this.orgForNewTqip.id
+      var inputElement = (<HTMLInputElement>document.getElementById(selectString))
+      if (inputElement) {
+        var surveyId = inputElement.value
+        for (var survey of this.surveys) {
+          if (survey.id == Number(surveyId)) {
+            this.srvyForNewTqip = survey
+          }
+
+        }
+      }
+
     }
 }

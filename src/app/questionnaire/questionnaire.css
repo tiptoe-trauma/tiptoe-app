@@ -83,3 +83,8 @@ label.btn-primary {
 .logo {
   width: 100px;
 }
+
+.margin-paragraph {
+  margin-left: 20px;
+  margin-right: 20px;
+}

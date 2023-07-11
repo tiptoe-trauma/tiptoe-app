@@ -14,6 +14,7 @@ const appRoutes: Routes = [
     // {path: 'uses', component: UseCasesComponent},
     {path: 'sparql', component: DataFeedbackComponent},
     {path: 'tiptoe', component: TiptoeComponent},
+    {path: 'tiptoe/:message', component: TiptoeComponent},
     {path: 'questionnaire/:type', component: QuestionnaireComponent},
     // Until useAsDefault: true has returned
     {path: '**', component: NotFoundComponent}

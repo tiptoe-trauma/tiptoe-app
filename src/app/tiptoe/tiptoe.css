@@ -11,6 +11,10 @@
   background-color: #007bff;
 }
 
+.success-button {
+  background-color: #198754;
+}
+
 .tqip-button {
   background-color: #17a2b8;
   width: 150px;
@@ -34,7 +38,11 @@
   justify-content: space-between;
 }
 
-.table {
-  max-width: 700px;
+td {
+  text-align: center;
+}
+
+th {
+  text-align: center;
 }
 

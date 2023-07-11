@@ -3,6 +3,7 @@
     <div class="nav-buttons float-xs-right">
       <div class="dropdown"><div class="nav-item"><a *ngIf="user && user.is_staff" class="nav-link" href="/admin/" target="_">Admin</a></div></div>
       <div class="dropdown"><div class="nav-item"><a *ngIf="user" (click)="toTiptoe()" class="nav-link" routerLink="/tiptoe">Home</a></div></div>
+      <div class="dropdown"><div class="nav-item"><a *ngIf="user" href="/images/TIPTOE.pdf"  class="nav-link" >Survey PDF</a></div></div>
       <div class="dropdown">
         <div class="nav-item">Researcher Tools <sup>&#8964;</sup></div>
         <div class="dropdown-content">
@@ -18,8 +19,6 @@
         Welcome to the TIPTOE questionnaire. 
         This questionnaire  collects non-identifying information about your institution and stores the data in the TIPTOE data repository.
         <b>The non-identifying data in the TIPTOE data repository will be used as comparative data for future users and it will be accessible for use by public health researchers.</b>
-        No registration is required. If you would like to access your answers or complete the questionnaire at a later time please provide an email address below.
-        This email will only be used for providing a link back to your questionnaire and never shared with third parties.
         This questionnaire relies on cookies to function and by starting one you consent to their use.
         Please direct feedback about the questionnaire to the email address at the bottom of the page.
       </p>

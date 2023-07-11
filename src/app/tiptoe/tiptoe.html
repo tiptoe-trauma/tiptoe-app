@@ -4,8 +4,6 @@
       Welcome to the TIPTOE questionnaire. 
       This questionnaire  collects non-identifying information about your institution and stores the data in the TIPTOE data repository.
       <b>The non-identifying data in the TIPTOE data repository will be used as comparative data for future users and it will be accessible for use by public health researchers.</b>
-      No registration is required. If you would like to access your answers or complete the questionnaire at a later time please provide an email address below.
-      This email will only be used for providing a link back to your questionnaire and never shared with third parties.
       This questionnaire relies on cookies to function and by starting one you consent to their use.
       Please direct feedback about the questionnaire to the email address at the bottom of the page.
     </p>
@@ -21,20 +19,24 @@
   <br/>
   <br/>
   <div class="registration">
-    <h3>Submit Your TQIP</h3>
-    <p>Use the button below to submit your TQIP. <b>Please submit a new TQIP for every new survey.</b></p>
-    <button type="button" class="btn btn-info tqip-button tqip-text" onclick="window.location.href='https://uams.app.box.com/f/ffcb38b254cf4868bdb5cd7460cba11c';"> Submit TQIP</button>
+
+      
     <br/>
     <h3>Your TIPTOE Questionnaires</h3>
-    <p>You can continue or review answers to the questionnaire by selecting the Survey Date and clicking Begin.<br>  Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.</p>
+    <p><b>Getting Started - </b>Click on <b>New Survey</b> to begin a new questionnaire.<br>You can continue or review answers to the questionnaire by selecting the Survey Date and clicking Begin Survey.<br>  Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.
+    <br>
+    If you'd like to see the survey questions, you can download <a href="/images/TIPTOE.pdf">this pdf</a>.
+    </p>
     <table class="table">
         <thead>
             <tr>
                 <th>Organization</th>
                 <th></th>
                 <th>Survey Date</th>
-                <th>Complete?</th>
                 <th></th>
+                <th>Survey Complete?</th>
+                <th></th>
+                <th>TQIP Submitted?</th>
             </tr>
         </thead>
         <ng-container *ngFor="let org of organizations">
@@ -42,8 +44,9 @@
                 <td>
                   <b>{{org.name}}</b>
                 </td>
-                <td><button type="button" class="btn btn-primary tiptoe-button" (click)="setActiveSurvey( org.id)">
-                    Begin Survey 
+                <td><button id='newSurvey{{org.id}}' type="button" (click)="orgForNewSrvy=org" class="btn btn-success success-button tqip-text" data-bs-toggle="modal"
+                                                                                       data-bs-target="#newModal">
+                    New Survey 
                 </button>
                 </td>
                 <td><select  id='select{{org.id}}' (init)="updateApproval()" (change)="updateApproval()" > 
@@ -54,6 +57,10 @@
                       </option>
                     </ng-container>
                 </select>
+                </td>
+                <td><button type="button" class="btn btn-primary tiptoe-button" (click)="setActiveSurvey( org.id)">
+                    Begin Survey 
+                </button>
                 </td>
                 <td *ngIf="approval[org.id]; else notApproved">
                   yes 
@@ -66,17 +73,30 @@
                     &#x2718;
                   </td>
                 </ng-template>
-                <td><button id='newSurvey{{org.id}}' type="button" (click)="orgForNewSrvy=org" class="btn btn-info tiptoe-button tqip-text" data-bs-toggle="modal"
-                                                                                       data-bs-target="#newModal">
-                    New Survey 
-                </button>
+                <td>
+                  <button id='newTqip{{org.id}}' type="button" (click)="handleClick(org)"  class="btn btn-info tiptoe-button tqip-text" data-bs-toggle="modal"
+                                                                                       data-bs-target="#tqipModal">
+                    Upload TQIP 
+                  </button>
                 </td>
+                <td *ngIf="approvalTqip[org.id]; else notTqip">
+                  yes 
+                  &#10004;
+                </td>
+
+                <ng-template #notTqip>
+                  <td> 
+                    no
+                    &#x2718;
+                  </td>
+                </ng-template>
             </tr>
         </ng-container>
     </table>
     <br/>
     
       <h4>Invite to Organization</h4>
+      <p>You can invite another person to fill out the questionnaire and submit the TQIP file by entering their email below.</p>
       <form class="form-inline">
         Invite:
         <input style="width:300px" type="text" name="newEmail" [(ngModel)]="new_email" placeholder="Email Address">
@@ -129,7 +149,8 @@
                 </button>
             </div>
             <div class="modal-body">
-              <label for="start">TQIP Date:&nbsp; </label>
+              Please input the date of your most recent TQIP submission.<br/><br/>
+              <label for="start"><b>TQIP Survey Date:&nbsp; </b></label>
 
               <input type="date" id="start" name="survey-start"
                      [(ngModel)]="surveyDate">
@@ -137,6 +158,45 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" (click)="newSurvey()" data-bs-dismiss="modal" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Tqip Modal -->
+<div class="modal fade" id="tqipModal" tabindex="-1" role="dialog" aria-labelledby="tqipModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tqipModalLabel">Submit TQIP</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              Please upload your TQIP file.  It must be in xml format and <b>MUST NOT</b> contain any PHI.
+                  <form enctype="multipart/form-data"  >
+                    <div *ngIf="srvyForNewTqip">
+                      <b>TQIP Survey Date</b>: {{srvyForNewTqip.date}}
+                      <br/>
+                      <br/>
+                      If this is not the correct date, please click <b>Cancel</b> and create/select the correct date.
+                      <br/>
+                      <br/>
+
+                    </div>
+                    <div *ngIf="!srvyForNewTqip">
+                      Please create a new survey.
+
+                    </div>
+                    <input type="file" name="profile" (change)="onChange($event)" />
+                  </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" (click)="uploadTqip()" data-bs-dismiss="modal" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
