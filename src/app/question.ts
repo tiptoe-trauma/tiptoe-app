@@ -30,6 +30,7 @@ export interface Answer {
     text?: string;
     options?: number[];
     integer?: number;
+    flt?: number;
     yesno?: boolean;
     question: number;
 }

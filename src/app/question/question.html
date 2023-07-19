@@ -32,6 +32,17 @@
                    min=0>
           </fieldset>
         </ng-template>
+        <ng-template [ngIf]="question.q_type === 'flt'">
+          <fieldset class="form-group">
+            <input type="number" class="form-control"
+                   placeholder="Number"
+                   (blur)="setValue()"
+                   [(ngModel)]="answer.flt"
+                   name="number"
+                   step="any"
+                   min=0>
+          </fieldset>
+        </ng-template>
         <ng-template [ngIf]="question.q_type === 'combo'">
           <fieldset class="form-group">
               <select class="form-select"

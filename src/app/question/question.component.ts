@@ -76,6 +76,7 @@ export class QuestionComponent implements OnInit {
         }
         if(this.visibility.includes('false')){
             this.answer.integer = null;
+            this.answer.flt = null;
             this.answer.options = [];
             this.answer.text = null;
             this.answer.yesno = null;
@@ -134,6 +135,7 @@ export class QuestionComponent implements OnInit {
             } else if(this.old_answer == this.answer &&
                       this.old_answer.yesno == this.answer.yesno &&
                       this.old_answer.integer == this.answer.integer &&
+                      this.old_answer.flt == this.answer.flt &&
                       this.old_answer.options == this.answer.options &&
                       this.old_answer.yesno == this.answer.yesno &&
                       this.old_answer.text == this.answer.text){

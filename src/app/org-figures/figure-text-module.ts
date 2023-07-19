@@ -13,7 +13,7 @@ export function get_figure_text(q_id: number){
     } else if(q_id==25){
         return 'Percent of institutions with a trauma program manager';
     } else if(q_id==33){
-        return 'Percent of institutions with a trauma registrar';
+        return 'Percentile ranks for number of FTE trauma registrar positions';
     } else if(q_id==10){
         return 'Percent of programs with a Trauma Program Operational Review Committee';
     } else if(q_id==11){
