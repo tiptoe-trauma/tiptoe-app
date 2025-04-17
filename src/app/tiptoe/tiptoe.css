@@ -46,3 +46,53 @@ th {
   text-align: center;
 }
 
+#columnsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 10px; /* Gap between checkboxes */
+  display: none;
+}
+
+.tqip-modal-content {
+  width: 700px; /* Adjust the width as needed */
+  margin: auto; /* Center the modal horizontally */
+}
+
+#autoRemoveList {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #e8ffe8; /* Light green background for success message */
+  border: 1px solid #a2d5a2; /* Green border */
+  border-radius: 5px; /* Rounded edges for aesthetic appeal */
+  display: none; /* By default, the message is hidden */
+}
+
+#successMessage {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #e8ffe8; /* Light green background for success message */
+  border: 1px solid #a2d5a2; /* Green border */
+  border-radius: 5px; /* Rounded edges for aesthetic appeal */
+  display: none; /* By default, the message is hidden */
+}
+#showColumnsDiv{
+  display: none; /* By default, the message is hidden */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Add a faint separator between rows */
+}
+
+th {
+    font-weight: bold;
+}

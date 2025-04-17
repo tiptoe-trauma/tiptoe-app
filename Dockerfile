@@ -1,6 +1,7 @@
 FROM alpine:latest as angular-builder
 RUN apk add --update nodejs npm
 WORKDIR /code
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 COPY package-lock.json .
 COPY package.json .

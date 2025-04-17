@@ -92,7 +92,9 @@ export class TiptoeComponent implements OnInit, OnChanges {
 
     onChange(event) {
       this.uploadFile = event.target.files[0];
+      this.loadAndDisplayColumns()
     }
+
 
     updateEmail(){
       this._userService.updateEmail(this.user.email).subscribe(
@@ -154,6 +156,25 @@ export class TiptoeComponent implements OnInit, OnChanges {
     }
 
     newSurvey() {
+        if (!this.surveyDate) {
+          alert('Please enter a valid date.');
+          return;
+        }
+        
+        console.log(this.surveys);
+
+
+        const isDuplicate = this.surveys.some(
+          survey =>
+            survey.organization === this.orgForNewSrvy.id && // Match organization
+            survey.date === this.surveyDate              // Match date
+        );
+
+        if (isDuplicate) {
+          alert('The date you entered already exists for this organization.');
+          return;
+        }
+
         this._userService.createSurvey(this.surveyDate, this.orgForNewSrvy).subscribe(
             res => {
               this.surveys.push(res);
@@ -217,6 +238,109 @@ export class TiptoeComponent implements OnInit, OnChanges {
       return modifiedXmlString;
     }
 
+    loadAndDisplayColumns() {
+      var fileInfo
+      var file = this.uploadFile 
+      var fileName = this.uploadFile.name
+      var textType = /text.*/;
+
+      const autoRemoveDiv = document.getElementById('autoRemoveList');
+      const showColumns = document.getElementById('showColumnsDiv');
+      try {
+        if (file.type.match(textType)) {
+          console.log('match')
+          var reader = new FileReader();
+          const self = this;
+
+          reader.onload = function (e) {
+            fileInfo = reader.result;
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(fileInfo, "text/xml");
+
+            const tagsToRemove = ["LastModifiedDateTime", "FacilityId", "PatientId", "HomeZip", "HomeCountry", "HomeCity", "HomeState", "HomeCounty", "HomeResidences", "DateOfBirth", "Age", "AgeUnits", "IncidentDate", "IncidentTime", "PlaceOfInjuryCode", "InjuryZip", "IncidentCountry", "IncidentCity", "IncidentState", "IncidentCounty", "HospitalArrivalDate", "HospitalArrivalTime", "TraumaSurgeonArrivalDate", "TraumaSurgeonArrivalTime", "PatientUUID", "EdDischargeDate", "EdDischargeTime", "HospitalDischargeDate", "HospitalDischargeTime", "WithdrawalOfLifeSupportingTreatmentDate", "WithdrawalOfLifeSupportingTreatmentTime", "NationalProviderIdentifier" ]; // Replace with your desired tags
+
+            // Extract unique element names from the XML
+            const allElements = xmlDoc.getElementsByTagName('*');
+            const uniqueElementNames = [...new Set(Array.from(allElements).map(el => el.nodeName))];
+
+            // Create checkboxes for each unique element name
+            const container = document.getElementById('columnsContainer');
+            container.innerHTML = '';
+            let removedColumns = []
+
+            // List of names for which checkboxes should not be created
+            const excludedNames = ['NtdsRecord', 'NtdsRecords',
+                'ItdxRecord', 'ItdxRecords', 'item'];
+
+            for (const name of uniqueElementNames) {
+                if (excludedNames.includes(name)) {
+                    continue;
+                }
+                const checkboxDiv = document.createElement('div'); // Create a new div for each checkbox-label pair
+                checkboxDiv.classList.add('checkboxItem'); // Add a class for styling
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = name;
+                checkbox.id = 'checkbox_' + name;
+                if (tagsToRemove.some(item => item.toLowerCase() === name.toLowerCase())){
+                  checkboxDiv.style.backgroundColor = 'yellow'
+                  checkbox.checked = true
+                  checkbox.disabled = true
+                  removedColumns.push(name)
+                }
+
+                const label = document.createElement('label');
+                label.htmlFor = 'checkbox_' + name;
+                label.textContent = name;
+
+                checkboxDiv.appendChild(checkbox);  // Append checkbox to the div
+                checkboxDiv.appendChild(label);     // Append label to the div
+                container.appendChild(checkboxDiv); // Append the div to the container
+            }
+            if (removedColumns.length > 0) {
+              autoRemoveDiv.textContent = 'Automatically Selected Columns to be DELETED: ' + removedColumns.join(', ');
+            } else {
+              autoRemoveDiv.textContent = 'No PHI columns automatically detected.  The checkbox below can be used to check for and remove columns that contain PHI.'
+            }
+            autoRemoveDiv.style.display = 'block';  // Make it visible
+            autoRemoveDiv.style.backgroundColor = '#e8ffe8'
+            showColumns.style.display = 'block';
+
+            //fileNameDisplay.textContent = ` (${fileInput.files[0].name})`;
+          }
+
+          reader.readAsText(file);
+        } else {
+          fileInfo = "File not supported!"
+          autoRemoveDiv.textContent = 'Invalid file'
+          autoRemoveDiv.style.display = 'block';  // Make it visible
+          autoRemoveDiv.style.backgroundColor = '#FFFFCC'
+        }
+      } catch (error) {
+        autoRemoveDiv.textContent = 'Invalid file'
+        autoRemoveDiv.style.display = 'block';  // Make it visible
+        autoRemoveDiv.style.backgroundColor = '#FFFFCC'
+      }
+
+
+
+
+
+    }
+    
+    toggleColumnsContainer() {
+      var columnsContainer = document.getElementById("columnsContainer");
+      var showColumnsCheckbox = document.getElementById("showColumnsCheckbox");
+      console.log('here')
+    
+      if (showColumnsCheckbox instanceof HTMLInputElement && showColumnsCheckbox.checked) {
+        console.log('yes')
+        columnsContainer.style.display = "grid";
+      } else {
+        columnsContainer.style.display = "none";
+      }
+    }
 
     uploadTqip(){
         var fileInfo
@@ -248,7 +372,17 @@ export class TiptoeComponent implements OnInit, OnChanges {
                   const xmlDoc = parser.parseFromString(fileInfo, "text/xml");
 
                   //const tagsToRemove = ["PatientId", ]; // Replace with your desired tags
-                  const tagsToRemove = ["LastModifiedDateTime", "FacilityId", "PatientId", "HomeZip", "HomeCountry", "HomeCity", "HomeState", "HomeCounty", "HomeResidences", "DateOfBirth", "Age", "AgeUnits", "IncidentDate", "IncidentTime", "PlaceOfInjuryCode", "InjuryZip", "IncidentCountry", "IncidentCity", "IncidentState", "IncidentCounty", "HospitalArrivalDate", "HospitalArrivalTime", "TraumaSurgeonArrivalDate", "TraumaSurgeonArrivalTime", "PatientUUID", "EdDischargeDate", "EdDischargeTime", "HospitalDischargeDate", "HospitalDischargeTime", "WithdrawalOfLifeSupportingTreatmentDate", "WithdrawalOfLifeSupportingTreatmentTime", "NationalProviderIdentifier" ]; // Replace with your desired tags
+                  var tagsToRemove = ["LastModifiedDateTime", "FacilityId", "PatientId", "HomeZip", "HomeCountry", "HomeCity", "HomeState", "HomeCounty", "HomeResidences", "DateOfBirth", "Age", "AgeUnits", "IncidentDate", "IncidentTime", "PlaceOfInjuryCode", "InjuryZip", "IncidentCountry", "IncidentCity", "IncidentState", "IncidentCounty", "HospitalArrivalDate", "HospitalArrivalTime", "TraumaSurgeonArrivalDate", "TraumaSurgeonArrivalTime", "PatientUUID", "EdDischargeDate", "EdDischargeTime", "HospitalDischargeDate", "HospitalDischargeTime", "WithdrawalOfLifeSupportingTreatmentDate", "WithdrawalOfLifeSupportingTreatmentTime", "NationalProviderIdentifier" ]; // Replace with your desired tags
+
+                  const checkboxes = document.querySelectorAll('[id^="checkbox"]');
+                  checkboxes.forEach(checkbox => {
+                    if (checkbox instanceof HTMLInputElement && checkbox.checked) {
+                      const checkboxValue = checkbox.value;
+                      if (!tagsToRemove.includes(checkboxValue)) {
+                        tagsToRemove.push(checkboxValue);
+                      }
+                    }
+                  });
 
                   var elements = xmlDoc.getElementsByTagName("*")
                   const elementsArray = Array.from(elements);
@@ -374,4 +508,18 @@ export class TiptoeComponent implements OnInit, OnChanges {
       }
 
     }
+
+    sortedSurveys(surveys: any[], orgId: number): any[] {
+      return surveys
+        .filter(survey => survey.organization === orgId) // Only include surveys for this organization
+        .sort((a, b) => {
+          // Handle null dates
+          if (!a.date && !b.date) return 0;
+          if (!a.date) return 1;
+          if (!b.date) return -1;
+          // Compare dates in descending order
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+    }
+
 }

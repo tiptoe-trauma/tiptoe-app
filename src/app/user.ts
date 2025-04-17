@@ -6,6 +6,7 @@ export interface Survey {
    tqip: number;
    approved: boolean
    users: number[];
+   organization: number;
 }
 
 export interface Organization {

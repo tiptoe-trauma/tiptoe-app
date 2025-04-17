@@ -19,11 +19,12 @@
   <br/>
   <br/>
   <div class="registration">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/t8EjCo8hU2U?si=b_wYk1aQDcm_PH_2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
       
     <br/>
     <h3>Your TIPTOE Questionnaires</h3>
-    <p><b>Getting Started - </b>Click on <b>New Survey</b> to begin a new questionnaire.<br>You can continue or review answers to the questionnaire by selecting the Survey Date and clicking Begin Survey.<br>  Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.
+    <p><b>Getting Started - </b>Click on <b>New Survey</b> to begin a new questionnaire.<br>You can continue or review answers to the questionnaire by selecting the Survey/Submission Date and clicking Begin Survey.<br>  Answers to the questionnaire are saved to the server as soon as an answer is selected, there is no need to "save" any of your work.
     <br>
     If you'd like to see the survey questions, you can download <a href="/images/TIPTOE.pdf">this pdf</a>.
     </p>
@@ -32,7 +33,7 @@
             <tr>
                 <th>Organization</th>
                 <th></th>
-                <th>Survey Date</th>
+                <th>Survey/Submission Date</th>
                 <th></th>
                 <th>Survey Complete?</th>
                 <th></th>
@@ -49,16 +50,18 @@
                     New Survey 
                 </button>
                 </td>
-                <td><select  id='select{{org.id}}' (init)="updateApproval()" (change)="updateApproval()" > 
-                    <ng-container *ngFor="let survey of surveys; let last = last">
-                      <option *ngIf="survey.organization==org.id"  value={{survey.id}}>
-                        {{survey.date}}
+                <td>
+                  <select id="select{{org.id}}" (init)="updateApproval()" (change)="updateApproval()">
+                    <ng-container *ngFor="let survey of sortedSurveys(surveys, org.id); let last = last">
+                      <option *ngIf="survey.organization == org.id" value="{{survey.id}}">
+                        {{survey.date || 'No Date'}}
                         {{last ? updateApproval() : ''}}
                       </option>
                     </ng-container>
-                </select>
+                  </select>
                 </td>
-                <td><button type="button" class="btn btn-primary tiptoe-button" (click)="setActiveSurvey( org.id)">
+
+                <td><button type="button" class="btn btn-primary tiptoe-button tqip-text" (click)="setActiveSurvey( org.id)">
                     Begin Survey 
                 </button>
                 </td>
@@ -131,7 +134,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" (click)="sendInvitation()" class="btn btn-primary">Send</button>
+                <button type="button" (click)="sendInvitation()" class="btn btn-primary" data-bs-dismiss="modal">Send</button>
             </div>
         </div>
     </div>
@@ -149,11 +152,39 @@
                 </button>
             </div>
             <div class="modal-body">
-              Please input the date of your most recent TQIP submission.<br/><br/>
-              <label for="start"><b>TQIP Survey Date:&nbsp; </b></label>
+              Please input the date of your most recent TQIP submission.  (<b>Example</b>: If your last TQIP was submitted on March 1, 2023 for the October-December 2022 quarter, please enter March 1, 2023.)<br/><br/>
+              <label for="start"><b>TQIP Submission Date:&nbsp; </b></label>
 
               <input type="date" id="start" name="survey-start"
                      [(ngModel)]="surveyDate">
+              <br><br>
+              TQIP Data Submission Schedule:
+              <table>
+                  <tr>
+                      <th>Quarter</th>
+                      <th>Submission Window</th>
+                  </tr>
+                  <tr>
+                      <td>October–December 2024</td>
+                      <td>February 3–March 3, 2025</td>
+                  </tr>
+                  <tr>
+                      <td>January–March 2025</td>
+                      <td>May 1–June 2, 2025</td>
+                  </tr>
+                  <tr>
+                      <td>April–June 2025</td>
+                      <td>August 1–September 2, 2025</td>
+                  </tr>
+                  <tr>
+                      <td>July–September 2025</td>
+                      <td>November 3 – December 3, 2025</td>
+                  </tr>
+                  <tr>
+                      <td>October–December 2025</td>
+                      <td>February 2–March 2, 2026</td>
+                  </tr>
+              </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -167,7 +198,7 @@
 <div class="modal fade" id="tqipModal" tabindex="-1" role="dialog" aria-labelledby="tqipModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+      <div class="modal-content tqip-modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="tqipModalLabel">Submit TQIP</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -175,13 +206,15 @@
                 </button>
             </div>
             <div class="modal-body">
-              Please upload your TQIP file.  It must be in xml format and <b>MUST NOT</b> contain any PHI.
+              Please upload your TQIP file.  The file must be in xml format.  You will have a chance to remove columns that contain PHI after selecting your file. (Optional: A standalone, offline application to remove PHI columns can be located <a href="/images/xml-column-remover.zip">here</a>.)
+                      <br/>
+                      <br/>
                   <form enctype="multipart/form-data"  >
                     <div *ngIf="srvyForNewTqip">
-                      <b>TQIP Survey Date</b>: {{srvyForNewTqip.date}}
-                      <br/>
-                      <br/>
-                      If this is not the correct date, please click <b>Cancel</b> and create/select the correct date.
+                      <b>TQIP Submission Date</b>: {{srvyForNewTqip.date}}
+                      <div style="color: red;">
+                      If this is not the correct date, please click <b>Cancel</b> and create/select the correct date. 
+                      </div>
                       <br/>
                       <br/>
 
@@ -191,12 +224,18 @@
 
                     </div>
                     <input type="file" name="profile" (change)="onChange($event)" />
+                    <div id="autoRemoveList"></div>
+                    <div id="showColumnsDiv">
+                      <input type="checkbox" id="showColumnsCheckbox" (change)="toggleColumnsContainer()" />
+                      <label id="showColumnsLabel" for="showColumnsCheckbox">Choose additional columns to remove</label>
+                    </div>
+                    <div id="columnsContainer"></div>
                   </form>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" (click)="uploadTqip()" data-bs-dismiss="modal" class="btn btn-primary">Save</button>
+                <button type="button" (click)="uploadTqip()" data-bs-dismiss="modal" class="btn btn-primary">Upload</button>
             </div>
         </div>
     </div>
